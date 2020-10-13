@@ -1,0 +1,67 @@
+<div class="inner-zoom">
+{% assign product-handle = product.title | handleize %}
+  <div class="inner-zoom-container">
+  	{% for image in product.images %}
+  		{% if image.alt contains 'airfiber' or image.alt contains 'inner-zoom' %}
+			<img  class="inner-zoom-img" src="{{ image.src | img_url: 'master' }}">
+		{% endif %}
+    {% endfor %}
+  </div>
+  <div>
+    <h2>{{section.settings.heading}}</h2>
+    <p>{{section.settings.content}}</p>
+    <div class="hyperdown-zoom-wrapper">
+      <div class="hyperdown-zoom-wrapper-text">
+        <h5>{{section.settings.subheading_left}}</h5>
+        <p>{{section.settings.content_left}}</p>
+      </div>
+      <div class="hyperdown-zoom-wrapper-text">
+        <h5>{{section.settings.subheading_right}}</h5>
+        <p>{{section.settings.content_right}}</p>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+{% schema %}
+  { 
+    "name": "About Hyperdown Duvet",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "The Hyperdown Duvet"
+      },
+      {
+        "type": "text",
+        "id": "subheading_left",
+        "label": "Heading Left",
+        "default": "Hyperdown (Inner)"
+      },
+      {
+        "type": "text",
+        "id": "content_left",
+        "label": "Content Left",
+        "default": "Hyperdown is our proprietary premium fill consisting of fine synthetic fibers that replicate the feel of down. Thanks to the Hyperdown's molecular makeup, the down alternative converts moisture into heat and is ultra lightweight. Added benefits include its antimicrobial, hypoallergenic, and odor-resistant properties."
+      },
+      {
+        "type": "text",
+        "id": "subheading_right",
+        "label": "Heading Right",
+        "default": "Outer Shell"
+      },
+      {
+        "type": "text",
+        "id": "content_right",
+        "label": "Content Right",
+        "default": "A luxurious 449 thread count of cotton sateen, expertly finished so that it conforms to your body, stays in place while sleeping, and provides maximum heat retention. While baffle box or sewn through are the typical duvet constructions, we use a special ring-quilting that allows for less sewing but still holds the Hyperdown in place."
+      }
+    ],
+    "blocks": [],
+    "presets": [
+    ]
+  }
+{% endschema %}

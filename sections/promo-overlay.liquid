@@ -1,0 +1,174 @@
+{% stylesheet %}
+	/* #promo-overlay {
+		width:100%;
+		height:100%;
+		top:0;
+		left:0;
+		position:fixed;
+		z-index:100;
+	    background-repeat: no-repeat !important;
+	    background-size: cover !important;
+	    background-position: center center !important;
+	    opacity: 1 !important;
+	} */
+	.modal-content {
+	    margin: 0 auto;
+	    max-width: 600px;
+	    text-align: center !important;
+	    font-family: 'Montserrat' !important;
+	}
+	.modal-content h2 {
+		font-size: 2em !important;
+	    margin-bottom: 0;
+	}
+	.modal-content h1, .modal-content h2, .modal-content h3, .modal-content h4, .modal-content h5, .modal-content h6 {
+		font-weight: 700;
+	}
+	.modal-content p {
+		font-weight: 500;
+	    margin-bottom: 16px;
+	}
+{% endstylesheet %}
+
+{% for block in section.blocks %}
+  {% assign foo = 0 %}
+
+	<div class="promo-modal promo-modal-{% increment foo %}" style="background: url('{{ block.settings.background_image | img_url: '2400x2400' }}');">
+		<div class="modal-wrapper modal-transition">
+		  <div class="modal-header">
+		    <button class="modal-close modal-toggle modal-toggle-{{ foo }}" style="color: {{ block.settings.closecolor }}">&nbsp;</button>
+		  </div>
+		  <div class="modal-body {{ block.settings.content_align }}">
+		    <div class="modal-content {{ block.settings.format }}">
+		    	<div class="show-email">
+					<span data-sumome-listbuilder-embed-id="9ac63a7105ab559bdd9d4685e31f0876f94a838f5ee648899c3efc7711f68da6"></span>
+				</div>
+		    	<div class="show-announcement">
+	                {% unless block.settings.text_1 == blank %}
+						<h2 style="color: {{ block.settings.textcolor_1 }}">{{ block.settings.text_1 }}</h2>
+					{% endunless %}
+	                {% unless block.settings.richtext_1 == blank %}
+						{{ block.settings.richtext_1 }}
+					{% endunless %}
+	                {% unless block.settings.text_2 == blank %}
+						<h2 style="color: {{ block.settings.textcolor_2 }}">{{ block.settings.text_2 }}</h2>
+					{% endunless %}
+	                {% unless block.settings.richtext_2 == blank %}
+						{{ block.settings.richtext_2 }}
+					{% endunless %}
+	                {% unless block.settings.text_3 == blank %}
+						<h2 style="color: {{ block.settings.textcolor_3 }}">{{ block.settings.text_3 }}</h2>
+					{% endunless %}
+	                {% unless block.settings.richtext_3 == blank %}
+						{{ block.settings.richtext_3 }}
+					{% endunless %}
+				</div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+
+{% endfor %}
+
+
+
+{% schema %}
+	{
+    "blocks": [
+      {
+        "type": "quote",
+        "name": "Promo Overlay",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Overlay"
+          },
+          {
+            "type": "color",
+            "id": "closecolor",
+            "label": "Close Color"
+          },
+          {
+            "type": "image_picker",
+            "id": "background_image",
+            "label": "Background Image"
+          },
+          {
+            "type": "radio",
+            "id": "content_align",
+            "options": [
+              { "value": "left", "label": "Left"},
+              { "value": "center", "label": "Center"},
+              { "value": "right", "label": "Right"}
+            ],
+            "label": "Content Align"
+          },
+          {
+            "type": "radio",
+            "id": "format",
+            "options": [
+              { "value": "email-capture", "label": "Email Capture"},
+              { "value": "announcement", "label": "Announcement"}
+            ],
+            "label": "Format"
+          },
+          {
+            "type": "header",
+            "content": "Content"
+          },
+          {
+               "type": "text",
+               "id": "text_1",
+               "label": "Text"
+          },
+          {
+               "type": "color",
+               "id": "textcolor_1",
+               "label": "Heading Color",
+               "default": "#ffffff"
+          },
+          {
+               "type": "richtext",
+               "id": "richtext_1",
+               "label": "Text Area",
+               "default": "<p>Default <em>richtext</em> <a href=\"https://example.com/\">content</a></p>"
+          },
+                {
+               "type": "text",
+               "id": "text_2",
+               "label": "Text"
+          },
+          {
+               "type": "color",
+               "id": "textcolor_2",
+               "label": "Heading Color",
+               "default": "#ffffff"
+          },
+          {
+               "type": "richtext",
+               "id": "richtext_2",
+               "label": "Text Area",
+               "default": "<p>Default <em>richtext</em> <a href=\"https://example.com/\">content</a></p>"
+          },
+                {
+               "type": "text",
+               "id": "text_3",
+               "label": "Text"
+          },
+          {
+               "type": "color",
+               "id": "textcolor_3",
+               "label": "Heading Color",
+               "default": "#ffffff"
+          },
+          {
+               "type": "richtext",
+               "id": "richtext_3",
+               "label": "Text Area",
+               "default": "<p>Default <em>richtext</em> <a href=\"https://example.com/\">content</a></p>"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

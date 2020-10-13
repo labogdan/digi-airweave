@@ -1,0 +1,128 @@
+<div id="featuredAthletes" class="hp-featured-sponsorships-wrapper">
+  {% for block in section.blocks %}
+  <div id="{{ block.settings.anchor }}" class="hp-featured-sponsorships" data-athlete="{{ block.settings.anchor }}">
+    <div class="hp-sponsorship-img-mobile" style="background-image: url({{ block.settings.background | img_url: 'master' }})">
+    </div>
+    <div class="hp-sponsorship-block" style="background-image: url({{ block.settings.background | img_url: 'master' }})">
+      <div class="hp-sponsorship-message">
+        <h2 class="hp-sponsorship-quote">
+          {{ block.settings.quote }}
+        </h2>
+        {% unless block.settings.video_url == blank %}
+          <a class="hp-sponsorship-preview" href="#sponsorship-video-{{ forloop.index }}" rel="modal:open">
+            <img src="{{ block.settings.preview | img_url: '300x' }}">
+            <div class="video-play small-icon">
+              {% include 'svg-definitions' with 'play-icon' %}
+            </div>
+          </a>
+        {% endunless %}
+        <div class="video-wrapper" style="display: none;">
+          {% if block.settings.video_url == blank %}
+          {% else %}
+            {% if block.settings.video_url.type == "youtube" %}
+              <iframe src="//www.youtube.com/embed/{{ block.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+            {% endif %}
+            {% if block.settings.video_url.type == "vimeo" %}
+              <iframe src="//player.vimeo.com/video/{{ block.settings.video_url.id }}?byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+            {% endif %}
+          {% endif %}
+        </div>
+        <p class="hp-sponsorship-member">
+          {{ block.settings.member }}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% for block in section.blocks %}
+  <div id="sponsorship-video-{{ forloop.index }}" class="sponsorship-video modal rte" style="display:none;">
+    <div class="video-wrapper">
+      <iframe src="//www.youtube.com/embed/{{ block.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{% endfor %}
+
+{% if section.blocks.size > 1 %}
+
+
+<script>
+  $(document).ready(function() {
+    {% for block in section.blocks %}
+    if (window.location.hash == '#{{ block.settings.anchor }}') {
+      hpFeaturedSponsorshipsWrapper.slick("goTo", {{ forloop.index0 }});
+      $(window).on("load", function() {
+        $('html, body').animate({
+          scrollTop: $('#{{ block.settings.anchor }}').offset().top-89
+        });
+      });
+    }
+    {% endfor %}
+  });
+</script>
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Featured Sponsorships",
+    "class": "index-section",
+    "settings": [
+
+    ],
+    "blocks": [
+      {
+        "type": "sponsorship_block",
+        "name": "Sponsorship",
+        "settings": [
+          {
+            "type": "text",
+            "id": "anchor",
+            "label": "Anchor tag",
+            "info": "https://www.airweave.com/#anchor"
+          },
+          {
+            "type": "image_picker",
+            "id": "background",
+            "label": "Background image"
+          },
+          {
+            "type": "text",
+            "id": "quote",
+            "label": "Quote content",
+            "default": "\"airweave has helped me consistently get a good night's sleep, and makes the routine of being on the road a lot easier.\""
+          },
+          {
+            "type": "text",
+            "id": "member",
+            "label": "Sponsorship member",
+            "default": "Bubba Watson"
+          },
+          {
+            "type": "image_picker",
+            "id": "preview",
+            "label": "Video preview image"
+          },
+          {
+            "type": "video_url",
+            "id": "video_url",
+            "label": "YouTube or Vimeo link",
+            "accept": ["youtube", "vimeo"]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Sponsorships",
+        "category": "Homepage",
+        "blocks": [
+          {
+            "type": "sponsorship_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

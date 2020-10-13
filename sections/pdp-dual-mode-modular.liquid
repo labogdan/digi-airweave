@@ -1,0 +1,80 @@
+<h2 class="features-header dual-mode-header">{{ section.settings.heading }}</h2>
+<div class="product-dual-mode-container features-content-wrapper">
+  <div class="features-content dual-mode-content">
+    <div class="features-copy">
+      <h2>{{ section.settings.features_heading }}</h2>
+      <p>{{ section.settings.features_content }}</p>
+    </div>
+    <div class="features-video">
+    	{% if section.settings.video_image == "video" %}
+			<video id="synchronized-video" width="100%" preload="true" poster="{{ section.settings.media_image | img_url: '1200x' }}" onclick="playPause('synchronized-video')">
+		      <source src="{{ section.settings.video_url }}" type="video/webm">
+		      <source src="{{ section.settings.video_url }}" type="video/mp4">
+		    </video>
+		    <div class="video-play" onclick="playPause('synchronized-video')">
+		      {% include 'svg-definitions' with 'play-icon' %}
+		    </div>
+		{% elsif section.settings.video_image == "youtube_video" %}
+			<div class="video-responsive">
+				<iframe width="560" height="315" src="{{ section.settings.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+		{% else %}
+			<img src="{{ section.settings.media_image | img_url: '1200x' }}">
+		{% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  { 
+    "name": "Text with Image Modular",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "features_heading",
+        "label": "Features Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "features_content",
+        "label": "Fearures Content"
+      },
+	  {
+		"type": "select",
+		"id": "video_image",
+		"label": "Media Type",
+		"options": [
+		 {
+		   "value": "video",
+		   "label": "Video"
+		 },
+		 {
+		   "value": "youtube_video",
+		   "label": "Youtube Video"
+		 },
+		 {
+		   "value": "image",
+		   "label": "Image"
+		 }
+		],
+		"default":   "image"
+	  },
+      {
+        "type": "image_picker",
+        "id": "media_image",
+        "label": "Media - Image"
+      },
+      {
+        "type": "text",
+        "id": "video_url",
+        "label": "Media - Video Source"
+      }
+    ]
+  }
+{% endschema %}

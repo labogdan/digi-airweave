@@ -1,0 +1,41 @@
+<div class="product-thumbnail">
+
+
+  {% if settings.display_vendor %}
+    <span class="product-thumbnail__vendor">{{ product.vendor }}</span>
+  {% endif %}
+ 
+  {% if collection_handles contains 'coming-soon' %}
+    <span>{{ 'collections.general.coming_soon' | t }}</span>
+  {% else %}
+    <span class="product-thumbnail__price price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
+      {% if product.available %}
+        {% if product.compare_at_price_min > product.price_min %}
+          <span class="product-thumbnail__was-price was-price">
+            <span class="money">{{ product.compare_at_price_min | money_without_trailing_zeros | remove: ',' }}</span>
+          </span>
+        {% endif %}
+      {% else %}
+        <span class="product-thumbnail__sold-out sold-out">{{ 'products.product.sold_out' | t }}</span>
+      {% endif %}
+    </span>
+
+    <span class="product-thumbnail__price price klarna">
+        <small>As low as</small>
+		<div class="klarna-contain">
+		  <!-- Placement v1 -->
+		  <klarna-placement
+		    data-id="0f2333a5-b2e0-49ad-96e0-fe0928bc4b6e"
+		    data-purchase_amount="{{ product.price_min | money_without_currency | remove: ',' | remove: '.' }}"
+		    data-inline
+		  ></klarna-placement>
+		  <!-- end Placement -->
+		</div>
+
+    </span>
+
+
+  {% endif %}
+</div>
+
+<a class="button button--primary shop-cta" href="{{ product.url | within: collection }}">Shop  {{ product.title | remove: 'airweave' }} </a>

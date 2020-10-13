@@ -1,0 +1,30 @@
+<script>
+$(document).ready(function(){
+// PRODUCT
+$('.mattresses-product-section .mattresses-product-image').on("click",function(){
+	var x = $(this).parent().find("h2").text();
+	ga('send','event','Collections: Mattresses','Clicked On: Product Image',x);
+});
+
+$('.mattresses-product-section .mattresses-product-details').on("click",function(){
+	var x = $(this).find("h2").text();
+	ga('send','event','Collections: Mattresses','Clicked On: Product Shop Now',x);
+});
+
+// LOCATION
+$('.mattresses-location-img').on("click",function(){
+	var x = $(this).siblings(".mattresses-location-text").find("h5").text();
+	ga('send','event','Collections: Mattresses','Clicked On: Location Image',x);
+});
+
+$('.mattresses-location-text a').on("click",function(){
+	var x = $(this).siblings("h5").text();
+	ga('send','event','Collections: Mattresses','Clicked On: Location View Details',x);
+});
+
+// TRY IT
+$('.mattresses-try-it-out-icon').siblings('a').on("click",function(){
+	ga('send','event','Collections: Mattresses','Clicked On: 60 Night Trial');
+});
+});
+</script>

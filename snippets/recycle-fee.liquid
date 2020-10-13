@@ -1,0 +1,257 @@
+{% if settings.check_for_recycling_fee == true %}
+
+<script>
+(function(RecycleFee, $) {
+  'use strict';
+
+  var $dom = {},
+      checkout = false,
+      province = '{{ checkout.shipping_address.province }}',
+      settings = {
+        feeOn: {{ settings.check_for_recycling_fee }},
+        product: "{{ settings.recycling_fee_product }}",
+        productType: ["{{ settings.recycle_fee_product_type | replace: ',', '","'}}"],
+        variants: [],
+        provinces: []
+      };
+
+  var cacheDom = function() {
+    $dom.document = $(document);
+  };
+
+  // Credit David Walsh (https://davidwalsh.name/javascript-debounce-function)
+  // Returns a function, that, as long as it continues to be invoked, will not
+  // be triggered. The function will be called after it stops being called for
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+  // leading edge, instead of the trailing.
+  function debounce(func, wait, immediate) {
+    var timeout;
+
+    return function executedFunction() {
+      var context = this;
+      var args = arguments;
+
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+
+      var callNow = immediate && !timeout;
+
+      clearTimeout(timeout);
+
+      timeout = setTimeout(later, wait);
+
+      if (callNow) func.apply(context, args);
+    };
+  };
+
+  // Helper function to easily toggle console.log
+  // In browser console set RecyclingFee.debugOn to `true` or `false`
+  var debug = function(obj) {
+    if (RecycleFee.debugOn) {
+      console.log(obj);
+    }
+  }
+
+  // Search the current cart for item ids that match the recycling fee variant ids
+  // Works like indexOf
+  var cartHasRecycleFee = function(items) {
+    var found = -1;
+
+    items.forEach(function(item) {
+      var index = settings.variants.indexOf(item.id);
+
+      if (index > -1) {
+        found = index;
+      }
+    });
+
+    return found;
+  };
+
+  var productTypeMatch = function(items) {
+    var found = false;
+
+    items.forEach(function(item) {
+      if (settings.productType.indexOf(item.product_type) > -1) {
+        found = true;
+      }
+    });
+
+    return found;
+  }
+
+  // After updating the cart, either adding or removing Recycling Fee, we update the displaying
+  // cart either on the Checkout page or anywhere else in the shop.
+  var refreshCart = function() {
+    if (checkout) {
+      // Trigger the cart to update itself
+      OrderSummaryUpdater.prototype.onChange(document);
+    } else {
+      // If we're not in checkout refresh inline cart
+      // **Note: This may have to be customized depending on theme**
+      if (typeof InlineCart !== 'undefined') {
+        InlineCart.update(getCartData(function(cart) {
+          // InlineCart.update in this theme doesn't update the cart count icon,
+          // so we request the cart data and update it here
+          $('.inline-cart-count').html(cart.item_count);
+        }));
+      }
+    }
+  };
+
+  var onError = function(error) {
+    console.error(error);
+  };
+
+  // Get the cart data from Shopify
+  // https://help.shopify.com/themes/development/getting-started/using-ajax-api#get-cart
+  var getCartData = function(callback) {
+    $.getJSON('/cart.js', callback);
+  };
+
+  // Get product data from Shopify
+  // https://help.shopify.com/themes/development/getting-started/using-ajax-api#get-product
+  var getProductData = function(callback) {
+    $.getJSON('/products/' + settings.product + '.js', callback);
+  }
+
+  var removeRecyclingFeeFromCart = function(variantId, callback) {
+    // https://help.shopify.com/themes/development/getting-started/using-ajax-api#update-cart
+
+    var updates = {};
+    updates[variantId] = 0;
+
+    $.ajax({
+      url: '/cart/update.js',
+      method: 'POST',
+      data: {
+        updates: updates
+      },
+      dataType: 'json'
+    })
+    .done(callback)
+    .fail(onError);
+  };
+
+  var addRecyclingFeeToCart = function(variantId, callback) {
+    // https://help.shopify.com/themes/development/getting-started/using-ajax-api#add-to-cart
+    $.ajax({
+      url: '/cart/add.js',
+      method: 'POST',
+      data: {
+        quantity: 1,
+        id: variantId
+      },
+      dataType: 'json'
+    })
+    .done(callback)
+    .fail(onError);
+  };
+
+  var checkCartUpdate = function(newProvince) {
+    debug('Checking for cart update...');
+    province = newProvince;
+
+    debug("Current province: " + province);
+
+    // We need to check the current cart for a recycling fee before acting
+    getCartData(function(data) {
+      var provinceIndex = settings.provinces.indexOf(province); // if province matches a recycling fee province
+      var variantIndex = cartHasRecycleFee(data.items); // if the cart contains a recycling fee product
+
+      if (variantIndex === -1) { // Does not have recycling fee in cart
+        debug('Cart does not have recycle fee.');
+
+        // Province matches a fee province and product type qualifies for fee
+        if (provinceIndex > -1 && productTypeMatch(data.items)) {
+          debug('Add fee');
+          addRecyclingFeeToCart(settings.variants[provinceIndex], refreshCart);
+        }
+      } else { // Recycling Fee in cart
+        debug('Cart contains recycle fee.');
+
+        // Province matches fee province
+        if (provinceIndex > -1) {
+          // current province doesnt match current province in cart
+          if (provinceIndex !== variantIndex) {
+            debug('Replace fee');
+            removeRecyclingFeeFromCart(settings.variants[variantIndex], function() {
+              addRecyclingFeeToCart(settings.variants[provinceIndex], refreshCart);
+            });
+          }
+        }
+
+        // Province does not match fee province
+        // or product doesn't require fee
+        if (provinceIndex === -1 || !productTypeMatch(data.items)) {
+          // Remove fee because it no longers applies for the current province
+          // or because customer is not in checkout
+          debug('Remove fee');
+          removeRecyclingFeeFromCart(settings.variants[variantIndex], refreshCart);
+        }
+      }
+    });
+  };
+
+  var onChangeProvince = debounce(function() {
+    debug('Province input changed');
+
+    var updateProvince = $('#checkout_shipping_address_province').val();
+
+    if (province !== updateProvince) {
+      checkCartUpdate(updateProvince);
+    }
+  }, 250);
+
+  var bindUIActions = function() {
+      // if user is entering their shipping info, look for updates
+      $dom.document.on('change', '#checkout_shipping_address_province', onChangeProvince);
+      $dom.document.on('change', '#checkout_shipping_address_zip', onChangeProvince);
+  };
+
+  RecycleFee.init = function() {
+    debug('RECYCLE FEE ACTIVE');
+
+    cacheDom();
+    bindUIActions();
+
+    // Are we on checkout or another page on the shop?
+    // This affects what kind of changes we may need to make to the cart UI
+    if (typeof Shopify.Checkout.step !== 'undefined') {
+      checkout = true;
+
+      // User hasn't entered an address so don't prematurely set recycle fee on page load
+      if (Shopify.Checkout.step === 'contact_information'
+        && $('#checkout_shipping_address_address1').val().length === 0) {
+        province = ''; // Empty string will clear fee
+      }
+    }
+
+    // Download the product data for our Recycling Fee product set
+    // in theme settings
+    getProductData(function(product) {
+
+      // Create arrays of recycling fee provinces and variant ids
+      product.variants.forEach(function(variant) {
+        settings.variants.push(variant.id);
+        settings.provinces.push(variant.option1);
+      });
+
+      // After we get product data update the cart with the province available on load
+      // This province will either be an empty string, or the checkout.shipping_address.province
+      // field on checkout pages. Empty string doesn't match any of the product provinces so it will
+      // trigger a product removal.
+      checkCartUpdate(province);
+    });
+  };
+
+  RecycleFee.settings = settings; // expose settings for testing
+  RecycleFee.debugOn = false;
+
+})(window.RecycleFee = window.RecycleFee || {}, jQuery);
+
+RecycleFee.init();
+</script>
+{% endif %}

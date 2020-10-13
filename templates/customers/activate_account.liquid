@@ -1,0 +1,40 @@
+<!-- /templates/customers/activate_account.liquid -->
+<section class="customer-template active-account-container flex flex-justify-center">
+  <div class="flex-4-md">
+    <div class="customer-form flex-form-vertical">
+      {% form 'activate_customer_password' %}
+
+        <h1 class="form-title">Activate Account</h1>
+        <p class="form-subtitle">Create your password to activate your account.</p>
+
+        {% if form.errors %}
+          <div class="form-note is-error">
+            <ul>
+              {% for error in form.errors %}
+                <li>{{ form.errors.messages[error] }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <div class="input-group flex-12">
+          <label for="customer-password" class="hidden-label">Password</label>
+          <input type="password" value="" name="customer[password]" id="customer-password" class="" placeholder="Password">
+        </div>
+
+        <div class="input-group flex-12">
+          <label for="customer-password-confirmation" class="hidden-label">Confirm Password</label>
+          <input type="password" value="" name="customer[password_confirmation]" id="customer-password-confirmation" class="" placeholder="Confirm Password">
+        </div>
+
+        <div class="input-group flex-12">
+          <button type="submit" class="form-submit btn btn--primary flex-12">Activate Account</button>
+        </div>
+
+        <div class="input-group flex-12">
+          <button type="submit" class="form-submit btn text-link" name="decline">Decline Invitation</button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</section>

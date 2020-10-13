@@ -1,0 +1,148 @@
+{% comment %} ** Mega menu - static ** {% endcomment %}
+{% assign id = section.id %}
+{% comment %} HTML markup {% endcomment %}
+<section class="mega-menu__section mega-menu__{{ section.id }}">
+  {% include 'include-mega-menu' %}
+</section>
+
+{% schema %}
+
+{
+  "name": "Mega menu 1",
+  "class": "mega-menu-section mega-menu-1",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Mega menu - Mattresses",
+      "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360021253094)"
+    },
+    {
+      "type": "color",
+      "id": "mega_menu_background_color",
+      "label": "Background",
+      "default": "#f6f6f6"
+    },
+    {
+      "type": "color",
+      "id": "mega_menu_text_color",
+      "label": "Text",
+      "default": "#404040"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu_1",
+          "label": "Menu",
+          "info": "This menu won't show drop-down items."
+        },
+        {
+          "type": "url",
+          "id": "menu_1_link",
+          "label": "Menu heading link"
+        }
+      ]
+    },
+    {
+      "type": "featured_product",
+      "name": "Featured product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "featured_product",
+          "label": "Product"
+        },
+        {
+          "type": "richtext",
+          "id": "richtext_bottom",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "featured_promo",
+      "name": "Featured promotion",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "If using a graphic, 600 x 350px is recommended. Otherwise, 600 x 600px with the subject of the image centered."
+        },
+        {
+          "type": "richtext",
+          "id": "richtext",
+          "label": "Text",
+          "default": "<p>Add description and links to your promotion</p>"
+        },
+        {
+          "type": "color",
+          "id": "bgr_color",
+          "label": "Background",
+          "default": "#EEEEEE"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "url",
+          "id": "promo_link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Label",
+          "default": "Shop now"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "button--primary",
+              "label": "Primary"
+            },
+            {
+              "value": "button--secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "button--link-style",
+              "label": "Link style"
+            }
+          ],
+          "default": "button--primary"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "menu"
+      },
+      {
+        "type": "featured_promo"
+      },
+      {
+        "type": "featured_product"
+      }
+    ]
+  }
+}
+
+{% endschema %}

@@ -1,0 +1,212 @@
+<header class="header-main{% if settings.promo-bar-enable == true %} promo-enabled{% endif %}">
+  <nav class="header-nav-links">
+    <ul>
+      {% for link in linklists.header.links %}
+      <li  class="{% if link.links != blank %}is-parent{% endif %} {% if link.title == 'Mattresses' %}mega-1{% elsif link.title == 'Accessories' %}mega-2{% elsif link.title == 'Why Airweave?' %}mega-3{% else %}no-child{% endif %}"><a href="{{ link.url }}">{{ link.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <div class="header-nav-logo">
+    <a href="/">
+      <img class="lazyload" data-src="{{ 'logo.svg' | asset_url }}" width="75px">
+    </a>
+  </div>
+  <div class="accordion-trigger">
+    <button>
+      Shop
+    </button>
+  </div>
+
+  <nav class="header-nav-secondary">
+    <!--<a href="/collections/shop-airweave-gifts" class="header-nav-secondary-btn gift-link">
+      <span class="long"><i class="fa fa-gift" style="font-size: 18px"></i>&nbsp; 2019 Airweave Gift Guide</span>
+      <span class="short"><i class="fa fa-gift" style="font-size: 18px"></i>&nbsp; Gifts</span>
+    </a>-->
+    <a href="tel:1-800-407-1500" class="header-nav-secondary-btn">
+      1-800.407.1500
+    </a>
+    
+    <a href="#" class="header-nav-secondary-btn" onclick="Smooch.open();" style="display: inline-block !important">
+      <img class="lazyload" data-src="{{ 'message-circle.svg' | asset_url }}"> Chat
+    </a>
+    {% comment %}
+    <a id="chat-mobile" class="chat-mobile" onclick="olark('api.box.expand')">
+      <img class="lazyload" data-src="{{ 'chat-mobile.svg' | asset_url }}">
+    </a>
+    {% endcomment %}
+    <a id="cart-menu" class="cart-menu">
+      <img class="lazyload" data-src="{{ 'shopping-cart.svg' | asset_url }}">
+      <div class="inline-cart-count{% if cart.item_count == 0 %} inline-cart-empty{% endif %}">
+        {{ cart.item_count }}
+      </div>
+    </a>
+  </nav>
+  
+  <div class="hello-bar">
+    <ul>
+      <li><i class='uil uil-truck'></i><span> Free Shipping</span></li>
+      <li><a href="#" title="*For mattresses, futon, toppers and portables only" class="tooltip"><i class='uil uil-moon'></i><span> 100 Night Trial<sup>*</sup></span></a></li>
+      <li><i class='uil uil-usd-circle'></i><span> Financing Available</span></li>
+    </ul>
+  </div>
+  {% section 'mega-menu-1' %}
+  {% section 'mega-menu-2' %}
+  {% section 'mega-menu-3' %}
+</header>
+
+<div class="accordion">
+  <div class="nav__container">
+    <nav class="drop-down-menu">
+        {% for link in linklists.mobile-menu.links %}
+      <div class="accordion-header {% if link.links != blank %}parent{% endif %} {% if link.title contains 'Mattresses' %}active{% endif %}">{% if link.links == blank %}<a href="{{ link.url }}" style="padding: 0">{{ link.title }}</a>{% else %}{{ link.title }}{% endif %}</div>
+          {% if link.links != blank %}
+            <div class="accordion-content group-{% increment interation %}">
+              {% if link.title contains 'Mattresses' %}
+                  {% if settings.mattress_product_1 != blank %}
+                    <div class="accordion-featured grid-x">
+                      <a class="small-4" href="/products/airweave-mattress-advanced">
+                        <img class="lazyload" data-src="{{ all_products[settings.mattress_product_1].featured_image | img_url: '300x' }}"/>
+                      </a>
+                      <a class="small-8 text-center" href="{{ all_products[settings.mattress_product_1].url }}">
+                        <span>{{ all_products[settings.mattress_product_1].title }}</span>
+                        from {{ all_products[settings.mattress_product_1].price_min | money | remove: '.00' | remove: ' ' }}
+                      </a>
+                    </div>
+                  {% endif %}
+                  {% if settings.mattress_product_2 != blank %}
+                    <div class="accordion-featured grid-x">
+                      <a class="small-4" href="/products/airweave-mattress-advanced">
+                        <img class="lazyload" data-src="{{ all_products[settings.mattress_product_2].featured_image | img_url: '300x' }}"/>
+                      </a>
+                      <a class="small-8 text-center" href="{{ all_products[settings.mattress_product_2].url }}">
+                        <span>{{ all_products[settings.mattress_product_2].title }}</span>
+                        from {{ all_products[settings.mattress_product_2].price_min | money | remove: '.00' | remove: ' ' }}
+                      </a>
+                    </div>
+                  {% endif %}
+              {% elsif link.title contains 'Accessories' %}
+                  {% if settings.accessories_product_3 != blank %}
+                    <div class="accordion-featured grid-x">
+                      <a class="small-4" href="/products/airweave-mattress-advanced">
+                        <img class="lazyload" data-src="{{ all_products[settings.accessories_product_3].featured_image | img_url: '300x' }}"/>
+                      </a>
+                      <a class="small-8 text-center" href="{{ all_products[settings.accessories_product_3].url }}">
+                        <span>{{ all_products[settings.accessories_product_3].title }}</span>
+                        from {{ all_products[settings.accessories_product_3].price_min | money | remove: '.00' | remove: ' ' }}
+                      </a>
+                    </div>
+                  {% endif %}
+                  {% if settings.accessories_product_4 != blank %}
+                    <div class="accordion-featured grid-x">
+                      <a class="small-4" href="/products/airweave-mattress-advanced">
+                        <img class="lazyload" data-src="{{ all_products[settings.accessories_product_4].featured_image | img_url: '300x' }}"/>
+                      </a>
+                      <a class="small-8 text-center" href="{{ all_products[settings.accessories_product_4].url }}">
+                        <span>{{ all_products[settings.accessories_product_4].title }}</span>
+                        from {{ all_products[settings.accessories_product_4].price_min | money | remove: '.00' | remove: ' ' }}
+                      </a>
+                    </div>
+                  {% endif %}
+              {% endif %}
+              <div class="accordion-list">
+                {% for child_link in link.links %}
+                  <a href="{{ child_link.url }}" {% if child_link.title contains 'Shop All' %}class="shop-all"{% endif %}>{{ child_link.title }}</a>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+
+      <!--<div for="accordion-1" class="accordion-header parent active">Mattresses</div>
+      <div class="accordion-content" style="display: block">
+        <div class="accordion-featured grid-x">
+          <a class="small-4" href="/products/airweave-mattress-advanced">
+              <img class="lazyload" data-src="{{ 'matt-mobile-thumb.png' | asset_url }}"/>
+          </a>
+          <a class="small-8 text-center" href="/products/airweave-mattress-advanced">
+            <span>Mattress Advanced</span>
+            from $1280
+          </a>
+        </div>
+        <div class="accordion-featured grid-x">
+          <a class="small-4" href="/products/airweave-mattress">
+              <img class="lazyload" data-src="{{ 'aw-matt-mobile-thumb.jpg' | asset_url }}"/>
+          </a>
+          <a class="small-8 text-center" href="/products/airweave-8-5-mattress">
+            <span>Mattress</span>
+            from $1070
+          </a>
+        </div>
+        <div class="accordion-list">
+          <a href="/products/airweave-futon">Futon</a>
+          <a href="/products/airweave-top-mattress-luxe">Top Mattress Luxe</a>
+          <a href="/products/airweave-top-mattress">Top Mattress</a>
+          <a href="/collections/mattresses">Shop All</a>
+        </div>
+      </div>
+    </nav>
+    <nav class="drop-down-menu">
+      <div for="accordion-2" class="accordion-header parent">Accessories</div>
+      <div class="accordion-content">
+        <div class="accordion-list">
+          <a href="/products/dog-bed">Dog Bed</a>
+          <a href="/products/pillow">Pillow</a>
+          <a href="/products/airweave-hyperdown-duvet">Duvet</a>
+          <a href="/products/airweave-seat-cushion">Seat Cushion</a>
+          <a href="/products/ritz-paris-collection-by-airweave">Ritz Paris Collection</a>
+          <a href="/products/airweave-portable">Portable</a>
+          <a href="/collections/accessories">Shop All</a>
+        </div>
+      </div>
+    </nav>
+    <nav class="drop-down-menu">
+      <div for="accordion-3" class="accordion-header parent">Why Airweave?</div>
+      <div class="accordion-content">
+        <div class="accordion-list">
+          <a href="/pages/about-us">Our Story</a>
+          <a href="/pages/stories">User Stories</a>
+          <a href="/pages/mattress-for-back-joint-pain">Back &amp; Joint Pain</a>
+          <a href="/pages/sleep-study-core-body-temperature-improved-performance">Sleep Research</a>
+          <a href="/pages/the-cleanest-mattress-on-earth">100% Washable</a>
+          <a href="/pages/eco-friendly-mattress">Eco-Friendly</a>
+          <a href="/pages/eco-friendly-mattress">Social Impact</a>
+        </div>
+      </div>-->
+    </nav>
+    <div class="mobile-values">
+      <ul>
+        <li><i class='uil uil-truck'></i><span> Free Shipping</span></li>
+        <li><i class='uil uil-moon'></i><span> 100 Night Trial<sup>*</sup></span></li>
+        <li><i class='uil uil-usd-circle'></i><span> Financing Available</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="inline-cart-wrapper">
+  <section class="inline-cart" data-inline-cart></section>
+</div>
+
+{% if template contains 'product' or template contains 'futon' or template contains 'hyperdown-duvet' or template contains 'modular' or template contains 'outer-cover' or template contains 'ritz' %}
+  {% include 'pdp-breadcrumb' %}
+{% endif %}
+
+<script>
+  // RPS Side Cart
+  $(document).ready(function() {
+
+    $('#cart-menu').on("click", function(e) {
+      e.preventDefault();
+      var sideCart = window.sideCart || [];
+      sideCart.push('toggle');
+      // console.log("clicked");
+      // $('.inline-cart-wrapper').toggleClass('inline-cart-active');
+      //
+      // $('body').addClass('overflow-hidden');
+    });
+
+  });
+</script>

@@ -1,0 +1,11 @@
+<script>
+  (function() {
+    Header.init();
+    {% if settings.countdown_timer_enabled %}
+      CountdownBanner.init();
+    {% endif %}
+	{% if product.handle == 'airweave-mattress-advanced' or product.handle == 'new-airweave-mattress' %}
+    	AdvanceMatress.init();
+    {% endif %}
+  }());
+</script>

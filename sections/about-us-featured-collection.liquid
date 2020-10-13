@@ -1,0 +1,78 @@
+{% if template == 'page.landing-11' %}
+  <h2 style="padding:20px;" class="hp-bottom-header">More from airweave</h2>
+{% endif %}
+<div class="hp-featured-collection hp-featured-collection--aboutUs">
+  {% for block in section.blocks %}
+    <div class="product-block">
+      <a href="{{ all_products[block.settings.product].url }}">
+        <img src="{{ all_products[block.settings.product].featured_image | img_url: '340x' }}">
+      </a>
+      <p class="product-block-title">
+        <a class="product-block-link" href="{{ all_products[block.settings.product].url }}">
+          {%- if all_products[block.settings.product].tags contains 'new' -%}
+            <span class="new-tag__hp-featured">new!</span>
+          {%- endif -%}
+          {{ all_products[block.settings.product].title }}
+        </a>
+      </p>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.hp-featured-collection').slick({
+      dots: false,
+      arrows: true,
+      slidesToShow: {{ section.settings.slides_to_show }},
+      responsive: [
+        {
+          breakpoint: 767,
+          settings: {
+            slidesToShow: 1,
+            arrows: true,
+            dots: true,
+          }
+        }
+      ]
+    });
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "About Us Featured",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "slides_to_show",
+        "label": "Select how many slides to show",
+        "options": [
+          { "value": "3", "label": "3 slides" },
+          { "value": "4", "label": "4 slides" }
+        ],
+        "default":   "3"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product_block",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Choose a product to show"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collection",
+        "category": "Homepage"
+      }
+    ]
+  }
+{% endschema %}

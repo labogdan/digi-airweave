@@ -1,0 +1,48 @@
+<div id="breadcrumb-scroll" class="pdp-breadcrumb">
+  <div class="pdp-sections-dropdown">
+    <p>{{ product.title }}</p>
+  </div>
+  <div class="pdp-breadcrumb-list">
+    <p><a class="pdp-breadcrumb-link" href="/collections/mattresses">Products</a> / <span class="breadcrumb-title">{{ product.title }}</span></p>
+  </div>
+  <div class="pdp-breadcrumb-right">
+    <ul>
+      <li data-scroll="#productInfo"><span>Product Info</span></li>
+      <li data-scroll="#productBenefits"><span>Benefits</span></li>
+      <li data-scroll="#productReviews"><span>Reviews</span></li>
+      <li data-scroll="#productFaqs"><span>Faq's</span></li>
+    </ul>
+	<h3 class="product-price">
+		<span id="productPrice" itemprop="price" content="{{ product.selected_or_first_available_variant.price | divided_by: 100.00 }}">{{ product.selected_or_first_available_variant.price | money | remove: '.00' | remove: ' ' }}</span>
+    {% unless product.selected_or_first_available_variant.price == product.selected_or_first_available_variant.compare_at_price %}
+      <span class="product-compare-at-price" content="{{ product.selected_or_first_available_variant.compare_at_price | divided_by: 100.00 }}">{{ product.selected_or_first_available_variant.compare_at_price | money | remove: '.00' | remove: ' ' }}</span>
+    {% endunless %}
+	</h3>
+
+    {% if product.variants.size > 1 %}
+	  {% for option in product.options %}
+		  {% include 'variant-select' with option %}
+	  {% endfor %}
+	{% endif %}
+
+    <button class="pdp-breadcrumb-add" data-cart-add="{{ product.selected_or_first_available_variant.id }}" data-cart-quantity="1">
+      Add <span class="hide-x-small">to Cart</span>
+    </button>
+  </div> 
+</div>
+
+<script>
+$(function() {
+  if($(window).width() <= 470){
+    $("#breadcrumb-scroll").hide();
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 300) {
+            $("#breadcrumb-scroll").fadeIn("slow");
+        }
+        else {
+            $("#breadcrumb-scroll").fadeOut("fast");
+        }
+    });
+  }
+});
+</script>

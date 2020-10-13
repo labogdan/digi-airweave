@@ -1,0 +1,53 @@
+{% comment %}
+  /------------ Travel Bundle Promo ------------/
+{% endcomment %}
+
+{% assign has_topper = false %}
+{% assign has_travel_duvet = false %}
+
+{% for item in cart.items %}
+
+  {% if item.product.handle == 'airweave-portable' %}
+    {% assign has_topper = true %}
+  {% endif %}
+
+  {% if item.product.handle == 'airweave-hyperdown-travel-blanket' and item.properties == empty %}
+    {% assign has_travel_duvet = true %}
+  {% endif %}
+
+{% endfor %}
+
+{% comment %} 
+  /------------ End Travel Bundle Promo ------------/
+{% endcomment %}
+
+{% capture bundle-savings-message %}
+<div class="inline-cart-savings-unactivated">
+  <span class="inline-cart-savings--message">
+  <span class="hyperdown-strong">SAVE $100</span> on any purchase of the <a href="https://www.airweave.com/products/airweave-hyperdown-travel-blanket" class="inline-cart-savings--link">Hyperdown Traveler</a> with a <a href="https://www.airweave.com/products/airweave-portable" class="inline-cart-savings--link">Portable Topper</a>
+  </span>
+</div>
+{% endcapture %}
+
+{% capture bundle-savings-message-activated %}
+<div class="inline-cart-savings">
+  <span class="inline-cart-savings--headline">
+    You saved $100!
+  </span>
+  <span class="inline-cart-savings--message">
+    with your purchase of the <a href="https://www.airweave.com/products/airweave-hyperdown-travel-blanket" class="inline-cart-savings--link">Hyperdown Traveler</a> with a <a href="https://www.airweave.com/products/airweave-portable" class="inline-cart-savings--link">Portable Topper
+  </span>
+</div>
+{% endcapture %}
+ 
+
+{% comment %} Change the message of the page  {% endcomment %}
+{% if settings.travel-bundle-enable %}
+  {% if has_travel_duvet and has_topper %}
+    {{ bundle-savings-message-activated }}
+  {% endif %} 
+
+  {% unless has_travel_duvet and has_topper %}
+    {{ bundle-savings-message }}
+  {% endunless %}
+{% endif %} 

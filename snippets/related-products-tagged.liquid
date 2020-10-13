@@ -1,0 +1,82 @@
+<div class="related-products-wrapper">
+  <h2 class="related-products-header">You May Also Like</h2>
+  <div class="grid-container related-products-container more-featured-collection related-collection-tagged">
+    {% for rec_product in recommended_products %}
+      {% assign this_product = all_products[rec_product] %}
+      {% if this_product.available %}
+	      <div class="collection-extras-block">
+	        <div class="collection-extras-block-image">
+	          <a href="{{ this_product.url }}">
+	            <img src="{{ this_product.featured_image | img_url: 'master' }}">
+	          </a>
+	        </div>
+	        <div class="collection-extras-block-content text-center">
+				<a href="{{ this_product.url }}">
+					<div class="vert-text">
+					    <span class="collection-extras-block-title">{{ this_product.title }}</span>
+					</div>
+					{% if this_product.price_varies == true %}
+					  {% if on_sale %}
+					    <h3 class="collection-extras-block-price">{{ this_product.price_min | money | remove: '.00' | remove: ' ' }} - {{ this_product.price_max | money | remove: '.00' | remove: ' ' }} </h3>
+					    <h3 class="collection-extras-compare-at-price">{{ this_product.compare_at_price_min | money | remove: '.00' | remove: ' ' }} - {{ this_product.compare_at_price_max | money | remove: '.00' | remove: ' ' }} </h3>
+					  {% else %}
+					    <h3 class="collection-extras-block-price">{{ this_product.price_min | money | remove: '.00' | remove: ' ' }} - {{ this_product.price_max | money | remove: '.00' | remove: ' ' }}</h3>
+					  {% endif %}
+					{% else %}
+					  {% if on_sale %}
+					    <h3 class="collection-extras-block-price">{{ this_product.price | money | remove: '.00' | remove: ' ' }}</h3>
+					    <h3 class="collection-extras-compare-at-price">{{ this_product.compare_at_price | money | remove: '.00' | remove: ' ' }}</h3>
+					  {% else %}
+					    <h3 class="collection-extras-block-price">{{ this_product.price | money | remove: '.00' | remove: ' ' }}</h3>
+					  {% endif %}
+					{% endif %}
+					<div class="yotpo bottomLine"
+					  data-appkey="2L4JZXk1a0QKtmjoNOZmVVp735oAgqpG1fMEuvLJ"
+					  data-domain="{{shop.permanent_domain | escape }}"
+					  data-product-id="{{ this_product.id }}"
+					  data-product-models="{{ this_product.id }}"
+					  data-name="{{ this_product.title | escape }}"
+					  data-url="{{ shop.url }}{{ this_product.url }}"
+					  data-image-url="{{ this_product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+					  data-description="{{ this_product.description | escape }}"
+					  data-bread-crumbs="{% for tag in this_product.tags %}{{ tag | escape }};{% endfor %}">
+					</div>
+				</a>
+				<div class="quick-add">
+					<form action="/cart/add" method="post" class="shopify-product-form" enctype="multipart/form-data">
+						{% assign has_presale_pricing = false %}
+						{% if this_product.tags contains 'presale-pricing' %}
+						{% assign has_presale_pricing = true %}
+						{% endif %}
+				
+				
+						{% if this_product.variants.size > 1 %}
+							<select id="productSelect" class="related-products-carousel" name="id" style="display: block">
+								{% for variant in this_product.variants %}
+								{% if variant.available %}
+								<option {% if variant == this_product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}</option>
+								{% else %}
+								<option disabled="disabled">
+								{{ variant.title }}
+								</option>
+								{% endif %}
+								{% endfor %}
+							</select>
+							  <button type="submit" name="add" class="quick-atc" data-cart-add="{{ this_product.selected_or_first_available_variant.id }}" data-cart-quantity="1">
+							    <span>Add</span>
+							  </button>
+				
+				        {% else %}
+							  <button type="submit" name="add" class="quick-atc full" data-cart-add="{{ this_product.selected_or_first_available_variant.id }}" data-cart-quantity="1">
+							    <span>Add to Cart</span>
+							  </button>
+				        {% endif %}
+				
+					</form>
+				</div>
+	        </div>
+	      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

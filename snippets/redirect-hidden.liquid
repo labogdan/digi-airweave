@@ -1,0 +1,8 @@
+{%- comment -%}Hide products tagged 'hidden'{%- endcomment -%}
+{% if template contains 'product' %}
+  {% if product.tags contains 'hidden' %}
+    <script>
+      window.location.replace('{{ shop.url }}');
+    </script>
+  {% endif %}
+{% endif %}

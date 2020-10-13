@@ -1,0 +1,80 @@
+{% if related_products == true %}
+  {% assign hover_enabled = block.settings.show_related_products_title_on_hover %}
+{% else %}
+  {% assign hover_enabled = settings.thumbnail_hover_enabled %}
+{% endif %}
+
+{% if type == 'block' %}
+  {% assign object = block %}
+{% else %}
+  {% assign object = section %}
+{% endif %}
+
+<div class="
+  {% include 'column-width', value: products_per_row %}
+  medium-down--one-half
+  {% if object.settings.mobile_products_per_row == '1' %}
+    small-down--one-whole
+  {% else %}
+    small-down--one-half
+  {% endif %}
+  column
+  {% if settings.enable_quickshop %}
+    quick-shop--true
+    quick-shop--closed
+    product-{{ product.id }} js-product_section
+  {% endif %}
+  {% if settings.stickers_enabled %}
+    has-thumbnail-sticker
+  {% endif %}
+  thumbnail
+  product__thumbnail
+  product__grid-item
+  thumbnail__hover-overlay--{{ hover_enabled }}
+  has-padding-bottom"
+  {% if section.settings.pagination_type != 'basic_pagination' %}
+    data-load-more--grid-item
+  {% endif %}>
+  <div class="product-wrap {% if product.images[1] != blank and settings.show_secondary_image == true %}swap--true{% endif %}">
+
+	  <div class="product-image__wrapper">
+		<div class="image__container product__imageContainer">
+			<a href="{{ product.url | within: collection }}">
+            {% include 'image-element', image: product.images[1], alt: block.settings.image_top.alt, additional_classes: 'mega-menu__image' %}
+          </a>
+        </div>
+      </div>
+
+      <div class="thumbnail__caption text-align-{{ settings.thumbnail_text_alignment }}">
+      	<a href="{{ product.url | within: collection }}" class="product-thumbnail__title">{{ product.title }}</a><br>
+      	{% if product.price_varies == true %}
+          {% if product.compare_at_price > product.price %}
+            <h3 class="collection-extras-block-price {% if settings.highlight_price_enabled %}sale-red{% endif %}">from {{ product.price_min | money | remove: '.00' | remove: ' ' }}</h3>
+            <h3 class="collection-extras-compare-at-price">{{ product.compare_at_price_min | money | remove: '.00' | remove: ' ' }}</h3>
+          {% else %}
+            <h3 class="collection-extras-block-price">from {{ product.price_min | money | remove: '.00' | remove: ' ' }}</h3>
+          {% endif %}
+        {% else %}
+          {% if product.compare_at_price > product.price %}
+            <h3 class="collection-extras-block-price {% if settings.highlight_price_enabled %}sale-red{% endif %}">from {{ product.price | money | remove: '.00' | remove: ' ' }}</h3>
+            <h3 class="collection-extras-compare-at-price">{{ product.compare_at_price | money | remove: '.00' | remove: ' ' }}</h3>
+          {% else %}
+            <h3 class="collection-extras-block-price">{{ product.price | money | remove: '.00' | remove: ' ' }}</h3>
+          {% endif %}
+        {% endif %}
+      	
+      	
+      	
+      </div>
+
+  </div>
+
+  {% if hover_enabled == false %}
+    {% if settings.enable_shopify_collection_badges and settings.enable_shopify_review_comments %}
+    <div class="product-thumbnail__review-stars is-flex is-justify-{{ settings.thumbnail_text_alignment }}">
+      <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+    </div>
+    {% endif %}
+  {% endif %}
+
+</div>

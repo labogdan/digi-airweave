@@ -1,0 +1,46 @@
+<!-- RPS Side Cart -->
+<div id="side-cart"></div>
+{{ 'side-cart.min.js' | asset_url | script_tag }}
+<script>
+  var sideCart = window.sideCart || [];
+  sideCart.push('set-cart', {{ cart | json }});
+  sideCart.push('set-config', {
+    empty_cart_top_promo: '{{ settings.empty_cart_top_promo | replace: "'", "\'" }}',
+
+    empty_cart_product_1: {{ all_products[settings.empty_cart_product_1] | json }},
+    empty_cart_product_2: {{ all_products[settings.empty_cart_product_2] | json }},
+    empty_cart_collection_1: {{ collections[settings.empty_cart_collection_1] | json }},
+
+    empty_cart_product_3: {{ all_products[settings.empty_cart_product_3] | json }},
+    empty_cart_product_4: {{ all_products[settings.empty_cart_product_4] | json }},
+    empty_cart_collection_2: {{ collections[settings.empty_cart_collection_2] | json }},
+
+    empty_cart_default_promo: '{{ settings.empty_cart_default_promo | replace: "'", "\'" }}',
+
+    free_shipping: {% if settings.free_shipping %}true{% else %}false{% endif %}
+  });
+
+  sideCart.push('set-events', {
+    open: function() { document.body.classList.add('overflow-hidden'); },
+    close: function() { document.body.classList.remove('overflow-hidden'); },
+    updateCount: function(count) {
+      var div = document.querySelector('#cart-menu .inline-cart-count');
+      if (div)
+      {
+        div.innerHTML = count;
+
+        if (count > 0)
+        {
+          div.classList.remove('inline-cart-empty');
+        }
+        else
+        {
+          div.classList.add('inline-cart-empty');
+        }
+      }
+    }
+  });
+
+  sideCart.push('set-upsells', {{ collections['sidecart-upsells'].products | json }});
+</script>
+<!-- End RPS Side Cart -->

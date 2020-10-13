@@ -1,0 +1,194 @@
+<div id="productBenefits" class="features">
+  <h2 class="features-header">Different At Its Core</h2>
+  <div class="features-btns">
+    <a href="#synchronized" class="features-btn">
+      {% include 'svg-definitions' with 'warm' %}
+      <p>Extra Warm</p>
+    </a>
+    <a href="#designed" class="features-btn">
+      {% include 'svg-definitions' with 'humidity' %}
+      <p>Humidity Control</p>
+    </a>
+    <a href="#easy" class="features-btn">
+      {% include 'svg-definitions' with 'clean' %}
+      <p>Healthy</p>
+    </a>
+    <a href="#ecofriendly" class="features-btn">
+      {% include 'svg-definitions' with 'humane' %}
+      <p>Humane</p>
+    </a>
+  </div>
+  <div class="features-content-wrapper">
+    <div id="synchronized" class="features-content">
+      <div class="features-copy">
+        <h2>Extra Warm</h2>
+        <p>Extra warmth is created through hygroscopic heat build up, the ability to convert  moisture into heat, thanks to our innovative Hyperdown fill. When combined with an outer  shell  designed to provide the highest level of insulation, this is the perfect duvet for cooler temperatures.</p>
+        <a href="#designed" class="features-next">Next Benefit {% include 'svg-definitions' with 'right-caret' %}</a>
+      </div>
+      {% comment %}<div class="features-video">
+        <video id="synchronized-video" width="100%" preload="true" poster="{{ 'secondHomepage-gamechanging4.png' | asset_url }}" onclick="playPause('synchronized-video')">
+          <source src="{{ 'Homepage_Diagram_v05_H264.webm' | asset_url }}" type="video/webm">
+          <source src="{{ 'Homepage_Diagram_v05_H264.mp4' | asset_url }}" type="video/mp4">
+        </video>
+        <div class="video-play" onclick="playPause('synchronized-video')">
+          {% include 'svg-definitions' with 'play-icon' %}
+        </div>
+      </div>{% endcomment %}
+    </div>
+    <div id="designed" class="features-content">
+      <div class="features-copy">
+        <h2>Humidity Control</h2>
+        <p>Most duvets trap heat and moisture leaving you tossing and turning uncomfortably due to a high level of humidity. Hyperdown  is able to take moisture and convert it into heat leaving you comfortably warm and sound asleep.</p>
+        <a href="#easy" class="features-next">Next Benefit {% include 'svg-definitions' with 'right-caret' %}</a>
+      </div>
+      {% comment %}<div class="features-video">
+        <img src="{{ 'designed-to-breathe.jpg' | asset_url }}">
+      </div>{% endcomment %}
+    </div>
+    <div id="easy" class="features-content">
+      <div class="features-copy">
+        <h2>Healthy</h2>
+        <p>While natural down can attract dirt, microbes, and cause allergies, Hyperdown is antimicrobial, hypoallergenic, and even controls odors. Wash easily by hand or dry clean.</p>
+        <a href="#ecofriendly" class="features-next">Next Benefit {% include 'svg-definitions' with 'right-caret' %}</a>
+      </div>
+      {% comment %}<div class="features-video">
+        <video id="easy-to-clean-video" width="100%" preload="false" poster="{{ 'easy-to-clean-preplay.jpg' | asset_url }}" onclick="playPause('easy-to-clean-video')">
+          <source src="{{ '20161019_aw_water.mp4' | asset_url }}" type="video/mp4">
+        </video>
+        <div class="video-play" onclick="playPause('easy-to-clean-video')">
+          {% include 'svg-definitions' with 'play-icon' %}
+        </div>
+      </div>{% endcomment %}
+    </div>
+    <div id="ecofriendly" class="features-content">
+      <div class="features-copy">
+        <h2>Humane</h2>
+        <p>We  support cruelty-free bedding and, as a company built on  innovation, are proud to develop an alternative that is superior to natural down. </p>
+      </div>
+      {% comment %}<div class="features-video">
+        <div class="youtube-embed">
+          <iframe class="youtube-video" width="100%" src="https://www.youtube.com/embed/2uqbHdrsPkA?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>{% endcomment %}
+    </div>
+  </div>
+</div>
+
+<script>
+// TABBED CONTENT
+$('.features-btns').each(function(){
+  // For each set of tabs, we want to keep track of
+  // which tab is active and its associated content
+  var $active, $content, $links = $(this).find('a');
+
+  // If the location.hash matches one of the links, use that as the active tab.
+  // If no match is found, use the first link as the initial active tab.
+  $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+  $active.addClass('active');
+
+  $content = $($active[0].hash);
+  $content.addClass('active');
+
+  // Hide the remaining content
+  $links.not($active).each(function () {
+    $(this.hash).removeClass('active');
+  });
+
+  // Bind the click event handler
+  $(this).on('click', 'a', function(e){
+    // Pause all videos
+    pauseAll();
+
+    // Make the old tab inactive.
+    $active.removeClass('active');
+    $content.removeClass('active');
+
+    // Update the variables with the new link and content
+    $active = $(this);
+    $content = $(this.hash);
+
+    // Make the tab active.
+    $active.addClass('active');
+    $content.addClass('active');
+
+    // Prevent the anchor's default click action
+    e.preventDefault();
+  });
+  $('.features-next').on('click', function(e){
+    // Pause all videos
+    pauseAll();
+
+    // Make the old tab inactive.
+    $active.removeClass('active');
+    $content.removeClass('active');
+
+    // Update the variables with the new link and content
+    $nexthash = ($(this.hash));
+    $active = $('.features-btn[href=' + $nexthash.selector + ']');
+    $content = $(this.hash);
+
+    // Make the tab active.
+    $active.addClass('active');
+    $content.addClass('active');
+
+    // Prevent the anchor's default click action
+    e.preventDefault();
+  });
+});
+
+//var video1 = document.getElementById("video1");
+function playPause(videoName) {
+  var video = document.getElementById(videoName)
+  if (video.paused) {
+    video.play();
+    // $('#' + videoName).attr('controls', 'true');
+    $('#' + videoName).next('.video-play').hide();
+  } else {
+    video.pause();
+    $('#' + videoName).next('.video-play').show();
+  }
+}
+function pauseAll() {
+  $('video').each(function() {
+    this.pause();
+    $(this).next('.video-play').show();
+  });
+  //Pause the youtube embed too
+  $('.youtube-video').each(function(){
+    this.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*')
+  });
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  //Cache reference to window and animation items
+  var $autoplay_video = $('#synchronized-video');
+  var $window = $(window);
+  $window.on('scroll', check_if_in_view);
+  $window.on('scroll resize', check_if_in_view);
+  $window.trigger('scroll');
+
+  function check_if_in_view() {
+    var window_height = $window.height();
+    var window_top_position = $window.scrollTop();
+    var window_bottom_position = (window_top_position + window_height);
+
+    $.each($autoplay_video, function() {
+      var $element = $(this);
+      var element_height = $element.outerHeight();
+      var element_top_position = $element.offset().top;
+      var element_bottom_position = (element_top_position + element_height);
+
+      //check to see if this current container is within viewport
+      if (element_top_position + 160 <= window_bottom_position) {
+        $autoplay_video[0].play();
+        $autoplay_video.next('.video-play').hide();
+        //remove listener after autoplay triggers once
+        $window.off('scroll', check_if_in_view);
+        $window.off('scroll resize', check_if_in_view);
+      } 
+    });
+  }
+});
+</script>

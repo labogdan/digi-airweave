@@ -1,0 +1,52 @@
+<div class="hp-featured-collection">
+  {% for block in section.blocks %}
+    <div class="product-block">
+      <a href="{{ all_products[block.settings.product].url }}">
+        <img src="{{ all_products[block.settings.product].featured_image | img_url: '340x' }}">
+      </a>
+      <p class="product-block-title">
+        <a class="product-block-link" href="{{ all_products[block.settings.product].url }}">{{ all_products[block.settings.product].title }}</a>
+      </p>
+    </div>
+  {% endfor %}
+</div>
+<input	type="hidden" value="{{ section.settings.slides_to_show }}" id="ss-sts"/>
+
+
+{% schema %}
+  {
+    "name": "Featured Collection",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "slides_to_show",
+        "label": "Select how many slides to show",
+        "options": [
+          { "value": "3", "label": "3 slides" },
+          { "value": "4", "label": "4 slides" }
+        ],
+        "default":   "3"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product_block",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Choose a product to show"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collection",
+        "category": "Homepage"
+      }
+    ]
+  }
+{% endschema %}

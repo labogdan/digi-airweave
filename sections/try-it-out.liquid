@@ -1,0 +1,45 @@
+<div class="hp-bottom-collection-wrapper">
+  {% if template == 'page.landing-11' %}
+    <h2 class="hp-bottom-header">More from airweave</h2>
+    {% else %}
+    <h2 class="hp-bottom-header">Try it out</h2>
+  {% endif %}
+  <div class="hp-bottom-collection">
+    {%- assign collection = collections[section.settings.collection] -%}
+    {% if template == 'page.landing-11' %}
+      {% assign collection = collections['mattresses'] %}
+    {% endif %}
+    {% for product in collection.products %}
+      <div class="hp-bottom-product-block">
+        <div class="hp-bottom-product-image">
+          <a href="{{ product.url | within: collection }}">
+            <img class="lazyload" data-src="{{ product.featured_image | img_url: '340x' }}">
+          </a>
+        </div>
+        <div class="hp-bottom-product-block-title">
+          <a class="hp-bottom-product-block-link" href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Try It Out",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Choose a collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Try It Out",
+        "category": "Homepage"
+      }
+    ]
+  }
+{% endschema %}

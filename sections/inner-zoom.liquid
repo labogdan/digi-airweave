@@ -1,0 +1,39 @@
+<div class="inner-zoom">
+{% assign product-handle = product.title | handleize %}
+  <div class="inner-zoom-container">
+  	{% for image in product.images %}
+  		{% if image.alt contains 'airfiber' or image.alt contains 'inner-zoom' %}
+			<img  class="inner-zoom-img" src="{{ image.src | img_url: 'master' }}">
+		{% endif %}
+    {% endfor %}
+    <img class="zoom-area-img" src="{{ 'zoom-area.png' | asset_url }}" {% if product.title contains "S-Line" %}style="left: 52%;"{% endif %}>
+  </div>
+  <div>
+    <h2>{{section.settings.heading}}</h2>
+    <p>{{section.settings.content}}</p>
+  </div>
+</div>
+
+
+{% schema %}
+  { 
+    "name": "About Airfiber",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "What is airfiber?"
+      },
+      {
+        "type": "text",
+        "id": "content",
+        "label": "Content",
+        "default": "Airfiber is our proprietary technology and material that makes up the core of our mattresses. Through its unique interwoven design, airfiber helps you move easily, evenly distributes weight and allows airflow to help keep you in a deeper more restful sleep."
+      }
+    ],
+    "blocks": [],
+    "presets": [
+    ]
+  }
+{% endschema %}

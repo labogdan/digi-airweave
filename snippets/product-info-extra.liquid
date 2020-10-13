@@ -1,0 +1,13 @@
+<div class="product-info-extras">
+  <div class="product-info-extra">
+    {% include 'svg-definitions' with 'truck' %}
+    <span>Free Shipping {% unless product.handle == "pillow" or product.handle == "airweave-hyperdown-duvet" or product.handle == "airweave-seat-cushion" %}<span class="returns-addon"> &amp; Returns </span>{% endunless %}</span>
+  </div>
+
+  {% unless product-info-extra.handle == 'airweave-seat-cushion' or product-info-extra.handle == 'airweave-hyperdown-duvet' or product-info-extra.handle == 'airweave-hyperdown-travel-blanket' or product-info-extra.handle == 'pillow-nj' or product.handle == "pillow" %}
+    <div class="product-info-extra">
+      {% include 'svg-definitions' with 'clock' %}
+      <span>100 Night Trial</span>
+    </div>
+  {% endunless %}
+</div>

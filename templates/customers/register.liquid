@@ -1,0 +1,52 @@
+<!-- /templates/customers/register.liquid -->
+<section class="customer-template register-container flex flex-justify-center">
+  <div class="flex-4-md">
+      <div class="customer-form flex-form-vertical">
+        {% form 'create_customer' %}
+          <h1 class="form-title">Create Account</h1>
+
+          {% if form.errors %}
+            <div class="form-note is-error">
+              <ul>
+                {% for error in form.errors %}
+                  <li>{{ form.errors.messages[error] }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          <div class="input-group flex-12">
+            <label for="first-name" class="hidden-label">First Name</label>
+            <input type="text" name="customer[first_name]" id="first-name" class="" placeholder="First Name" autocapitalize="words" autofocus>
+          </div>
+
+          <div class="input-group flex-12">
+            <label for="last-name" class="hidden-label">Last Name</label>
+            <input type="text" name="customer[last_name]" id="last-name" class="" placeholder="Last Name" autocapitalize="words">
+          </div>
+
+          <div class="input-group flex-12">
+            <label for="email" class="hidden-label">Email</label>
+            <input type="email" name="customer[email]" id="email" class="{% if form.errors contains 'email' %}error{% endif %}" placeholder="Email" autocorrect="off" autocapitalize="off">
+          </div>
+
+          <div class="input-group flex-12">
+            <label for="create-password" class="hidden-label">Password</label>
+            <input type="password" name="customer[password]" id="create-password" class="{% if form.errors contains 'password' %}error{% endif %}" placeholder="Password">
+          </div>
+
+          <div class="input-group flex-12">
+            <button type="submit" class="form-submit btn btn--primary flex-12">Submit</button>
+          </div>
+
+          <div class="input-group flex-12">
+            <a href="{{ shop.url }}" class="btn text-link">Return to Store</a>
+          </div>
+
+        {% endform %}
+      </div>
+
+    </div>
+
+  </div>
+</section>

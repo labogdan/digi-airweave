@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	{% include 'redirect-hidden' %}
+  	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	{% include 'dataLayer' %}
+    
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="Ol4nxrUi8XXe9g0T0KN-D_Aezw67pOOy8V8USPFlV7Q" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {% if handle contains 'save' %}
+    	<meta name="robots" content="noindex">
+    {% endif %}
+    <link rel="canonical" href="{{ canonical_url }}" />
+    <link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}" />
+    
+    <!-- Title and Description ================================ -->
+    <title>
+      {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}" />
+    {% else %}
+      <meta name="description" content="airweave is the mattress brand designed to power your tomorrow. Engineered with Japanese technology. Free shipping. Try it for 100 nights. For customers outside of the US and contiguous 48 states please contact us with the product you're interested in and Shipping address for a delivery quote." />
+    {% endif %}
+    <meta name="keywords" content="mattress, topper, bedding, nyc store, airweave, weave, air, firm mattress, soft mattress, dual mode mattress, aerweave, airwave, mattress pad, sports mattress, athlete mattress, mattress set, twin mattress, queen mattress, california king mattress, king mattress, affordable, mattress back pain, best rated mattress, Olympic mattress, thin mattress" />
+
+    <!-- Product Meta ================================ -->
+    {% include 'open-graph-tags' %}
+    {% include 'twitter-card' %}
+
+    <!-- Header Content ================================ -->
+    {{ content_for_header }}
+
+	<!-- Stylesheets ================================ -->
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    {{ 'foundation.min.css' | asset_url | stylesheet_tag }}
+    {{ 'vendor.css' | asset_url | stylesheet_tag }}
+    {{ 'bvaccel.css' | asset_url | stylesheet_tag }}
+    {{ 'hc.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'dc.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'remodal.min.scss' | asset_url | stylesheet_tag }}
+    
+    <!-- Shopify ================================ -->
+    <!-- {{ 'shopify_common.js' | shopify_asset_url | script_tag }} -->
+    <!-- {{ 'option_selection.js' | shopify_asset_url | script_tag }} -->
+
+    {% if template contains 'customers' %}
+      <!-- {{ 'customer_area.js'  | shopify_asset_url | script_tag }} -->
+    {% endif %}
+
+    <!-- Vendor Scripts & Libraries ================================ -->
+    <script src="{{ 'vendor.js' | asset_url }}" async></script>
+
+    <!-- Libraries Used: ================================ -->
+    <!-- ================================================ -->
+    <!-- ##########:   https://github.com/ -->
+
+    <!-- Object API ================================ -->
+    <script>
+      window.shop = {
+        template: {{ template | json }},
+        currentPage: {{ current_page }},
+        customerIsLogged: {% if customer %}true{% else %}false{% endif %},
+        shopCurrency: {{ shop.currency | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        moneyWithCurrencyFormat: {{ shop.money_with_currency_format | json }},
+        collectionSortBy: {{ collection.sort_by | default: collection.default_sort_by | json }}
+      }
+    </script>
+
+	{% if template contains 'product' %}
+		<script type="text/javascript">
+		(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/2L4JZXk1a0QKtmjoNOZmVVp735oAgqpG1fMEuvLJ/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+		</script>
+	{% endif %}
+    
+
+    <!-- Hotjar Tracking Code for airweave.com -->
+    <!--<script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:336968,hjsv:5};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>-->
+
+    <!-- Pinterest Tag -->
+    <script type="text/javascript">
+    !function(e){if(!window.pintrk){window.pintrk=function()
+    {window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
+    n=window.pintrk;n.queue=[],n.version="3.0";var
+    t=document.createElement("script");t.async=!0,t.src=e;var
+    r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}
+    ("https://s.pinimg.com/ct/core.js");
+
+    pintrk('load','2613871209998', { em: '{{ customer.email }}', });
+    pintrk('page');
+    </script>
+    <noscript>
+    <img height="1" width="1" style="display:none;" alt=""
+    src="https://ct.pinterest.com/v3/?tid=2613871209998&noscript=1" />
+    </noscript>
+    <!-- end Pinterest Tag -->
+    
+    <script type="text/javascript">
+      (function(e,t,u,n,f){
+        "use strict";
+        e.fx||(e.fuelxEQ=e.fuelxEQ?e.fuelxEQ:[],e.fuelx=function(){e.fuelxP&&e.fuelxP.fuelx?e.fuelxP.handleEvent(arguments):e.fuelxEQ.push(arguments)},
+               f=e.document.createElement(t),f.async=!0,f.src=u,n=e.document.getElementsByTagName(t)[0],n.parentNode.insertBefore(f,n))
+      })(window,"script","https://cdn.fuelx.com/js/tr.js?v1");
+    </script>
+    <script type="text/javascript">
+      fuelx("init", "43acbe03eaca103645d4f953d46dca23", "MQ4c7iSsN6rspGdCgqWqJQ%3D%3D");
+      fuelx("pageview");
+    </script>
+
+
+{%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
+{%- assign time_now = 'now' | date: '%s' %}
+{%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
+{%- assign diffSeconds = time_now | minus: yotpo_live_time %}
+    <script src="https://www.dwin1.com/19038.js" type="text/javascript" defer="defer"></script>
+</head>
+
+  <body id="{{ page_title | handle }}" class="template__{{ template | replace: '.', '--' }} {% if customer %}customer-logged-in{% endif %}{% if settings.promo-bar-enable == true %} promo-bar-is-present{% endif %} {% if settings.countdown_timer_enabled %}shopify-section-countdown-banner-is-present{% endif %}">
+
+    <script async src="https://us-library.klarnaservices.com/merchant.js?uci=3587ddfc-acfb-4b80-96a8-7c33e849cc57&country=US" async></script>
+
+    {% include 'floodlight-tracking' %}
+    
+	<div class="overlay" data-overlay></div>
+
+    {% include 'free-trial-modal' %}
+
+    {% if settings.countdown_timer_enabled %}
+      {% section 'countdown-banner' %}
+    {% endif %}
+
+    {% section 'promo-overlay' %}
+    
+    {% include 'ajax-cart' %}
+    
+    {% include 'header' %}
+    
+    {% if settings.promo-bar-enable == true %}
+      {% include 'promo-bar' %}
+
+    {% endif %}
+
+    <main class="page-content {% if settings.promo-bar-enable == true %}promo-bar-is-active{% endif %}">{{ content_for_layout }}</main>
+
+    {% include 'footer' %}
+
+    <script src="{{ 'bvaccel.js' | asset_url }}"></script>
+    <!-- Footer Scripts ================================ -->
+    <script src="{{ 'bvclean.js' | asset_url }}" async></script>
+    <script src="{{ 'z__jsMegaMenu.js' | asset_url }}" async></script>
+    {{ 'remodal.min.js' | asset_url | script_tag }}
+    <script src="{{ 'hc.js' | asset_url }}"></script>
+    
+    <script>	
+      (function() {	
+        CartJS.init({{ cart | json }});	
+        InlineCart.init(	
+          {% if settings.free-hyperdown-traveler-enable == true %}	
+            'freeTravelerActive'	
+          {% endif %}	
+        );	
+        FastClick.attach(document.body);	
+        KlaviyoForm.init();	
+        Scroll.init();	
+        Header.init();	
+        {% if settings.countdown_timer_enabled %}	
+          CountdownBanner.init();	
+        {% endif %}	
+        {% if template contains 'page' %}	
+          CampaignLandingPage.init();	
+          MatressToppersLandingPage.init();	
+        {% endif %}	
+        {% if template contains 'hyperdown-duvet' %}	
+          HyperdownDuvetPage.init();	
+        {% endif %}	
+        Sliders.init();	
+        // init modules	
+        Toggle.init();	
+        {% if product.handle == 'airweave-mattress-advanced' %}	
+          AdvanceMatress.init();	
+        {% endif %}	
+        {% if template contains 'index' %}	
+            InstagramFeed.init();	
+        {% endif %}	
+        {% if reset_password %}	
+          Toggle.toggle('#reset-success');	
+        {% endif %}	
+      }());	
+    </script>
+
+    {% include 'external-scripts' %}
+
+    <script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js" async></script>
+    
+    {% include 'react-sidecart' %}
+    
+    <!-- Twitter universal website tag code -->
+    <script>
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+    a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','nydhy');
+    twq('track','PageView');
+    </script>
+    
+    <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"56254900"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+    
+
+	{% if template contains "product" %}
+    <script async>
+    jQuery(function() {
+      jQuery('.swatch :radio').change(function() {
+        var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+        var optionValue = jQuery(this).val();
+        jQuery(this)
+          .closest('form')
+          .find('.single-option-selector')
+          .eq(optionIndex)
+          .val(optionValue)
+          .trigger('change');
+      });
+    });
+    </script>
+    {% endif %}
+
+	<script>
+      jQuery(function() {
+        $('.menu-title').click( function() {
+          $(".menu-title").$(this).toggleClass("visible");
+        } );
+
+        $('body').on('click', '.accordion-trigger', function(){
+          //console.log('click accordion-trigger');
+          $(".accordion").toggleClass("visible");
+
+          if($('.accordion').hasClass('visible')) {
+            $('body').addClass('overflow-hidden');
+          } else {
+            $('body').removeClass('overflow-hidden');
+          }
+        } );
+      })
+    </script>
+
+
+    <script defer>
+      $('body').on('click', '.modal-toggle-0', function (e) {
+        e.preventDefault();
+        $('.promo-modal-0').toggleClass('is-visible');
+      });
+
+      $('body').on('click', '.modal-toggle-1', function (e) {
+        e.preventDefault();
+        $('.promo-modal-1').toggleClass('is-visible');
+      });
+
+      $('body').on('click', '.modal-toggle-2', function (e) {
+        e.preventDefault();
+        $('.promo-modal-2').toggleClass('is-visible');
+      });
+    </script>
+
+    {% include 'klaviyo-bis' %}
+
+    <!--SteelHouse Tracking Pixel-->
+    <!-- INSTALL ON ALL PAGES OF SITE-->
+    <script type="text/javascript">
+        (function(){"use strict";var e=null,b="4.0.0",
+        n="30734",
+        additional="term=value",
+        t,r,i;try{t=top.document.referer!==""?encodeURIComponent(top.document.referrer.substring(0,2048)):""}catch(o){t=document.referrer!==null?document.referrer.toString().substring(0,2048):""}try{r=window&&window.top&&document.location&&window.top.location===document.location?document.location:window&&window.top&&window.top.location&&""!==window.top.location?window.top.location:document.location}catch(u){r=document.location}try{i=parent.location.href!==""?encodeURIComponent(parent.location.href.toString().substring(0,2048)):""}catch(a){try{i=r!==null?encodeURIComponent(r.toString().substring(0,2048)):""}catch(f){i=""}}var l,c=document.createElement("script"),h=null,p=document.getElementsByTagName("script"),d=Number(p.length)-1,v=document.getElementsByTagName("script")[d];if(typeof l==="undefined"){l=Math.floor(Math.random()*1e17)}h="dx.steelhousemedia.com/spx?"+"dxver="+b+"&shaid="+n+"&tdr="+t+"&plh="+i+"&cb="+l+additional;c.type="text/javascript";c.src=("https:"===document.location.protocol?"https://":"http://")+h;v.parentNode.insertBefore(c,v)})()
+    </script>
+	
+	<script src="{{ 'lazysizes.min.js' | asset_url }}" async></script>
+    
+      
+    <!--Gorgias Chat Widget Start--><div id="gorgias-chat">{% if customer %}<script>window.gorgiasChatParameters = {"smooch": {"givenName": "{{ customer.name }}","email": "{{ customer.email }}","properties": {"shopify__cart__total_price": "{{ cart.total_price | money | strip_html | default: null }}","shopify__cart__nb_of_items": {{ cart.items | size | default: 0 }},{% for item in cart.items %}"shopify__cart__items-{{ forloop.index }}-[]":"{\"line_price\":\"{{item.line_price|money|strip_html|default:null}}\",\"price\":\"{{item.price|money|strip_html|default:null}}\",\"product_id\":\"{{item.product_id|default:null}}\",\"quantity\":{{item.quantity|default:null}},\"sku\":\"{{item.sku|default:null}}\",\"title\":\"{{item.title}}\",\"variant_id\":{{item.variant_id|default:null}},\"vendor\":\"{{item.vendor|default:null}}\",\"id\":{{item.id|default:null}}}"{% if forloop.last != true %},{% endif %}{% endfor %}}}}</script>{% else %}<script>window.gorgiasChatParameters = {"smooch": {"properties": {"shopify__cart__total_price": "{{ cart.total_price | money | strip_html | default: null }}","shopify__cart__nb_of_items": {{ cart.items | size | default: 0 }},{% for item in cart.items %}"shopify__cart__items-{{ forloop.index }}-[]":"{\"line_price\":\"{{item.line_price|money|strip_html|default:null}}\",\"price\":\"{{item.price|money|strip_html|default:null}}\",\"product_id\":\"{{item.product_id|default:null}}\",\"quantity\":{{item.quantity|default:null}},\"sku\":\"{{item.sku|default:null}}\",\"title\":\"{{item.title}}\",\"variant_id\":{{item.variant_id|default:null}},\"vendor\":\"{{item.vendor|default:null}}\",\"id\":{{item.id|default:null}}}"{% if forloop.last != true %},{% endif %}{% endfor %}}}}</script>{% endif %}<script src="https://config.gorgias.io/production/z8QbV2PEVR7ogePy/chat/gpGJBxpjDb2YXZA5.js" defer></script></div><!--Gorgias Chat Widget End--></body>
+  <script type="text/javascript">
+    var gorgiasChatInterval = window.setInterval(function () {
+      var iframe = document.querySelector('#gorgias-web-messenger-container');
+      if (iframe) { 
+        var head = iframe.contentWindow.document.querySelector('head')
+        if (head.children.length) {
+          window.clearInterval(gorgiasChatInterval); // this line breaks out of the loop - make sure it's not deleted.        
+          var styles = document.createElement('style');
+          styles.textContent = '.logo-wrapper{display: none}'
+          head.appendChild(styles)
+        }
+      }    
+    }, 100);
+  </script>
+
+    
+</body>
+
+
+</html>

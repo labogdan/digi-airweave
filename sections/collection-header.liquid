@@ -1,0 +1,61 @@
+<h4>{{ section.settings.collection_heading }}</h4>
+<p class="experience-copy-desktop">{{ section.settings.collection_description_desktop }}</p>
+  <div class="mattresses-experience-features">
+    <div class="mattresses-feature fade-in-icon">
+      <div class="mattresses-feature-icon">
+        <img src="{{ 'synchronized-to-you-icon.png' | asset_url }}">
+      </div>
+      <p>Ease of Movement</p>
+    </div>
+    <div class="mattresses-feature fade-in-icon">
+      <div class="mattresses-feature-icon">
+        <img src="{{ 'designed-to-breathe-icon.png' | asset_url }}">
+      </div>
+      <p>Designed To Breathe</p>
+    </div>
+    <div class="mattresses-feature fade-in-icon">
+      <div class="mattresses-feature-icon">
+        <img src="{{ 'eco-friendly-icon.png' | asset_url }}">
+      </div>
+      <p>Eco Friendly</p>
+    </div>
+    <div class="mattresses-feature fade-in-icon">
+      <div class="mattresses-feature-icon">
+        <img src="{{ 'easy-to-clean-icon.png' | asset_url }}">
+      </div>
+      <p>Easy To Clean</p>
+    </div>
+  </div>
+  <div class="mattresses-experience-mobile">
+    <span id="experience-learn-more" class="experience-learn-more">Learn More</span>
+    <p class="experience-copy-mobile">{{ section.settings.collection_description_mobile }}</p>
+  </div>
+
+
+
+{% schema %}
+  {
+    "name": "Collection Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "airweave Mattress"
+      },
+      {
+        "type": "text",
+        "id": "collection_heading",
+        "label": "Collection Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_description_desktop",
+        "label": "Desktop Description"
+      },
+      {
+        "type": "textarea",
+        "id": "collection_description_mobile",
+        "label": "Mobile Description"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,35 @@
+<!-- /templates/page.stories-story.liquid -->
+
+{{ page.content }}
+
+<script>
+$(document).ready(function() {
+  $('.story-header-hit-left').hover(
+    function () {
+      $('.story-header-wrapper').addClass('story-header-wrapper-is-left');
+    },
+    function () {
+      $('.story-header-wrapper').removeClass('story-header-wrapper-is-left');
+    }
+  );
+  $('.story-header-hit-left').click(function () {
+    $('html, body').animate({
+      scrollTop: ($('#story-perform').offset().top-80)
+    }, 500);
+  });
+
+  $('.story-header-hit-right').hover(
+    function () {
+      $('.story-header-wrapper').addClass('story-header-wrapper-is-right');
+    },
+    function () {
+      $('.story-header-wrapper').removeClass('story-header-wrapper-is-right');
+    }
+  );
+  $('.story-header-hit-right, .story-header-explore-button').click(function () {
+    $('html, body').animate({
+      scrollTop: ($('#story-prepare').offset().top-80)
+    }, 500);
+  });
+})
+</script>

@@ -1,0 +1,41 @@
+<div class="inner-zoom">
+{% assign product-handle = product.title | handleize %}
+  <div class="inner-zoom-container">
+  	<img class="inner-zoom-img" src="{{ section.settings.media_image | img_url: '1200x' }}">
+    <img class="zoom-area-img" src="{{ section.settings.zoom_area | img_url: '1200x' }}">
+  </div>
+  <div>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.content }}</p>
+  </div>
+</div>
+
+{% schema %}
+  { 
+    "name": "Airweave Inner Zoom",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "What is airfiber?"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Airfiber is our proprietary technology and material that makes up the core of our mattresses. Through its unique interwoven design, airfiber helps you move easily, evenly distributes weight and allows airflow to help keep you in a deeper more restful sleep."
+      },
+      {
+        "type": "image_picker",
+        "id": "media_image",
+        "label": "Media - Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "zoom_area",
+        "label": "Zoom Image"
+      }
+    ]
+  }
+{% endschema %}

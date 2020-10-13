@@ -1,0 +1,59 @@
+<div class="hp-info hp-info--aboutUs">
+  {% comment %}<div class="hp-info-img">
+    <img src="{{ 'airfiber-technology.jpg' | asset_url }}">
+  </div>{% endcomment %}
+  <div class="hp-info-img">
+	<img src="{{ 'airweave-innovation.gif' | asset_url }}" alt="Airweave Technology"/>
+  </div>
+  <div class="hp-info-content">
+    <h2 class="hp-info-content-heading">
+      {{ section.settings.title }}
+    </h2>
+    <p class="hp-info-content-copy">
+      {{ section.settings.content }}
+    </p>
+  </div>
+</div>
+
+<script>
+function playPause(videoName) {
+  var video = document.getElementById(videoName)
+  if (video.paused) {
+    video.play();
+    $('#' + videoName).next('.video-play').hide();
+  } else {
+    video.pause();
+    $('#' + videoName).next('.video-play').show();
+  }
+}
+document.getElementById('airweave-innovation').addEventListener('ended',function() {
+  $('#airweave-innovation').next('.video-play').show();
+}, false);
+</script>
+
+{% schema %}
+  {
+    "name": "About us Info Spotlight",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "The Newest Innovation in Sleep Surface Technology"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Airfiber is our proprietary technology and material that makes up the core of our mattresses. Through it’s unique interwoven design, airfiber helps you move easily, evenly distributes weight and allows airflow to help keep you in a deeper more restful sleep."
+      }
+    ],
+    "presets": [
+      {
+        "name": "About us Info Spotlight",
+        "category": "Homepage"
+      }
+    ]
+  }
+{% endschema %}

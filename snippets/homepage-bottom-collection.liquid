@@ -1,0 +1,17 @@
+<div class="hp-bottom-collection-wrapper">
+  <h2 class="hp-bottom-header">Try it out</h2>
+  <div class="hp-bottom-collection">
+    {% for product in collections.mattresses.products %}
+      <div class="hp-bottom-product-block">
+        <div class="hp-bottom-product-image">
+          <a href="{{ product.url | within: collection }}">
+            <img class="lazyload" data-src="{{ product.featured_image | img_url: '340x' }}">
+          </a>
+        </div>
+        <div class="hp-bottom-product-block-title">
+          <a class="hp-bottom-product-block-link" href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="hp-showcase">
+  <h2 class="hp-showcase-header">{{ section.settings.heading }}</h2>
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'instafeed_block' %}
+        {% include 'homepage-instafeed' %}
+      {% when 'reviews_block' %}
+        {% include 'homepage-featured-reviews' %}
+      {% when 'articles_block' %}
+        {% include 'homepage-blogfeed' %}
+    {% endcase %}
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Showcase",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Showcase heading",
+        "default": "And Sleep Lovers Everywhere"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "instafeed_block",
+        "name": "Instafeed",
+        "settings": [
+
+        ]
+      },
+      {
+        "type": "reviews_block",
+        "name": "Reviews",
+        "settings": [
+          
+        ]
+      },
+      {
+        "type": "articles_block",
+        "name": "Articles",
+        "settings": [
+          
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Showcase",
+        "category": "Homepage",
+        "blocks": [
+          {
+            "type": "instafeed_block"
+          },
+          {
+            "type": "reviews_block"
+          },
+          {
+            "type": "articles_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

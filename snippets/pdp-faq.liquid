@@ -1,0 +1,67 @@
+{% if product.handle == 'airweave-8-5-mattress' %}
+  {% assign productName = 'mattress' %}
+{% elsif product.handle == 'airweave-top-mattress' %}
+  {% assign productName = 'topper' %}
+{% elsif product.handle == 'airweave-portable-team-usa-model' %}
+  {% assign productName = 'portable' %}
+{% elsif product.handle == 'ritz-paris-collection-by-airweave' %}
+  {% assign productName = 'ritz' %}
+{% elsif product.handle == 'airweave-seat-cushion' %}
+  {% assign productName = 'seat_cushion' %}
+{% elsif product.handle == 'airweave-portable' %}
+  {% assign productName = 'airweave_portable' %}
+{% elsif product.handle == 'airweave-hyperdown-duvet' %}
+  {% assign productName = 'hyperdown_duvet' %}
+{% elsif product.handle == 'airweave-mattress-advanced' %}
+  {% assign productName = 'airweave_advanced' %}
+{% elsif product.handle == 'airweave-hyperdown-travel-blanket' %}
+  {% assign productName = 'airweave_hyperdown_travel' %}
+{% elsif product.handle == 'airweave-futon' %}
+  {% assign productName = 'airweave_futon' %}
+{% elsif product.handle == 'pillow' %}
+  {% assign productName = 'pillow' %}
+{% elsif product.handle == 'mattress-outer-cover' %}
+  {% assign productName = 'airweave_outer' %}
+{% elsif product.handle == 'airweave-top-mattress-luxe' %}
+  {% assign productName = 'luxe' %}
+{% elsif product.handle == 'dog-bed' %}
+  {% assign productName = 'dog-bed' %}
+{% elsif product.handle == 's-line-pillow' %}
+  {% assign productName = 's-pillow' %}
+{% elsif product.handle == 'new-airweave-mattress' %}
+  {% assign productName = 'new-mattress' %}
+{% elsif product.handle == 'new-mattress-advanced' %}
+  {% assign productName = 'new-mattress-advanced' %} 
+{% else %}
+  {% assign productName = 'mattress' %}
+{% endif %}
+
+<div id="productFaqs" class="pdp-faqs">
+  <h2 class="features-header">FREQUENTLY ASKED QUESTIONS</h2>
+  <div class="faq-accordion">
+    {% for i in (1..6) %}
+    {% capture check_enable %}{{ productName }}_faq_question_{{ i }}_enable{% endcapture %}
+    {% if settings[check_enable] == true %}
+    <div class="faq-tab">
+      <button class="faq-question">
+        {% capture question %}{{ productName }}_faq_question_{{ i }}{% endcapture %}
+        <span>{{ settings[question] }}</span>
+      </button>
+      <div class="faq-panel">
+        {% capture answer %}{{ productName }}_faq_answer_{{ i }}{% endcapture %}
+        <p>{{ settings[answer] }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+$('.faq-question').click(function() {
+  $('.faq-question').not(this).removeClass('faq-active');
+  $('.faq-question').not(this).next('.faq-panel.faq-show').removeClass('faq-show').slideToggle();
+  $(this).toggleClass('faq-active');
+  $(this).next('.faq-panel').toggleClass('faq-show').slideToggle();
+})
+</script>

@@ -1,0 +1,170 @@
+<style>
+    /* Tabs */
+  ul#tabs-nav {
+    list-style: none;
+    margin: 0;
+    overflow: auto;
+    padding: 0 10px;
+  }
+  ul#tabs-nav li {
+    float: left;
+    margin-right: 2px;
+    padding: 8px 10px;
+    border-radius: 5px 5px 5px 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    font-family: "Gotham HTF Book";
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.91px;
+    background-color: white;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border: 1px solid lightgray;
+    text-transform: uppercase;
+    margin: 2px 0;
+  }
+  ul#tabs-nav li a {
+    width: 100%;
+    color: #46555C;
+  }
+  .details_product{
+    border: 1px solid #E9E9EB;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    margin: 10px;
+    text-align: center;
+  }
+  ul#tabs-nav li:hover, ul#tabs-nav li.active {
+    background-color: lightgray;
+  }
+</style>
+
+<div class="tabs">
+  <ul id="tabs-nav">
+    <li><a href="#tab1">Mattress</a></li>
+    <li><a href="#tab2">Top</a></li>
+    <li><a href="#tab3">Top Classic</a></li>
+  </ul> <!-- END tabs-nav -->
+  <div id="tabs-content">
+    <div id="tab1" class="tab-content">
+      <div class="details_product" style="display: block">
+        <h3 class="details__product-title">airweave Mattress</h3>
+        <div class="thumbnail__product" style="padding-bottom: 20px">
+          <img class="compare__product-image" src="{{ 'airweaveMattress8-5.jpg' | asset_url }}" alt="Image">
+          <div class="compare__product-price" style="margin-bottom: 10px">
+            <h3 class="collection-extras-block-price">$910 - $1,352</h3>
+            <h3 class="collection-extras-compare-at-price">$1,070 - $1,610</h3>
+          </div>
+          <p class="compare__product-sizes">
+          </p>
+          <a class="compare__product-btn hp-trusted-by-link" href="/products/airweave-8-5-mattress">Shop Mattress</a>
+        </div>
+        <div class="column__container">
+          <h3 class="column__title" >Firmness</h3>
+          <img class="column__image" src="{{ 'Firmness_Top.jpg' | asset_url}}" alt="">
+          <p class="column__info">
+            Standard firmness throughout
+          </p>
+        </div>
+        <div class="cover__container">
+          <h3 class="cover__title">Cover</h3>
+          <img class="cover__image" src="{{ 'Cover_Top.png' | asset_url}}" alt="">
+          <p class="cover__info">
+            Breathable Mesh 
+          </p>
+        </div>
+        <div class="airfiber__product">
+          <h3 class="airfiber__product-title">AIRFIBER&reg; THICKNESS</h3>
+          <div class="airfiber__product-image">
+            <img src="{{ 'Airfiber_Top.jpg' | asset_url}}" alt="Image">
+          </div>
+          <p class="airfiber__product-depth">7.8"</p>
+          <h3 class="airfiber__product-title">Total Thickness</h3>
+          <p class="airfiber__product-description">8.5"</p>
+          <a class="airfiber__product-btn hp-trusted-by-link" href="/products/airweave-8-5-mattress">Shop Mattress</a>
+        </div>
+      </div>  
+    </div>
+      <div id="tab2" class="tab-content">
+        <div class="details_product">
+        <h3 class="details__product-title">airweave Top Mattress</h3>
+        <div class="thumbnail__product" style="padding-bottom: 20px">
+          <img class="compare__product-image" src="{{ 'top-mattress-slide-1_340x.png' | asset_url }}" alt="Image">
+          <div class="compare__product-price" style="margin-bottom: 10px">
+            <h3 class="collection-extras-block-price">$520 - $752</h3>
+            <h3 class="collection-extras-compare-at-price">$650 - $940</h3>
+          </div>
+          <p class="compare__product-sizes">
+          </p>
+          <a class="compare__product-btn hp-trusted-by-link" href="/products/airweave-top-mattress">Shop Top Mattress</a>
+        </div>
+        <div class="column__container">
+          <h3 class="column__title" >Firmness</h3>
+          <img class="column__image" src="{{ 'Firmness_Classic.jpg' | asset_url}}" alt="">
+          <p class="column__info">
+            Standard firmness throughout
+          </p>
+        </div>
+        <div class="cover__container">
+          <h3 class="cover__title">Cover</h3>
+          <img class="cover__image" src="{{ 'Cover_Classic.jpg' | asset_url}}" alt="">
+          <p class="cover__info">
+            Breathable Mesh <br>Polyster 100%
+          </p>
+        </div>
+        <div class="airfiber__product">
+          <h3 class="airfiber__product-title">AIRFIBER&reg; THICKNESS</h3>
+          <div class="airfiber__product-image">
+            <img src="{{ 'Airfiber_Classic.png' | asset_url}}" alt="Image">
+          </div>
+          <p class="airfiber__product-depth">1.8"</p>
+          <h3 class="airfiber__product-title">Total Thickness</h3>
+          <p class="airfiber__product-description">2"</p>
+          <a class="airfiber__product-btn hp-trusted-by-link" href="/products/airweave-top-mattress">Shop Top Mattress</a>
+        </div>
+      </div>  
+    </div>
+    <div id="tab3" class="tab-content">
+      <div class="details_product">
+        <h3 class="details__product-title">airweave Top Mattress Classic</h3>
+        <div class="thumbnail__product" style="padding-bottom: 20px">
+          <img class="compare__product-image" src="{{ 'top-mattress-slide-1_340x.png' | asset_url }}" alt="Image">
+          <div class="compare__product-price" style="margin-bottom: 10px">
+            <h3 class="collection-extras-block-price">$458 - $660</h3>
+            <h3 class="collection-extras-compare-at-price">$610 - $880</h3>
+          </div>
+          <p class="compare__product-sizes">
+          </p>
+          <a class="compare__product-btn hp-trusted-by-link" href="/products/airweave-top-mattress-classic">Shop Top Mattress Classic</a>
+        </div>
+        <div class="column__container">
+          <h3 class="column__title" >Firmness</h3>
+          <img class="column__image" src="{{ 'Firmness_Classic.jpg' | asset_url}}" alt="">
+          <p class="column__info">
+            Standard firmness throughout
+          </p>
+        </div>
+        <div class="cover__container">
+          <h3 class="cover__title">Cover</h3>
+          <img class="cover__image" src="{{ 'Cover_Classic.jpg' | asset_url}}" alt="">
+          <p class="cover__info">
+            Breathable Mesh <br>Polyster 100%
+          </p>
+        </div>
+        <div class="airfiber__product">
+          <h3 class="airfiber__product-title">AIRFIBER&reg; THICKNESS</h3>
+          <div class="airfiber__product-image">
+            <img src="{{ 'Airfiber_Classic.png' | asset_url}}" alt="Image">
+          </div>
+          <p class="airfiber__product-depth">1.6"</p>
+          <h3 class="airfiber__product-title">Total Thickness</h3>
+          <p class="airfiber__product-description">1.8"</p>
+          <a class="airfiber__product-btn hp-trusted-by-link" href="/products/airweave-top-mattress-classic">Shop Top Mattress Classic</a>
+        </div>
+      </div>  
+  	</div>
+  </div> <!-- END tabs-content -->
+</div> <!-- END tabs -->
+

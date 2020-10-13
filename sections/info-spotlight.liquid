@@ -1,0 +1,43 @@
+<div class="hp-info">
+  {% comment %}<div class="hp-info-img">
+    <img src="{{ 'airfiber-technology.jpg' | asset_url }}">
+  </div>{% endcomment %}
+  <div class="hp-info-img">
+	<img src="{{ 'airweave-innovation.gif' | asset_url }}" alt="Airweave Technology" width="100%"/>
+  </div>
+  <div class="hp-info-content">
+    <h2 class="hp-info-content-heading">
+      {{ section.settings.title }}
+    </h2>
+    <p class="hp-info-content-copy">
+      {{ section.settings.content }}
+    </p>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Info Spotlight",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "The Newest Innovation in Sleep Surface Technology"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Airfiber is our proprietary technology and material that makes up the core of our mattresses. Through it’s unique interwoven design, airfiber helps you move easily, evenly distributes weight and allows airflow to help keep you in a deeper more restful sleep."
+      }
+    ],
+    "presets": [
+      {
+        "name": "Info Spotlight",
+        "category": "Homepage"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,66 @@
+<script type="text/javascript">
+
+function showOptinBox (data){
+  if (data.checkout == null){
+    // show checkbox if user has not recorded their preference
+    var optInParent = 'step__sections'
+      optInstyle = 'padding-top:8px;';
+    if (Shopify.Checkout.step === 'contact_information') {
+      // define custom optInParent class or style
+      optInstyle = 'padding-top:8px;';
+    } else if (Shopify.Checkout.step === 'shipping_method') {
+      // define custom optInParent class or style
+      optInstyle = 'padding-top:15px;';
+    } else if (Shopify.Checkout.step === 'payment_method') {
+      // define custom optInParent class or style
+      optInstyle = 'padding-top:15px;';
+    }
+    if ( document.getElementById('checkout_accept_sms') == null ){
+      var optinBox = '<div class="checkbox-wrapper" style="' + optInstyle + '"><div class="checkbox__input"><input class="input-checkbox" type="checkbox" value="1" checked="checked" id="checkout_accept_sms"></div><label class="checkbox__label" for="checkout_accept_sms">Receive support and offers via text message</label></div>';
+      optInParentElements = document.getElementsByClassName(optInParent);
+      optInParentElements[optInParentElements.length-1].insertAdjacentHTML( 'beforeend', optinBox );
+    }
+
+      optInform  = document.forms[document.forms.length-1];
+      if (optInform != undefined){
+        optInform.addEventListener('submit', function (e) {
+          try{
+            e.preventDefault();
+            var optInPref = document.getElementById("checkout_accept_sms").checked ? 'true' : 'false';
+            var xhr = new XMLHttpRequest();
+            xhr.timeout = 500;
+            xhr.open('GET', 'https://app.retentionrocket.com/checkout/' + checkoutId + '/sms?accept=' + optInPref, true);
+            xhr.onload = function () {
+              optInform.submit();
+            };
+            xhr.ontimeout = function (e) {
+              optInform.submit();
+            };
+            xhr.onerror = function () {
+              optInform.submit();
+            };
+            xhr.send(null);
+          } catch(e){
+            console.log(e.message);
+            optInform.submit();
+          }
+        }, false);
+      }
+     
+  }
+}
+
+var checkoutId = '{{ checkout.id }}';
+var rReq = new XMLHttpRequest();
+rReq.onreadystatechange = function () {
+        if (rReq.readyState == 4) {
+            if (rReq.status == 200) {
+                var data = rReq.responseText;
+				showOptinBox(JSON.parse(data));
+            }
+        }
+    };
+rReq.open("GET", "https://app.retentionrocket.com/checkout/" + checkoutId + "/sms", true);
+rReq.send();
+
+</script>

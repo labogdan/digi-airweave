@@ -1,0 +1,310 @@
+<div class="mattresses-products grid-container wide">
+  {% for block in section.blocks %}
+
+    {% assign on_sale = false %}
+    {% if all_products[block.settings.featured_product].compare_at_price > all_products[block.settings.featured_product].price %}
+      {% assign on_sale = true %}
+    {% endif %}
+
+    {% assign has_presale_pricing = false %}
+    {% if all_products[block.settings.featured_product].tags contains 'presale-pricing' %}
+      {% assign has_presale_pricing = true %}
+    {% endif %}
+
+    <div class="mattresses-product-section">
+      <a class="mattresses-product-image" href="{{ all_products[block.settings.featured_product].url }}">
+        {% if all_products[block.settings.featured_product].tags contains 'new' %}
+          <span class="new-tag__collection">new!</span>
+        {% endif %}
+        {% if block.settings.featured_image %}
+	        <img class="fade-in-img full" src="{{ block.settings.featured_image | img_url: '1600x' }}">
+        {% else %}
+	        <img class="fade-in-img" src="{{ all_products[block.settings.featured_product].featured_image | product_img_url: "1600x" }}">
+        {% endif %}
+      </a>
+      <div class="mattresses-product-details slide-in-details">
+			<div class="grid-content-contain">
+			    <h2>{{ all_products[block.settings.featured_product].title }}</h2>
+
+			    <div class="yotpo bottomLine"
+			      data-appkey="2L4JZXk1a0QKtmjoNOZmVVp735oAgqpG1fMEuvLJ"
+			      data-domain="{{shop.permanent_domain | escape }}"
+			      data-product-id="{{ all_products[block.settings.featured_product].id }}"
+			      data-product-models="{{ all_products[block.settings.featured_product].id }}"
+			      data-name="{{ all_products[block.settings.featured_product].title | escape }}"
+			      data-url="{{ shop.url }}{{ all_products[block.settings.featured_product].url }}"
+			      data-image-url="{{ all_products[block.settings.featured_product].featured_image | product_img_url: 'large' | replace: '?', '%3F' | replace: '&','%26'}}"
+			      data-description="{{ all_products[block.settings.featured_product].description | escape }}"
+			      data-bread-crumbs="{% for tag in all_products[block.settings.featured_product].tags %}{{ tag | escape }};{% endfor %}">
+			    </div>
+
+			    {% if has_presale_pricing == true %}
+			      {% include 'collection-featured-presale-pricing-snippet' %}
+			    {% else %}
+			      {% include 'collection-featured-pricing-snippet' %}
+			    {% endif %}
+
+			    <div class="klarna-contain">
+			      <!-- Placement v1 -->
+			      <klarna-placement
+			        data-id="0f2333a5-b2e0-49ad-96e0-fe0928bc4b6e"
+			        data-purchase_amount="{{ all_products[block.settings.featured_product].price }}"
+			        data-inline
+			      ></klarna-placement>
+			      <!-- end Placement -->
+			    </div>
+			</div>
+
+        {% if block.settings.featured_description != blank %}
+          <p>{{ block.settings.featured_description }}</p>
+        {% else %}
+          <p>{{ all_products[block.settings.featured_product].description }}</p>
+        {% endif %}
+
+        <div class="flex-align-items mt-auto">
+          <a href="{{ all_products[block.settings.featured_product].url }}">
+            <button>Shop Now</button>
+          </a>
+
+          <div class="quick-add">
+            <form action="/cart/add" method="post" class="shopify-product-form" enctype="multipart/form-data">
+              {% assign has_presale_pricing = false %}
+              {% if product.tags contains 'presale-pricing' %}
+              {% assign has_presale_pricing = true %}
+              {% endif %}
+
+              {% if all_products[block.settings.featured_product].variants.size > 1 %}
+                <select id="productSelect" class="related-products-carousel" name="id" style="display: block">
+                  {% for variant in all_products[block.settings.featured_product].variants %}
+                  {% if variant.available %}
+                  <option {% if variant == all_products[block.settings.featured_product].selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}</option>
+                  {% else %}
+                  <option disabled="disabled">
+                  {{ variant.title }}
+                  </option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+
+                <button type="submit" name="add" class="quick-atc" data-cart-add="{{ all_products[block.settings.featured_product].selected_or_first_available_variant.id }}" data-cart-quantity="1">
+                <span>Quick Shop</span>
+                </button>
+
+                  {% else %}
+                <button type="submit" name="add" class="quick-atc full" data-cart-add="{{ all_products[block.settings.featured_product].selected_or_first_available_variant.id }}" data-cart-quantity="1">
+                <span>Quick Shop</span>
+                </button>
+                  {% endif %}
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% assign cross_sell_collection = '' %}
+
+{% unless template == 'list-collections' %}
+  <div class="collection-extras-wrapper">
+    <h2 class="collection-extras-header">YOU MIGHT ALSO LIKE</h2>
+    <div class="grid-container wide collection-extras more-featured-collection">
+
+      {% for product in collection.products %}
+
+        {% assign on_sale = false %}
+        {% if product.compare_at_price > product.price %}
+          {% assign on_sale = true %}
+        {% endif %}
+
+        {% assign featured_list = '' %}
+        {% for block in section.blocks %}
+          {% assign featured_list = featured_list | append: all_products[block.settings.featured_product].id | append: ',' %}
+        {% endfor %}
+
+        {% unless featured_list contains product.id %}
+          <div class="collection-extras-block">
+            <div class="collection-extras-block-image">
+              <a href="{{ product.url }}">
+                <img src="{{ product.featured_image | img_url: 'master' }}">
+              </a>
+            </div>
+            <div class="collection-extras-block-content text-center">
+              <a href="{{ product.url }}">
+              	<div class="vert-text">
+	                <span class="collection-extras-block-title">{{ product.title }}</span>
+	            </div>
+
+                {% if product.price_varies == true %}
+                  {% if on_sale %}
+                    <h3 class="collection-extras-block-price">{{ product.price_min | money | remove: '.00' | remove: ' ' }} - {{ product.price_max | money | remove: '.00' | remove: ' ' }} </h3>
+                    <h3 class="collection-extras-compare-at-price">{{ product.compare_at_price_min | money | remove: '.00' | remove: ' ' }} - {{ product.compare_at_price_max | money | remove: '.00' | remove: ' ' }} </h3>
+                  {% else %}
+                    <h3 class="collection-extras-block-price">{{ product.price_min | money | remove: '.00' | remove: ' ' }} - {{ product.price_max | money | remove: '.00' | remove: ' ' }}</h3>
+                  {% endif %}
+                {% else %}
+                  {% if on_sale %}
+                    <h3 class="collection-extras-block-price">{{ product.price | money | remove: '.00' | remove: ' ' }}</h3>
+                    <h3 class="collection-extras-compare-at-price">{{ product.compare_at_price | money | remove: '.00' | remove: ' ' }}</h3>
+                  {% else %}
+                    <h3 class="collection-extras-block-price">{{ product.price | money | remove: '.00' | remove: ' ' }}</h3>
+                  {% endif %}
+                {% endif %}
+
+                <div class="yotpo bottomLine"
+                  data-appkey="2L4JZXk1a0QKtmjoNOZmVVp735oAgqpG1fMEuvLJ"
+                  data-domain="{{shop.permanent_domain | escape }}"
+                  data-product-id="{{ product.id }}"
+                  data-product-models="{{ product.id }}"
+                  data-name="{{ product.title | escape }}"
+                  data-url="{{ shop.url }}{{ product.url }}"
+                  data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                  data-description="{{ product.description | escape }}"
+                  data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+                </div>
+
+              </a>
+
+
+				<div class="quick-add">
+					<form action="/cart/add" method="post" class="shopify-product-form" enctype="multipart/form-data">
+						{% assign has_presale_pricing = false %}
+						{% if product.tags contains 'presale-pricing' %}
+						{% assign has_presale_pricing = true %}
+						{% endif %}
+
+
+						{% if product.variants.size > 1 %}
+							<select id="productSelect" class="related-products-carousel" name="id" style="display: block">
+								{% for variant in product.variants %}
+								{% if variant.available %}
+								<option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}</option>
+								{% else %}
+								<option disabled="disabled">
+								{{ variant.title }}
+								</option>
+								{% endif %}
+								{% endfor %}
+							</select>
+							  <button type="submit" name="add" class="quick-atc" data-cart-add="{{ product.selected_or_first_available_variant.id }}" data-cart-quantity="1">
+							    <span>Add</span>
+							  </button>
+
+				        {% else %}
+							  <button type="submit" name="add" class="quick-atc full" data-cart-add="{{ product.selected_or_first_available_variant.id }}" data-cart-quantity="1">
+							    <span>Add to Cart</span>
+							  </button>
+				        {% endif %}
+
+					</form>
+				</div>
+
+
+            </div>
+          </div>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+{% endunless %}
+
+
+{% if cross_sell_collection.products.size > 3 %}
+<!--<script>
+$(document).ready(function(){
+  $('.more-featured-collection').slick({
+    dots: false,
+    arrows: true,
+    slidesToShow: 2,
+    responsive: [
+      {
+        breakpoint: 940,
+        settings: {
+          slidesToShow: 3,
+          arrows: true,
+          dots: true,
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+          arrows: true,
+          dots: true,
+        }
+      }
+    ]
+  });
+});
+</script>-->
+{% endif %}
+
+<script>
+$(document).ready(function(){
+  $('.more-featured-collection').slick({
+    dots: false,
+    arrows: true,
+    slidesToShow: 4,
+    responsive: [
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 3,
+          arrows: true,
+          dots: false,
+        }
+      },
+      {
+        breakpoint: 940,
+        settings: {
+          slidesToShow: 2,
+          arrows: true,
+          dots: true,
+        }
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+          arrows: true,
+          dots: true,
+        }
+      }
+    ]
+  });
+});
+</script>
+
+{% schema %}
+  {
+    "name": "Collection Featured",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "product_block",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "featured_product",
+            "label": "Select a product"
+          },
+          {
+            "type": "image_picker",
+            "id": "featured_image",
+            "label": "Product image"
+          },
+          {
+            "type": "textarea",
+            "id": "featured_description",
+            "label": "Product description",
+            "info": "Will default to product description if empty"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

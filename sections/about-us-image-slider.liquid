@@ -1,0 +1,115 @@
+<div class="about__slideshow">
+  <h2>airweave benefits that go beyond sleep</h2>
+  <div class="about__slideshow-slider">
+    <div>
+      <div class="about__slideshow-cta">
+        <h2>{{section.settings.heading_1}}</h2>
+        <a class="hp-trusted-by-link learn-more__btn" href="{{section.settings.url_1}}">Learn More</a>
+      </div>
+      <img src="{{ section.settings.image_1 | img_url: 'master' }}">
+    </div>
+    <div >
+      <div class="about__slideshow-cta">
+        <h2>{{section.settings.heading_2}}</h2>
+        <a class="hp-trusted-by-link learn-more__btn" href="{{section.settings.url_2}}">Learn More</a>
+      </div>
+      <img src="{{ section.settings.image_2 | img_url: 'master' }}">
+    </div>
+    <div >
+      <div class="about__slideshow-cta">
+        <h2>{{section.settings.heading_3}}</h2>
+        <a class="hp-trusted-by-link learn-more__btn" href="{{section.settings.url_3}}">Learn More</a>
+      </div>
+      <img src="{{ section.settings.image_3 | img_url: 'master' }}">
+    </div>
+    <div >
+      <div class="about__slideshow-cta">
+        <h2>{{section.settings.heading_4}}</h2>
+        <a class="hp-trusted-by-link learn-more__btn" href="{{section.settings.url_4}}">Learn More</a>
+      </div>
+      <img src="{{ section.settings.image_4 | img_url: 'master' }}">
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Benefits Slider",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading_1",
+        "label": "Slider text 1",
+        "default": "Why top athletes <br> use airweave"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": "Image 1"
+      },
+      {
+        "type": "text",
+        "id": "url_1",
+        "label": "Button Url 1",
+        "default": "/pages/mattress-for-back-joint-pain"
+      },
+      {
+        "type": "text",
+        "id": "heading_2",
+        "label": "Slider text 2",
+        "default": "Why top athletes <br> use airweave"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "Image 2"
+      },
+      {
+        "type": "text",
+        "id": "url_2",
+        "label": "Button Url 2",
+        "default": "/pages/athletes-airweave-mattresses"
+      },
+      {
+        "type": "text",
+        "id": "heading_3",
+        "label": "Slider text 3",
+        "default": "Why top athletes <br> use airweave"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_3",
+        "label": "Image 3"
+      },
+      {
+        "type": "text",
+        "id": "url_3",
+        "label": "Button Url 3",
+        "default": "/pages/the-cleanest-mattress-on-earth"
+      },
+      {
+        "type": "text",
+        "id": "heading_4",
+        "label": "Slider text 4",
+        "default": "Why top athletes <br> use airweave"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_4",
+        "label": "Image 4"
+      },
+      {
+        "type": "text",
+        "id": "url_4",
+        "label": "Button Url 4",
+        "default": "/pages/eco-friendly-mattress"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom",
+        "category": "About-us"
+      }
+    ]
+  }
+{% endschema %}

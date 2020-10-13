@@ -1,0 +1,47 @@
+<ul id="accordion" class="details-accordion">
+<li class="open">
+  <div class="link">Description<i class="fa fa-chevron-down"></i></div>
+  <div class="submenu" style="display: block">
+    <p>{{ product.description }}</p>
+    {% include 'description-icons' %}
+  </div>
+</li>
+
+{% unless product.metafields.product.accordian-1-title == blank %}
+  <li>
+    <div class="link">
+        {% if product.metafields.product.accordian-1-truck %}{% include 'svg-definitions' with 'truck' %}{% endif %}
+        {% if product.metafields.product.accordian-1-clock %}{% include 'svg-definitions' with 'clock' %}{% endif %}
+        {{ product.metafields.product.accordian-1-title }}<i class="fa fa-chevron-down"></i>
+    </div>
+    <div class="submenu">
+      <p>{{ product.metafields.product.accordian-1-content }}</p>
+    </div>
+  </li>
+{% endunless %}
+
+{% unless product.metafields.product.accordian-2-title == blank %}
+  <li>
+    <div class="link">
+        {% if product.metafields.product.accordian-2-truck %}{% include 'svg-definitions' with 'truck' %}{% endif %}
+        {% if product.metafields.product.accordian-2-clock %}{% include 'svg-definitions' with 'clock' %}{% endif %}
+        {{ product.metafields.product.accordian-2-title }}<i class="fa fa-chevron-down"></i>
+    </div>
+    <div class="submenu">
+      <p>{{ product.metafields.product.accordian-2-content }}</p>
+    </div>
+  </li>
+{% endunless %}
+{% unless product.metafields.product.accordian-3-title == blank %}
+  <li>
+    <div class="link">
+        {% if product.metafields.product.accordian-3-truck %}{% include 'svg-definitions' with 'truck' %}{% endif %}
+        {% if product.metafields.product.accordian-3-clock %}{% include 'svg-definitions' with 'clock' %}{% endif %}
+        {{ product.metafields.product.accordian-3-title }}<i class="fa fa-chevron-down"></i>
+    </div>
+    <div class="submenu">
+      <p>{{ product.metafields.product.accordian-3-content }}</p>
+    </div>
+  </li>
+{% endunless %}
+</ul>

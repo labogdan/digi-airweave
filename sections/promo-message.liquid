@@ -1,0 +1,79 @@
+<style>
+  .hp-promo {
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .hp-promo-copy {
+    color: {{ section.settings.color }};
+  }
+</style>
+
+<div class="hp-promo">
+  <p class="hp-promo-copy">
+    {{ section.settings.message }}
+  </p>
+</div>
+
+{% schema %}
+  {
+    "name": "Promo Message",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "message",
+        "label": "Message",
+        "default": "You've always bought mattresses based on how it feels when you get into bed."
+      },
+      {
+        "type": "color",
+        "id": "color",
+        "label": "Text color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#2b3439"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Promo Message",
+        "category": "Homepage"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet 'scss' %}
+  .hp-promo {
+    padding: 35px 20px;
+  }
+
+  .hp-promo-copy {
+    max-width: 280px;
+    margin: 0 auto;
+    font-family: 'AGaramondPro', serif;
+    font-size: 16px;
+    line-height: 23px;
+    text-align: center;
+    em {
+      display: block;
+      margin-top: 5px;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .hp-promo {
+      padding: 80px;
+    }
+
+    .hp-promo-copy {
+      max-width: none;
+      font-size: 23px;
+      line-height: 30px;
+    }
+  }
+{% endstylesheet %}

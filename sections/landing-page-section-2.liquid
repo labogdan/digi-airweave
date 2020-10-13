@@ -1,0 +1,804 @@
+<div class="campaign-landing-page">
+
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'hero-block' %}
+        <section class="lp-hero">
+          <div class="lp-hero-image">
+            <img src="{{ block.settings.landing-page-template-2-hero | img_url: 'master' }}">
+          </div>
+          <div class="lp-hero-image-mobile">
+            <img src="{{ block.settings.landing-page-template-2-hero-mobile | img_url: 'master' }}">
+          </div>
+          <div class="lp-hero-copy page-flex">
+            <h3 class="lp-hero-subheading">{{ block.settings.landing-page-template-2-hero-subheading-text }}</h3>
+            <h2 class="lp-hero-heading">{{ block.settings.landing-page-template-2-hero-heading-text }}</h2>
+            <p class="lp-hero-content">{{ block.settings.landing-page-template-2-hero-content-text }}</p>
+            {% unless block.settings.landing-page-template-2-hero-cta-text == blank %}
+              <a class="lp-hero-shop page-flex" href="/collections/mattresses">{{ block.settings.landing-page-template-2-hero-cta-text }}</a>
+            {% endunless %}
+          </div>
+        </section>
+      {% when 'main-info-block' %}
+        <section class="lp-product-info page-flex">
+          <div class="lp-product-info-wrapper">
+            <div class="lp-product-info-container">
+              <div class="product-info-content">
+                <h2 class="product-info-heading">{{ block.settings.landing-page-template-2-info-heading-text }}</h2>
+                <h3 class="product-info-subheading">{{ block.settings.landing-page-template-2-info-subheading-text }}</h3>
+                <ul class="product-info-list page-flex">
+                  {% for i in (1..3) %}
+                    {% capture info_image %}landing-page-template-2-info-item-{{ i }}-image{% endcapture %}
+                    {% capture info_text %}landing-page-template-2-info-item-{{ i }}-text{% endcapture %}
+                    {% capture info_text_raw_url %}{{ block.settings[info_image] | img_url: 'master' }}{% endcapture %}
+                    {% if block.settings[info_text].size > 0 %}
+                      <li class="product-info-list-item page-flex">
+                        {% unless info_text_raw_url contains 'no-image' %}
+                          <div class="product-info-list-item-image">
+                            <img src="{{ block.settings[info_image] | img_url: 'master' }}">
+                          </div>
+                        {% endunless %}
+                        <div class="product-info-description">
+                          {% if block.settings[info_text].size > 0 %}
+                            <p>{{ block.settings[info_text] }}</p>
+                          {% endif %}
+                        </div>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="product-info-images">
+                <div class="product-info-main-image">
+                  <img src="{{ block.settings.landing-page-template-2-info-main-image | img_url: 'master' }}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      {% when 'additional-info-block' %}
+        <section class="lp-product-additional-info">
+          <h2 class="product-additional-info-heading">{{ block.settings.landing-page-template-2-addt-info-heading }}</h2>
+          <ul class="product-additional-info-list page-flex">
+
+            {% assign num_of_blocks = 0 %}
+            {% for i in (1..3) %}
+              {% capture block_text %}landing-page-template-2-addt-info-item-{{ i }}-text{% endcapture %}
+              {% if block.settings[block_text].size > 0 %}
+                {% assign num_of_blocks = num_of_blocks | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+
+            {% case num_of_blocks %}
+              {% when 1 %}
+                {% assign num_of_blocks = 'one-block' %}
+              {% when 2 %}
+                {% assign num_of_blocks = 'two-block' %}
+              {% when 3 %}
+                {% assign num_of_blocks = 'three-block' %}
+            {% endcase %}
+
+            {% for i in (1..3) %}
+              {% capture block_text %}landing-page-template-2-addt-info-item-{{ i }}-text{% endcapture %}
+              {% capture block_image %}landing-page-template-2-addt-info-item-{{ i }}-image{% endcapture %}
+              {% capture block_image_raw_url %}{{ block.settings[block_image] | img_url: 'master' }}{% endcapture %}
+              {% if block.settings[block_text].size > 0 %}
+              <li class="product-additional-info-list-item page-flex {{ num_of_blocks }}">
+                {% unless block_image_raw_url contains 'no-image' %}
+                  <div class="product-additional-info-list-image">
+                    <img src="{{ block.settings[block_image] | img_url: 'master' }}">
+                  </div>
+                {% endunless %}
+                <div class="product-additional-info-description">
+                  <p>{{ block.settings[block_text] }}</p>
+                </div>
+              </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </section>
+      {% when 'shop-products' %}
+        <section class="lp-shop-products">
+          <h2 class="lp-shop-products-heading">{{ block.settings.landing-page-template-2-shop-product-heading }}</h2>
+
+          <div class="shop-products-list-container">
+			{% include 'global-carousel' %}
+          </div>
+        </section>
+      {% when 'info-message' %}
+        <section class="info-message-wrapper">
+          {% if block.settings.landing-page-template-2-info-message-heading.size > 0 %}
+            <h2 class="info-message-container-heading"></h2>
+          {% endif %}
+          {% capture image_raw_url %}{{ block.settings.landing-page-template-2-info-message-image | img_url: 'master' }}{% endcapture %}
+          <div class="info-message-container page-flex">
+            <div class="info-message-image">
+              {% unless image_raw_url contains 'no-image' %}
+                <img src="{{ block.settings.landing-page-template-2-info-message-image | img_url: 'master' }}">
+              {% endunless %}
+            </div>
+            <p class="info-message-content">{{ block.settings.landing-page-template-2-info-message-content }}</p>
+          </div>
+        </section>
+      {% when 'info-process' %}
+        <section class="info-process">
+          <div class="info-process-container">
+            <h2 class="info-process-heading">{{ block.settings.landing-page-template-2-info-process-heading }}</h2>
+            <p class="info-process-content">{{ block.settings.landing-page-template-2-info-process-content }}</p>
+            {% capture image_raw_url %}{{ block.settings.landing-page-template-2-info-process-image | img_url: 'master' }}{% endcapture %}
+
+            {% unless image_raw_url contains 'no-image' %}
+              <img class="info-process-image" src="{{ block.settings.landing-page-template-2-info-process-image | img_url: 'master' }}">
+            {% endunless %}
+          </div>
+        </section>
+        <section class="info-process-steps page-flex">
+          {% for i in (1..5) %}
+            {% capture step_enable %}landing-page-template-2-info-process-item-{{ i }}-enable{% endcapture %}
+            {% capture step_image %}landing-page-template-2-info-process-item-{{ i }}-image{% endcapture %}
+            {% capture step_type %}landing-page-template-2-info-process-item-{{ i }}-type{% endcapture %}
+            {% capture step_heading %}landing-page-template-2-info-process-item-{{ i }}-heading{% endcapture %}
+            {% capture step_content %}landing-page-template-2-info-process-item-{{ i }}-content{% endcapture %}
+            {% capture step_placeholder_image %}landing-page-template-2-info-process-item-{{ i }}-placeholder{% endcapture %}
+            {% capture step_placeholder_raw_image_url %}{{ block.settings[step_placeholder_image] | img_url: 'master' }}{% endcapture %}
+
+            {% if block.settings[step_enable] %}
+              <li class="process-step-item page-flex">
+                <div class="process-step-item-image">
+                  {% if block.settings[step_type] == 'image' %}
+                    <img src="{{ block.settings[step_image] }}">
+                  {% elsif block.settings[step_type] == 'video' %}
+                    <video onclick="this.play()" loop="true" {% unless step_placeholder_raw_image_url contains 'no-image' %}poster="{{ block.settings[step_placeholder_image] | img_url: 'master' }}"{% endunless %}>
+                      <source src="{{ block.settings[step_image] }}" type="video/mp4">
+                    </video>
+                  {% endif %}
+                </div>
+                <div class="process-step-item-content">
+                  <h3>{{ block.settings[step_heading] }}</h3>
+                  <p>{{ block.settings[step_content] }}</p>
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </section>
+      {% when 'info-conclusion' %}
+        <section class="info-conclusion page-flex">
+          <div class="info-conclusion-image">
+            <img src="{{ block.settings.landing-page-template-2-info-conclusion-image | img_url: 'master' }}">
+          </div>
+          <div class="info-conclusion-content page-flex">
+            <h2>{{ block.settings.landing-page-template-2-info-conclusion-heading }}</h2>
+            <p>{{ block.settings.landing-page-template-2-info-conclusion-content }}</p>
+          </div>
+        </section>
+      {% when 'custom-reviews' %}
+        <div class="hp-featured-reviews-wrapper">
+          <div class="hp-featured-reviews">
+            {% for i in (1..4) %}
+              {% capture this_review_content %}review-content-{{ i }}{% endcapture %}
+              {% capture this_review_author %}review-author-{{ i }}{% endcapture %}
+              {% capture this_review_sub %}review-sub-{{ i }}{% endcapture %}
+              {% unless block.settings[this_review_content] == blank %}
+                <div class="hp-featured-review-block">
+                  <div class="hp-review-rating">
+                    <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+                    <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+                    <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+                    <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+                    <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+                  </div>
+                  <p class="hp-review-content">{{ block.settings[this_review_content] }}</p>
+                  <p class="hp-review-author">{{ block.settings[this_review_author] }}</p>
+                  <p class="hp-review-verified"><em>{{ block.settings[this_review_sub] }}</em></p>
+                </div>
+              {% endunless %}
+            {% endfor %}
+          </div>
+        </div>
+        <script>
+          $(document).ready(function(){
+            $('.hp-featured-reviews').slick({
+              arrows: true,
+              dots: false,
+              autoplay: true,
+              autoplaySpeed: 8000
+            });
+          });
+        </script>
+    {% endcase %}
+  {% endfor %}
+
+  <div class="mattresses-try-it-out hp-try-it-out">
+    <div class="mattresses-trial-copy">
+      <div class="mattresses-try-it-out-icon">
+        <img src="{{ 'moon-icon.svg' | asset_url }}">
+      </div>
+      <h3><span class="hp-locations-hidden-mobile">Free Shipping & </span>100 Night Trial</h3>
+      <a rel="modal:open" href="#trial-details" >View Details</a>
+    </div>
+  </div>
+  <div class="hp-locations">
+    {% comment %}<div class="mattresses-location nyc-showroom">
+      <div class="mattresses-location-img">
+        <a href="/pages/contact#showroom" target="_blank">
+          <img src="{{ 'showroom-store.jpg' | asset_url }}" class="location-image-mobile">
+          <img src="{{ 'showroom-store.jpg' | asset_url }}" class="location-image-desktop">
+        </a>
+      </div>
+      <div class="mattresses-location-text">
+        <h5>NYC Showroom</h5>
+        <h5>By Appointment Only</h5>
+        <p>498 Broome St<br>New York, NY 10013<br>(646) 964-5020</p>
+        <a class="hp-locations-view-details" href="/pages/contact#showroom" target="_blank">View Details</a>
+      </div>
+    </div>{% endcomment %}
+    <div class="mattresses-location boconcept-stores no-background-color">
+      <h2 class="mattresses-location-title">Looking For A Store Location?</h2>
+      <div class="mattresses-location-img">
+        <a href="/pages/contact#locations" target="_blank">
+          <img src="{{ 'airweave_store.jpg' | asset_url }}" class="location-image-mobile">
+          <img src="{{ 'airweave_store.jpg' | asset_url }}" class="location-image-desktop">
+        </a>
+      </div>
+      <div class="mattresses-location-text width-full">
+        <h5 class="mattress-location-subtitle">Experience airweave at select retailers in New York City</h5>
+        <a class="hp-locations-view-details-btn" href="/pages/contact#locations" target="_blank">See Details</a>
+      </div>
+    </div>
+  </div>
+
+  {% include 'contact-footer' %}
+
+</div>
+
+<script>
+  $(window).on('load', function() {
+    $('.grey-space').css('height', 100);
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Landing Page Template 2",
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "hero-block",
+        "name": "Hero",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-hero",
+            "label": "Hero Image",
+            "info": " 1400x600"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-hero-mobile",
+            "label": "Hero Image - Mobile",
+            "info": " 760x700"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-hero-subheading-text",
+            "label": "Hero Image Sub-Heading Text"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-hero-heading-text",
+            "label": "Hero Image Heading Text"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-hero-content-text",
+            "label": "Hero Image Content Text"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-hero-cta-text",
+            "label": "Hero Image CTA Text"
+          }
+        ]
+      },
+      {
+        "type": "main-info-block",
+        "name": "Main Info Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-heading-text",
+            "label": "Info Heading Text"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-subheading-text",
+            "label": "Info Sub-Heading Text"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-item-1-image",
+            "label": "Info Item 1 Image"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-item-1-text",
+            "label": "Info Item 1 Description"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-item-2-image",
+            "label": "Info Item 2 Image"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-item-2-text",
+            "label": "Info Item 2 Description"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-item-3-image",
+            "label": "Info Item 3 Image"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-item-3-text",
+            "label": "Info Item 3 Description"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-main-image",
+            "label": "Info Main Image"
+          }
+        ]
+      },
+      {
+        "type": "additional-info-block",
+        "name": "Additional Info Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "landing-page-template-2-addt-info-heading",
+            "label": "Info Block - Heading"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-addt-info-item-1-image",
+            "label": "Info Item 1 Image"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-addt-info-item-1-text",
+            "label": "Info Item 1 Text"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-addt-info-item-2-image",
+            "label": "Info Item 2 Image"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-addt-info-item-2-text",
+            "label": "Info Item 2 Text"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-addt-info-item-3-image",
+            "label": "Info Item 3 Image"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-addt-info-item-3-text",
+            "label": "Info Item 3 Text"
+          }
+        ]
+      },
+      {
+        "type": "shop-products",
+        "name": "Shop Products Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "landing-page-template-2-shop-product-heading",
+            "label": "Shop Products - Heading"
+          },
+          {
+            "type": "product",
+            "id": "landing-page-template-2-shop-product-1-product",
+            "label": "Product 1"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-shop-product-1-product-image",
+            "label": "Product 1 Image"
+          },
+          {
+            "type": "product",
+            "id": "landing-page-template-2-shop-product-2-product",
+            "label": "Product 2"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-shop-product-2-product-image",
+            "label": "Product 2 Image"
+          },
+          {
+            "type": "product",
+            "id": "landing-page-template-2-shop-product-3-product",
+            "label": "Product 3"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-shop-product-3-product-image",
+            "label": "Product 3 Image"
+          }
+        ]
+      },
+      {
+        "type": "info-message",
+        "name": "Info Message Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-message-heading",
+            "label": "Main Heading"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-message-image",
+            "label": "Main Image"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-message-content",
+            "label": "Main Content"
+          }
+        ]
+      },
+      {
+        "type": "info-process",
+        "name": "Info Process Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-heading",
+            "label": "Main Heading"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-content",
+            "label": "Main Content"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-process-image",
+            "label": "Main Image"
+          },
+          {
+            "type": "checkbox",
+            "id": "landing-page-template-2-info-process-item-1-enable",
+            "label": "Enable Item 1",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-1-image",
+            "label": "Asset 1",
+            "info": "Insert Url of Image or Video from Settings > Files"
+          },
+          {
+            "type": "select",
+            "id": "landing-page-template-2-info-process-item-1-type",
+            "label": "Type of Asset 1",
+            "options": [
+              {
+                "value": "video",
+                "label": "Video"
+              },
+              {
+                "value": "image",
+                "label": "Image"
+              }
+            ],
+            "default": "image"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-process-item-1-placeholder",
+            "label": "Asset 1 Video Placeholder Image",
+            "info": "Below will be the placeholder Image on Mobile. Add Image if Video was selected"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-1-heading",
+            "label": "Heading 1"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-1-content",
+            "label": "Content 1"
+          },
+          {
+            "type": "checkbox",
+            "id": "landing-page-template-2-info-process-item-2-enable",
+            "label": "Enable Item 2",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-2-image",
+            "label": "Asset 2",
+            "info": "Insert Url of Image or Video from Settings > Files"
+          },
+          {
+            "type": "select",
+            "id": "landing-page-template-2-info-process-item-2-type",
+            "label": "Type of Asset 2",
+            "options": [
+              {
+                "value": "video",
+                "label": "Video"
+              },
+              {
+                "value": "image",
+                "label": "Image"
+              }
+            ],
+            "default": "image"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-process-item-2-placeholder",
+            "label": "Asset 2 Video Placeholder Image",
+            "info": "Below will be the placeholder Image on Mobile. Add Image if Video was selected"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-2-heading",
+            "label": "Heading 2"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-2-content",
+            "label": "Content 2"
+          },
+          {
+            "type": "checkbox",
+            "id": "landing-page-template-2-info-process-item-3-enable",
+            "label": "Enable Item 3",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-3-image",
+            "label": "Asset 3",
+            "info": "Insert Url of Image or Video from Settings > Files"
+          },
+          {
+            "type": "select",
+            "id": "landing-page-template-2-info-process-item-3-type",
+            "label": "Type of Asset 3",
+            "options": [
+              {
+                "value": "video",
+                "label": "Video"
+              },
+              {
+                "value": "image",
+                "label": "Image"
+              }
+            ],
+            "default": "image"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-process-item-3-placeholder",
+            "label": "Asset 3 Video Placeholder Image",
+            "info": "Below will be the placeholder Image on Mobile. Add Image if Video was selected"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-3-heading",
+            "label": "Heading 3"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-3-content",
+            "label": "Content 3"
+          },
+          {
+            "type": "checkbox",
+            "id": "landing-page-template-2-info-process-item-4-enable",
+            "label": "Enable Item 4",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-4-image",
+            "label": "Asset 4",
+            "info": "Insert Url of Image or Video from Settings > Files"
+          },
+          {
+            "type": "select",
+            "id": "landing-page-template-2-info-process-item-4-type",
+            "label": "Type of Asset 4",
+            "options": [
+              {
+                "value": "video",
+                "label": "Video"
+              },
+              {
+                "value": "image",
+                "label": "Image"
+              }
+            ],
+            "default": "image"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-process-item-4-placeholder",
+            "label": "Asset 4 Video Placeholder Image",
+            "info": "Below will be the placeholder Image on Mobile. Add Image if Video was selected"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-4-heading",
+            "label": "Heading 4"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-4-content",
+            "label": "Content 4"
+          },
+          {
+            "type": "checkbox",
+            "id": "landing-page-template-2-info-process-item-5-enable",
+            "label": "Enable Item 5",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-5-image",
+            "label": "Asset 5",
+            "info": "Insert Url of Image or Video from Settings > Files"
+          },
+          {
+            "type": "select",
+            "id": "landing-page-template-2-info-process-item-5-type",
+            "label": "Type of Asset 5",
+            "options": [
+              {
+                "value": "video",
+                "label": "Video"
+              },
+              {
+                "value": "image",
+                "label": "Image"
+              }
+            ],
+            "default": "image"
+          },
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-process-item-5-placeholder",
+            "label": "Asset 1 Video Placeholder Image",
+            "info": "Below will be the placeholder Image on Mobile. Add Image if Video was selected"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-5-heading",
+            "label": "Heading 5"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-process-item-5-content",
+            "label": "Content 5"
+          }
+        ]
+      },
+      {
+        "type": "info-conclusion",
+        "name": "Info Conclusion Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "landing-page-template-2-info-conclusion-image",
+            "label": "Main Image"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-conclusion-heading",
+            "label": "Main Heading"
+          },
+          {
+            "type": "text",
+            "id": "landing-page-template-2-info-conclusion-content",
+            "label": "Main Content"
+          }
+        ]
+      },
+      {
+        "type": "custom-reviews",
+        "name": "Custom Reviews",
+        "settings": [
+          {
+            "type": "header",
+            "content": "First review"
+          },
+          {
+            "type": "textarea",
+            "id": "review-content-1",
+            "label": "Review content"
+          },
+          {
+            "type": "text",
+            "id": "review-author-1",
+            "label": "Review author"
+          },
+          {
+            "type": "text",
+            "id": "review-sub-1",
+            "label": "Author subtext"
+          },
+          {
+            "type": "header",
+            "content": "Second review"
+          },
+          {
+            "type": "textarea",
+            "id": "review-content-2",
+            "label": "Review content"
+          },
+          {
+            "type": "text",
+            "id": "review-author-2",
+            "label": "Review author"
+          },
+          {
+            "type": "text",
+            "id": "review-sub-2",
+            "label": "Author subtext"
+          },
+          {
+            "type": "header",
+            "content": "Third review"
+          },
+          {
+            "type": "textarea",
+            "id": "review-content-3",
+            "label": "Review content"
+          },
+          {
+            "type": "text",
+            "id": "review-author-3",
+            "label": "Review author"
+          },
+          {
+            "type": "text",
+            "id": "review-sub-3",
+            "label": "Author subtext"
+          },
+          {
+            "type": "header",
+            "content": "Fourth review"
+          },
+          {
+            "type": "textarea",
+            "id": "review-content-4",
+            "label": "Review content"
+          },
+          {
+            "type": "text",
+            "id": "review-author-4",
+            "label": "Review author"
+          },
+          {
+            "type": "text",
+            "id": "review-sub-4",
+            "label": "Author subtext"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

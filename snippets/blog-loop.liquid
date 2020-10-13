@@ -1,0 +1,59 @@
+<div class="article-block{% if post_type contains 'announcement' %} announcement-post{% endif %}"{% if blog-loop == 'featured' %}style="background-image: url({{ article.image.src | img_url: 'master' }})"{% endif %}>
+
+  <div class="article-block-overlay">
+    <div class="article-icon article-icon--featured-image" {% if blog-loop != 'featured' %}style="background-image: url({{ article.image.src | img_url: '400x400' }})"{% endif %}>
+      <img src="{{ article.image.src | img_url: '500x500' }}" style="display: none;" alt="{{ article.title | escape }}">
+    </div>
+
+    <div class="article-info-wrapper">
+      {% if article.tags.size > 0 %}
+        <div class="article-info-wrapper__tag-meta">
+          <div class="article-icon article-icon--svg">
+            {% capture post_icon %}news-{{ post_type }}-icon{% endcapture %}
+            {% include 'svg-definitions' with post_icon %}
+          </div>
+
+          {% for tag in article.tags %}
+            <a class="article-block-tag" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <span class="article-block-date">
+        {{ article.published_at | time_tag: format: 'month_day_year' }}
+      </span>
+
+      <a href="{{ article.url }}"><h2 class="article-block-title" >{{ article.title }}</h2></a>
+
+      {% comment %}<span>
+        {{ 'blogs.article.by_author' | t: author: article.author }}
+      </span>{% endcomment %}
+
+      {% comment %}
+      <p>
+        <a href="{{ article.url }}">
+          {{ article | img_url: '905x600' | img_tag: article.title, 'article__list-image' }}
+        </a>
+      </p>
+      {% endcomment %}
+
+      {% comment %}
+      <div class="rte">
+        {% if article.excerpt.size > 0 %}
+          {{ article.excerpt }}
+        {% else %}
+          {{ article.content | strip_html | truncate: 150 }}
+        {% endif %}
+      </div>
+      {% endcomment %}
+
+      <a class="block-article-learn-more" href="{{ article.url }}">
+        <div class="article-learn-more-icon">
+          {% include 'svg-definitions' with 'plus-icon' %}
+        </div>
+        <span>Learn More</span>
+      </a>
+    </div>
+  </div>
+
+</div>

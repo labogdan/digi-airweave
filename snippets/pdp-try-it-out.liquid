@@ -1,0 +1,46 @@
+<div class="pdp-trial">
+  <h2 class="pdp-trial-header">Try it out</h2>
+  <div class="trial-stores">
+    {% comment %}<div class="trial-store">
+      <div class="trial-store-img">
+        <a href="/pages/contact#showroom" target="_blank">
+          <img class= "trial-store-img-mobile" src="{{ 'showroom-store.jpg' | asset_url }}">
+          <img class= "trial-store-img-desktop" src="{{ 'showroom-store.jpg' | asset_url }}">
+        </a>
+      </div>
+      <div class="trial-store-details">
+        <p>NYC Showroom</p>
+        <a href="/pages/contact#showroom" target="_blank">View Details</a>
+      </div>
+    </div>{% endcomment %}
+    <div class="trial-store">
+      <div class="trial-store-img">
+        <a href="/pages/contact#locations" target="_blank">
+          <img class= "trial-store-img-mobile" src="{{ 'retailers-store-original.jpg' | asset_url }}">
+          <img  class="trial-store-img-desktop" src="{{ 'retailers-store-original.jpg' | asset_url }}">
+        </a>
+      </div>
+      <div class="trial-store-details">
+        <p>Additional Retailers</p>
+        <a href="/pages/contact#locations" target="_blank">View Details</a>
+      </div>
+    </div>
+    <div class="trial-store try-at-home">
+      <a rel="modal:open" href="#trial-details"  class="trial-store-img">
+        <img src="{{ 'moon-icon.svg' | asset_url }}">
+        <h3>100 Night Trial</h3>
+      </a>
+      <div class="trial-store-details">
+        <p>Try At Home</p>
+        <a rel="modal:open" href="#trial-details" >View Details</a>
+      </div>
+    </div>
+  </div>
+  <a rel="modal:open" href="#trial-details">
+    <div class="trial-cta">
+      <img src="{{ 'moon-icon.svg' | asset_url }}">
+      <h3>100 Night Trial</h3>
+      <span>View Details</span>
+    </div>
+  </a>
+</div>

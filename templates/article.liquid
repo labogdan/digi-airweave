@@ -1,0 +1,44 @@
+<!-- /templates/article.liquid -->
+
+<div class="article-header{% if article.image.src %} has-image" style="  background-image: url('{{ article.image.src | img_url: 'master' }}')"{% else %}"{% endif %}>
+</div>
+
+<div class="article-content-wrapper">
+  <div>
+    <a href="{{ blog.url }}" class="article-content-breadcrumb" title="{{ blog.title }}" aria-label="Navigate to {{ blog.title }}">
+      <span class="icon-back"></span>
+      <span>All {{ blog.title }}</span>
+    </a>
+
+    <h1 class="article-content-title">{{ article.title }}</h1>
+    {% comment %}<span>
+      {{ 'blogs.article.by_author' | t: author: article.author }}
+    </span>{% endcomment %}
+
+    <p class="article-content-date">{{ article.published_at | time_tag: format: 'month_day_year' }}</p>
+  </div>
+
+  <div class="rte" itemprop="articleBody">
+    {{ article.content }}
+  </div>
+</div>
+
+<div class="article-content-wrapper article-pagination">
+  <div>
+    {%- if blog.next_article != blank -%}
+      <a href="{{ blog.next_article.url }}" class="article-next" title="{{ blog.next_article.title }}" aria-label="Open {{ blog.next_article.title }}">
+        <span class="icon"></span>
+        <span>{{ blog.next_article.title }}</span>
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div>
+    {%- if blog.previous_article != blank -%}
+      <a href="{{ blog.previous_article.url }}" class="article-previous" title="{{ blog.previous_article.title }}" aria-label="Open {{ blog.previous_article.title }}">
+        <span class="icon"></span>
+        <span>{{ blog.previous_article.title }}</span>
+      </a>
+    {%- endif -%}
+  </div>
+</div>

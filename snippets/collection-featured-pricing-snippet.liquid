@@ -1,0 +1,15 @@
+{% if all_products[block.settings.featured_product].price_varies == true %}
+  {% if on_sale %}
+    <h3 class="{% if settings.highlight_price_enabled %}sale-red{% endif %}">{{ all_products[block.settings.featured_product].price_min | money | remove: '.00' | remove: ' ' }} - {{ all_products[block.settings.featured_product].price_max | money | remove: '.00' | remove: ' ' }} </h3>
+    <h3 class="product-compare-at-price">{{ all_products[block.settings.featured_product].compare_at_price_min | money | remove: '.00' | remove: ' ' }} - {{ all_products[block.settings.featured_product].compare_at_price_max | money | remove: '.00' | remove: ' ' }} </h3>
+  {% else %}
+    <h3>{{ all_products[block.settings.featured_product].price_min | money | remove: '.00' | remove: ' ' }} - {{ all_products[block.settings.featured_product].price_max | money | remove: '.00' | remove: ' ' }}</h3>
+  {% endif %}
+{% else %}
+  {% if on_sale %}
+    <h3 class="{% if settings.highlight_price_enabled %}sale-red{% endif %}">{{ all_products[block.settings.featured_product].price | money | remove: '.00' | remove: ' ' }}</h3>
+    <h3 class="collection-compare-at-price">{{ all_products[block.settings.featured_product].compare_at_price | money | remove: '.00' | remove: ' ' }}</h3>
+  {% else %}
+    <h3>{{ all_products[block.settings.featured_product].price | money | remove: '.00' | remove: ' ' }}</h3>
+  {% endif %}
+{% endif %}

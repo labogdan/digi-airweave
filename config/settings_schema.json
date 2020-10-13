@@ -1,0 +1,2322 @@
+[
+  {
+    "name": "Cart Bundles",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hyperdown bundle"
+      },
+      {
+        "type": "checkbox",
+        "id": "hyperdown-bundle-enable",
+        "label": "Enable hyperdown bundle"
+      },
+      {
+        "type": "header",
+        "content": "Travel bundle"
+      },
+      {
+        "type": "checkbox",
+        "id": "travel-bundle-enable",
+        "label": "Enable travel bundle"
+      },
+      {
+        "type": "header",
+        "content": "Free hyperdown traveler over $700"
+      },
+      {
+        "type": "checkbox",
+        "id": "free-hyperdown-traveler-enable",
+        "label": "Enable free hyperdown traveler",
+        "info": "Hyperdown traveler will be added to cart if cart is over $700"
+      }
+    ]
+  },
+  {
+    "name": "RPS Side Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Cart Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "free_shipping",
+        "label": "Free Shipping",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Empty Cart"
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_top_promo",
+        "label": "Promo Message"
+      },
+      {
+        "type": "product",
+        "id": "empty_cart_product_1",
+        "label": "Product 1"
+      },
+      {
+        "type": "product",
+        "id": "empty_cart_product_2",
+        "label": "Product 2"
+      },
+      {
+        "type": "collection",
+        "id": "empty_cart_collection_1",
+        "label": "Collection 1"
+      },
+      {
+        "type": "product",
+        "id": "empty_cart_product_3",
+        "label": "Product 3"
+      },
+      {
+        "type": "product",
+        "id": "empty_cart_product_4",
+        "label": "Product 4"
+      },
+      {
+        "type": "collection",
+        "id": "empty_cart_collection_2",
+        "label": "Collection 2"
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_default_promo",
+        "label": "Default Promo Message"
+      }
+    ]
+  },
+  {
+    "name": "Announcement Bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "countdown_timer_enabled",
+        "default": false,
+        "label": "Enable Announcement Bar"
+      }
+    ]
+  },
+  {
+    "name": "Highlight Sale Pricing",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "highlight_price_enabled",
+        "default": false,
+        "label": "Enable Higlighted Sale Prices"
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "facebook_url",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "instagram_url",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "twitter_url",
+        "label": "Twitter URL"
+      },
+      {
+        "type": "text",
+        "id": "pinterest_url",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "text",
+        "id": "tumblr_url",
+        "label": "Tumblr URL"
+      },
+      {
+        "type": "text",
+        "id": "youtube_url",
+        "label": "YouTube URL"
+      }
+    ]
+  },
+  {
+    "name": "Product Details & Specs",
+    "settings": [
+      {
+        "type": "header",
+        "content": "airweave Mattress"
+      },
+      {
+        "type": "textarea",
+        "id": "mattress_details_text",
+        "label": "Details & Specs tab"
+      },
+      {
+        "type": "header",
+        "content": "airweave Top Mattress"
+      },
+      {
+        "type": "textarea",
+        "id": "topper_details_text",
+        "label": "Details & Specs tab"
+      },
+      {
+        "type": "header",
+        "content": "airweave Team USA Portable Mattress"
+      },
+      {
+        "type": "textarea",
+        "id": "portable_details_text",
+        "label": "Details & Specs tab"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Airweave Advanced",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_advanced_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_advanced_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_advanced_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_advanced_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_advanced_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_advanced_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_advanced_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_advanced_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_advanced_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_advanced_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_advanced_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_advanced_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_advanced_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_advanced_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_advanced_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_advanced_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_advanced_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_advanced_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Airweave Hyperdown Travel",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_hyperdown_travel_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_hyperdown_travel_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_hyperdown_travel_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_hyperdown_travel_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_hyperdown_travel_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_hyperdown_travel_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_hyperdown_travel_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_hyperdown_travel_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_hyperdown_travel_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_hyperdown_travel_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_hyperdown_travel_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_hyperdown_travel_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_hyperdown_travel_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_hyperdown_travel_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_hyperdown_travel_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_hyperdown_travel_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_hyperdown_travel_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_hyperdown_travel_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Hyperdown Duvet",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "hyperdown_duvet_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "hyperdown_duvet_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "hyperdown_duvet_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "hyperdown_duvet_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "hyperdown_duvet_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "hyperdown_duvet_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "hyperdown_duvet_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "hyperdown_duvet_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "hyperdown_duvet_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "hyperdown_duvet_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "hyperdown_duvet_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "hyperdown_duvet_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "hyperdown_duvet_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "hyperdown_duvet_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "hyperdown_duvet_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "hyperdown_duvet_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "hyperdown_duvet_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "hyperdown_duvet_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - airweave Mattress",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "mattress_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "mattress_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "mattress_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "mattress_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "mattress_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "mattress_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "mattress_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "mattress_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "mattress_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "mattress_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "mattress_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "mattress_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "mattress_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "mattress_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "mattress_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "mattress_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "mattress_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "mattress_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Mattress Luxe",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "luxe_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "luxe_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "luxe_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "luxe_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "luxe_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "luxe_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "luxe_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "luxe_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "luxe_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "luxe_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "luxe_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "luxe_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "luxe_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "luxe_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "luxe_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "luxe_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "luxe_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "luxe_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - airweave Top Mattress",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "topper_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "topper_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "topper_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "topper_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "topper_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "topper_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "topper_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "topper_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "topper_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "topper_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "topper_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "topper_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "topper_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "topper_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "topper_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "topper_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "topper_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "topper_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - airweave Portable Team USA",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "portable_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "portable_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "portable_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "portable_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "portable_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "portable_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "portable_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "portable_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "portable_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "portable_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "portable_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "portable_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "portable_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "portable_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "portable_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "portable_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "portable_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "portable_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Ritz Paris for airweave Collection",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "ritz_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "ritz_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "ritz_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "ritz_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "ritz_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "ritz_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "ritz_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "ritz_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "ritz_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "ritz_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "ritz_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "ritz_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "ritz_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "ritz_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "ritz_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "ritz_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "ritz_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "ritz_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Seat Cushion",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "seat_cushion_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "seat_cushion_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "seat_cushion_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "seat_cushion_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "seat_cushion_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "seat_cushion_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "seat_cushion_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "seat_cushion_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "seat_cushion_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "seat_cushion_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "seat_cushion_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "seat_cushion_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "seat_cushion_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "seat_cushion_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "seat_cushion_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "seat_cushion_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "seat_cushion_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "seat_cushion_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Portable Original",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_portable_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_portable_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_portable_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_portable_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_portable_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_portable_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_portable_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_portable_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_portable_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_portable_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_portable_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_portable_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_portable_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_portable_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_portable_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_portable_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_portable_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_portable_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Airweave Futon",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_futon_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_futon_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_futon_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_futon_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_futon_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_futon_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_futon_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_futon_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_futon_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_futon_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_futon_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_futon_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_futon_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_futon_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_futon_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_futon_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_futon_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_futon_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Outer Cover",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_outer_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_outer_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_outer_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_outer_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_outer_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_outer_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_outer_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_outer_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_outer_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_outer_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_outer_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_outer_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_outer_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_outer_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_outer_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "airweave_outer_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "airweave_outer_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "airweave_outer_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Pillow",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "pillow_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "pillow_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "pillow_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "pillow_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "pillow_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "pillow_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "pillow_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "pillow_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "pillow_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "pillow_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "pillow_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "pillow_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "pillow_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "pillow_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "pillow_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "pillow_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "pillow_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "pillow_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - Dog Bed",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "dog-bed_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "dog-bed_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "dog-bed_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "dog-bed_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "dog-bed_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "dog-bed_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "dog-bed_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "dog-bed_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "dog-bed_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "dog-bed_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "dog-bed_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "dog-bed_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "dog-bed_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "dog-bed_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "dog-bed_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "dog-bed_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "dog-bed_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "dog-bed_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - S Pillow",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "s-pillow_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "s-pillow_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "s-pillow_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "s-pillow_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "s-pillow_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "s-pillow_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "s-pillow_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "s-pillow_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "s-pillow_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "s-pillow_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "s-pillow_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "s-pillow_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "s-pillow_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "s-pillow_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "s-pillow_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "s-pillow_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "s-pillow_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "s-pillow_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - New Mattress",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "FAQ - New Mattress Advanced",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Question 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress-advanced_faq_question_1_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress-advanced_faq_question_1",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress-advanced_faq_answer_1",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress-advanced_faq_question_2_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress-advanced_faq_question_2",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress-advanced_faq_answer_2",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress-advanced_faq_question_3_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress-advanced_faq_question_3",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress-advanced_faq_answer_3",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress-advanced_faq_question_4_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress-advanced_faq_question_4",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress-advanced_faq_answer_4",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress-advanced_faq_question_5_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress-advanced_faq_question_5",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress-advanced_faq_answer_5",
+        "label": "Answer"
+      },
+      {
+        "type": "header",
+        "content": "Question 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "new-mattress-advanced_faq_question_6_enable",
+        "label": "Show\/hide"
+      },
+      {
+        "type": "text",
+        "id": "new-mattress-advanced_faq_question_6",
+        "label": "Question"
+      },
+      {
+        "type": "textarea",
+        "id": "new-mattress-advanced_faq_answer_6",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "name": "Recycling",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "check_for_recycling_fee",
+        "label": "Check for state recycling fee at checkout?",
+        "default": false
+      },
+      {
+        "type": "product",
+        "id": "recycling_fee_product",
+        "label": "Recycling Product"
+      },
+      {
+        "type": "text",
+        "id": "recycle_fee_product_type",
+        "label": "Recycling Fee Product Type",
+        "info": "Comma separated list of product types that require recycling fee"
+      }
+    ]
+  },
+  {
+    "name": "Global Carousel",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product_1",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_2",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_3",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_4",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_5",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_6",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_7",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_8",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_9",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_10",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_11",
+        "label": "Feature product"
+      },
+      {
+        "type": "product",
+        "id": "product_12",
+        "label": "Feature product"
+      }
+    ]
+  },
+  {
+    "name": "Accordion Features",
+    "settings": [
+      {
+        "type": "product",
+        "id": "mattress_product_1",
+        "label": "Mattress Product #1"
+      },
+      {
+        "type": "product",
+        "id": "mattress_product_2",
+        "label": "Mattress Product #2"
+      },
+      {
+        "type": "product",
+        "id": "accessories_product_3",
+        "label": "Accessories Product #3"
+      },
+      {
+        "type": "product",
+        "id": "accessories_product_4",
+        "label": "Accessories Product #4"
+      }
+    ]
+  }
+]

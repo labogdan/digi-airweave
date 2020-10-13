@@ -1,0 +1,46 @@
+<div class="hp-hero">
+  <div class="hp-hero-image">
+    <img src="{{ section.settings.image | img_url: '1000x' }}" alt="airweave Mattress">
+  </div>
+  <div class="hp-hero-copy">
+    <h2 class="hp-hero-title">{{ section.settings.message }}</h2>
+    <a class="hp-hero-shop" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "message",
+        "label": "Message",
+        "default": "Airfiber Hero Message"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button text",
+        "default": "Shop All"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero",
+        "category": "Homepage"
+      }
+    ]
+  }
+{% endschema %}

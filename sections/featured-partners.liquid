@@ -1,0 +1,60 @@
+<div class="hp-partners">
+  {% for block in section.blocks %}
+    <div class="hp-partners-block" style="background-image:url({{ block.settings.background | img_url: 'master' }})">
+      <div class="hp-partners-block-overlay">
+        <img class="hp-partners-block-logo lazyload" data-src="{{ block.settings.logo | img_url: 'master' }}">
+        <p class="hp-partners-block-message">{{ block.settings.message }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Partners",
+    "class": "index-section",
+    "settings": [
+
+    ],
+    "blocks": [
+      {
+        "type": "partner_block",
+        "name": "Partner",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "background",
+            "label": "Background image"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          },
+          {
+            "type": "textarea",
+            "id": "message",
+            "label": "Hover message"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Partners",
+        "category": "Homepage",
+        "blocks": [
+          {
+            "type": "partner_block"
+          },
+          {
+            "type": "partner_block"
+          },
+          {
+            "type": "partner_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

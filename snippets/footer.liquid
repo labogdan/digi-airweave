@@ -1,0 +1,89 @@
+<footer class="footer-main">
+  <div class="footer-links-wrapper grid-x">
+    <div class="footer-primary small-12 medium-6 large-4">
+      <nav class="footer-main-links footer-shop">
+        <h4>Shop</h4>
+        <ul>
+          {% for link in linklists.footer-catalog.links %}
+          <li>
+            <a href="{{ link.url }}">
+              <span>{{ link.title }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+    <div class="small-12 medium-3 large-2">
+      <nav class="footer-main-links">
+        <h4>About</h4>
+        <ul>
+          {% for link in linklists.footer-about.links %}
+          <li>
+            <a href="{{ link.url }}">
+              <span>{{ link.title }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+    <div class="small-12 medium-3 large-2">
+      <nav class="footer-main-links">
+        <h4>Support</h4>
+        <ul>
+          {% for link in linklists.support.links %}
+          <li>
+            <a href="{{ link.url }}">
+              <span>{{ link.title }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+    <div class="small-12 medium-12 large-4">
+      <div class="grid-x email-container">
+        <div class="small-12 medium-12">
+          <p>Sign up for the latest offers</p>
+          <form id="email_signup" class="footer_email" action="//manage.kmail-lists.com/subscriptions/subscribe" data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe" method="GET" target="_blank" novalidate="novalidate">
+            <input type="hidden" name="g" value="nQF8G6">
+            <div class="mattresses-contact-emailbox">
+              <input id="k_id_email" class="emailbox-input" name="email" type="email" placeholder="Email Address">
+              <button class="emailbox-submit" type="submit">
+                Join
+              </button>
+            </div>
+            <div class="klaviyo_messages">
+              <p class="success_message">
+              </p>
+              <p class="error_message">
+              </p>
+            </div>
+          </form>
+        </div>
+        <div class="small-12 medium-6">
+          <nav class="footer-social-links">
+            <a href="https://twitter.com/airweaveUSA" target="_blank">
+              <img class="lazyload" data-src="{{ 'twitter.svg' | asset_url }}"/>
+            </a>
+            <a href="https://www.facebook.com/airweaveusa/" target="_blank">
+              <img class="lazyload" data-src="{{ 'facebook.svg' | asset_url }}"/>
+            </a>
+            <a href="https://www.instagram.com/airweaveusa/" target="_blank">
+              <img class="lazyload" data-src="{{ 'instagram.svg' | asset_url }}"/>
+            </a>
+          </nav>
+        </div>
+        <div class="small-12 medium-6 phone-number">
+          <a href="tel:1-800-407-1500">
+            1-800.407.1500
+          </a>
+        </div>        
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2020 Airweave.com. All Rights Reserved.</p>
+  </div>
+</footer>

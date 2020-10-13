@@ -1,0 +1,19 @@
+<div class="hp-blogfeed-wrapper">
+  <div class="hp-blogfeed">
+    {% for article in blogs.news.articles limit: 3 %}
+      <div class="hp-article-block">
+        <p class="hp-article-block-tags">
+          {% for tag in article.tags %}
+          {% unless tag.handle contains 'featured' %}
+            <span>{{ tag }}</span>
+          {% endunless %}
+          {% endfor %}
+        </p>
+        <a href="{{ article.url }}"><h2 class="hp-article-block-title">{{ article.title }}</h2></a>
+        <a class="hp-article-more" href="{{ article.url }}">Read More</a>
+      </div>
+    {% endfor %}
+  </div>
+  
+  <a class="hp-blogfeed-more" href="/blogs/news">view all news</a>
+</div>

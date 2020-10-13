@@ -1,0 +1,117 @@
+{% layout none %}
+
+<div class="inline-cart-inner">
+  <ul class="inline-cart-list {% if cart.item_count == 0 %}empty-cart{% endif %}">
+  {% if cart.item_count == 0 %}
+    {% if settings.hyperdown-bundle-enable %}
+      {% unless has_duvet == true and has_mattress == true %}
+        {{ bundle-savings-message }}
+      {% endunless %}
+    {% endif %}
+    <!-- {% if settings.hyperdown-bundle-enable %}
+      {% include 'hyperdown-bundle' %}
+    {% endif %}
+
+    {% if settings.travel-bundle-enable %}
+      {% include 'travel-bundle' %}
+    {% endif %} -->
+    <li class="line-item">
+      <p class="line-item-heading">Your Cart</p>
+      <button class="line-cart-exit">
+        <span></span>
+      </button>
+    </li>
+    <p class="inline-cart-empty-message">Your Cart is empty!</p>
+  {% else %}
+  <li class="line-item">
+    <p class="line-item-heading">Your Cart</p>
+    <button class="line-cart-exit">
+      <span></span>
+    </button>
+  </li>
+  {% for line_item in cart.items %}
+    <li class="line-item">
+      <div class="line_item-wrapper-thumbnail">
+        <img class="line_item-image" src="{{ line_item.image | img_url: 'medium' }}" alt="">
+      </div>
+      <div class="line_item-wrapper-info">
+        <!-- title -->
+        <p class="line-item-title">{{ line_item.product.title }}</p>
+        <!-- size -->
+        <p class="line-item-option">
+          {% unless line_item.variant.option1 contains 'Default Title' %}
+          <span>{{ line_item.product.options.first }}:</span>
+          <span>{{ line_item.variant.option1 }}</span>
+          {% else %}
+          <span>&nbsp;</span>
+          {% endunless %}
+        </p>
+        <!-- qty input -->
+        <div class="line-item-qty-wrapper">
+          {% comment %} Hyperdown Traveler Free Item Shouldn't Be Updateable {% endcomment %}
+          {% unless line_item.variant_id == 1113585287182 and line_item.properties != empty %}
+            <button class="line-item-qty-subtract" data-cart-update="{{ forloop.index }}" data-cart-quantity="{{ line_item.quantity | minus: 1 }}"></button>
+            <div class="line-item-qty-count">{{ line_item.quantity }}</div>
+            <button class="line-item-qty-add" data-cart-update="{{ forloop.index }}" data-cart-quantity="{{ line_item.quantity | plus: 1 }}"></button>
+          {% else %}
+            <button class="line-item-qty-subtract"></button>
+            <div class="line-item-qty-count">{{ line_item.quantity }}</div>
+            <button class="line-item-qty-add"></button>
+          {% endunless %}
+        </div>
+      </div>
+      <div class="line_item-wrapper-remove">
+        {% unless line_item.variant_id == 1113585287182 and line_item.properties != empty %}
+          <button class="line-item-remove" data-cart-remove-id="{{ line_item.variant_id }}">
+            Remove
+          </button>
+          <p class="line-item-price">{{ line_item.line_price | money | remove: '.00' }}</p>
+        {% else %}
+          <button class="line-item-remove" data-cart-remove-id="{{ line_item.variant_id }}">
+            Remove
+          </button>
+          <p class="line-item-price">{{ line_item.line_price | money | remove: '.00' }}</p>
+        {% endunless %}
+      </div>
+    </li>
+  {% endfor %}
+  {% endif %}
+  </ul>
+
+    {% if settings.hyperdown-bundle-enable %}
+      {% include 'hyperdown-bundle' %}
+    {% endif %}
+
+    {% if settings.travel-bundle-enable %}
+      {% include 'travel-bundle' %}
+    {% endif %}
+
+  <div class="inline-cart-checkout-cont">
+    <footer class="inline-cart-footer">
+      <div class="inline-cart-footer-wrapper">
+        <p class="inline-cart-subtotal-label">Subtotal:</p>
+
+        {% if cart.total_price < cart.original_total_price %}
+          <p class="inline-cart-subtotal inline-cart-subtotal--original">{{ cart.original_total_price | money | remove: '.00' | remove: ' ' }}</p>
+        {% endif %}
+
+        <p class="inline-cart-subtotal">{% if cart.items.size >= 1 %}{{ cart.total_price | money | remove: '.00' | remove: ' '  }}{% else %}$0{% endif %}</p>
+      </div>
+    </footer>
+    <div class="inline-cart-trial">
+      <p class="inline-cart-text">100 Night Trial &amp; Free Shipping on select purchases.</p>
+      <a class="inline-cart-link" rel="modal:open" href="#trial-details">View Details</a>
+    </div>
+    <a{% if cart.item_count > 0 %} href="/checkout"{% else %} class="checkout-btn-disabled"{% endif %}>
+      <button class="inline-cart-checkout-btn">Checkout</button>
+    </a>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.line-cart-exit').on("click", function(e) {
+    e.preventDefault();
+    $('.inline-cart-wrapper').toggleClass('inline-cart-active');
+    $('body').removeClass('overflow-hidden');
+  });
+</script>

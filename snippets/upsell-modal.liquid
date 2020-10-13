@@ -1,0 +1,49 @@
+<!--<div class="modal-top">
+    <h3>Special Offer  {{ upsellProduct.metafields.upsell.preheading }}</h3>
+	<h1>Bundle & Save</h1>
+</div>-->
+
+<div class="upsells">
+    {% for handle in handles %}
+        {% assign upsellProduct = all_products[handle] %}
+        {% unless upsellProduct == blank %}
+            <div class="upsell" data-upsell-id="{{ upsellProduct.id }}">
+                <script>window._upsellProducts[{{ upsellProduct.id }}] = {{ upsellProduct | json }};</script>
+
+                <div class="modal-content">
+                    <div class="left">
+                        <h2>{{ upsellProduct.title }}</h2>
+                        <p>{{ upsellProduct.description }}</p>
+                    </div>
+                    <div class="right">
+                        <div class="image">
+                            <img src="{{ upsellProduct.featured_image | img_url: '900x' }}" alt="{{ upsellProduct.title | escape }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom modal-content">
+                    <form action="/cart/add" method="post" data-upsell-id="{{ upsellProduct.id }}">
+                        <input type="hidden" name="id" value="{{ upsellProduct.variants.first.id }}">
+                        <h2 class="price product_price">{{ upsellProduct.price | money_without_trailing_zeros | remove: ',' | remove: '.' }}</h2>
+                        <klarna-placement
+                                data-id="0f2333a5-b2e0-49ad-96e0-fe0928bc4b6e"
+                                data-purchase_amount="{{ upsellProduct.price_min | money_without_currency | remove: ',' | remove: '.' }}"
+                                data-inline
+                        ></klarna-placement>
+
+                        <div class="swatch_options collection_swatches">
+                            {% for option in upsellProduct.options %}
+                                {% include 'product__swatch', product: upsellProduct, option: option %}
+                            {% endfor %}
+                        </div>
+                        <div class="action-buttons">
+                            <button type="submit">Add to Cart</button>
+                            <button data-action="open-cart" type="button">Continue to Cart</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endunless %}
+    {% endfor %}
+
+</div>

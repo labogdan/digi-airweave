@@ -1,0 +1,118 @@
+<!-- /templates/blog.liquid -->
+<div class="blog-container">
+
+  <div class="blog-header">
+  </div>
+
+  {% paginate blog.articles by 15 %}
+
+  <div class="blog-content-wrapper full-width">
+    <div class="blog-featured-slider">
+      {% for article in blog.articles %}
+        {% for tag in article.tags %}
+          {% if tag.handle contains 'featured' %}
+            {% include 'blog-loop' with 'featured' %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+    {% comment %}<div class="blog-content-header">
+      <header>
+        <h1>{{ page_title }}</h1>
+        {% if blog.tags.size > 0 %}
+          <select id="BlogTagFilter">
+            <option value="/blogs/{{ blog.handle }}">{{ 'blogs.article.all_topics' | t }}</option>
+            {% for tag in blog.all_tags %}
+              <option value="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" {% if current_tags contains tag %}selected{% endif %}>{{ tag }}</option>
+            {% endfor %}
+          </select>
+        {% endif %}
+      </header>
+    </div>{% endcomment %}
+
+    
+  </div>
+  <div class="blog-content-wrapper">
+    <div class="flex sort-by-wrapper">
+      {% if canonical_url contains '/tagged/' %}
+        <a href="/blogs/news" class="article-content-breadcrumb all-news" title="News" aria-label="Navigate to News">
+          <span class="icon-back"></span>
+          <span>All News</span>
+        </a>
+      {% endif %}
+
+      {%- assign sortable_tags = 'all|All,press|Press,partnership|Partnerships,announcement|Announcements' | split: ','  -%}
+      <div class="blog-articles-sort-by">
+        <span>Sort by:</span>
+        <select id="articles-sort-by" data-base="{{ blog.url }}">
+          {%- for tag in sortable_tags -%}
+            {%- assign parts = tag | split: '|' -%}
+            <option value="{{ parts.first }}"{% if canonical_url contains parts.first %} selected{% endif %}>{{ parts.last }}</option>
+          {%- endfor -%}
+        </select>
+      </div>
+    </div>
+      <div class="blog-articles-list">
+        {% for article in blog.articles %}
+
+          {% for tag in article.tags %}
+            {% if tag.handle contains 'press' %}
+              {% assign post_type = 'press' %}
+            {% elsif tag.handle contains 'sponsorship' %}
+              {% assign post_type = 'sponsorship' %}
+            {% elsif tag.handle contains 'partnership' %}
+              {% assign post_type = 'partnership' %}
+            {% elsif tag.handle contains 'announcement' %}
+              {% assign post_type = 'announcement' %}
+              {% break %}
+            {% else %}
+              {% assign post_type = 'press' %}
+            {% endif %}
+          {% endfor %}
+
+          {% for tag in article.tags %}
+            {% if tag.handle contains 'featured' %}
+              {% assign post_type = 'featured' %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% unless post_type contains 'featured' %}
+            {% include 'blog-loop' %}
+          {% endunless %}
+
+        {% endfor %}
+
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+      </div>
+  </div>
+
+  {% endpaginate %}
+
+</div>
+
+<script>
+(function() {
+  var $filterBy = $('#BlogTagFilter');
+
+  if (!$filterBy.length) {
+    return;
+  }
+
+  $filterBy.on('change', function() {
+    location.href = $(this).val();
+  });
+
+})();
+</script>
+
+<script>
+$(document).ready(function() {
+  $('.blog-featured-slider').slick({
+    dots: true
+  });
+});
+</script>

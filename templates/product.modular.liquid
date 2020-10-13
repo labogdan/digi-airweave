@@ -1,0 +1,143 @@
+{% include 'pdp-main' %}
+{% section 'pdp-features' %}
+
+{% section 'inner-zoom' %}
+{% if product.handle == 'airweave-mattress-advanced' %}
+  {% section 'advance-matress-info' %}
+{% else %}
+  {% section 'new-mattress-info' %}
+{% endif %}
+
+{% if product.handle == 'airweave-mattress-advanced' %}
+  {% section 'pdp-dual-mode-modular'  %}
+{% elsif product.handle == 'new-airweave-mattress' %}
+{% endif %}
+{% include 'pdp-reviews' %}
+{% include 'pdp-faq' %}
+{% include 'related-products-group' %}
+{% include 'pdp-try-it-out' %}
+{% include 'contact-footer' %}
+
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+<script>
+$(document).ready(function() {
+
+  // load youtube embedded video with custom placeholder
+  $('.placeholder-container').click(function() {
+    var video = '<div class="modular-video-embed"><iframe width="560" height="315" src="https://www.youtube.com/embed/Yt6Qv62nCSE?wmode=opaque&autoplay=1&rel=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div>';
+    $(this).replaceWith(video);
+  });
+
+  var selectCallback = function(variant, selector) {
+
+    document.getElementsByTagName("klarna-placement")[0].setAttribute("data-purchase_amount", variant.price);
+    window.KlarnaOnsiteService = window.KlarnaOnsiteService || [];
+    window.KlarnaOnsiteService.push({ eventName: 'refresh-placements' });
+
+    $('#productPrice, .shopify-product-form .product-price').html(Shopify.formatMoney(variant.price, "{{ shop.money }}").replace('.00', ''));
+    $('.pdp-breadcrumb select').val(variant.option1);
+
+    $('.new-tag__product--low-stock').toggle(variant.inventory_quantity > 0 && variant.inventory_quantity <= 10);
+
+    if (variant.compare_at_price > variant.price ) {
+      $('#productCompareAtPrice, .pdp-breadcrumb .product-compare-at-price').html(Shopify.formatMoney(variant.compare_at_price, "{{ shop.money }}").replace('.00', ''));
+    } else {
+      $('#productCompareAtPrice, .pdp-breadcrumb .product-compare-at-price').html('');
+    }
+
+    $('.affirm-as-low-as').attr('data-amount', variant.price);
+    if (typeof affirm == 'object') { affirm.ui.refresh(); }
+
+    if (variant) {
+      $('.pdp-breadcrumb-add').attr('data-cart-add', variant.id);
+      $('.pdp-add').attr('data-cart-add', variant.id);
+    } else {
+
+    }
+
+    if (variant && variant.available) {
+      $('.pdp-breadcrumb-add').removeAttr('disabled');
+      $('.pdp-add').removeAttr('disabled').removeClass('hidden');
+
+      setTimeout(function() {
+        $('.klaviyo-bis-trigger').addClass('hidden').hide();
+      }, 0);
+      // $('.pdp-breadcrumb-add').html('<span>Add To Cart</span>');
+      // $('.pdp-add').html('<span>Add To Cart</span>');
+    }
+
+    if (variant && !variant.available) {
+      $('.pdp-breadcrumb-add').attr('disabled', 'disabled');
+      $('.pdp-add').attr('disabled', 'disabled').addClass('hidden');
+
+      setTimeout(function() {
+        $('.klaviyo-bis-trigger').removeClass('hidden').css('display', 'inline-flex');
+      }, 0);
+      // $('.pdp-breadcrumb-add').html('<span>Sold Out</span>');
+      // $('.pdp-add').html('<span>Sold Out</span>');
+    }
+
+    // BEGIN SWATCHES
+    if (variant) {
+      var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      for (var i=0,length=variant.options.length; i<length; i++) {
+        var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+        if (radioButton.size()) {
+          radioButton.get(0).checked = true;
+        }
+      }
+    }
+    // END SWATCHES
+  }
+
+  jQuery(function($) {
+    
+    console.log('productSelect');
+    new Shopify.OptionSelectors('productSelect', {
+      product: {{ product | json }},
+      onVariantSelected: selectCallback,
+      enableHistoryState: true
+    });
+
+    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+      $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+    {% endif %}
+
+    // Hide selectors if we only have 1 variant and its title contains 'Default'.
+    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+      $('.selector-wrapper').hide();
+    {% endif %}
+  });
+});
+</script>
+
+<script text="text/javascript">
+  var _learnq = _learnq || [];
+
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+  };
+
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>

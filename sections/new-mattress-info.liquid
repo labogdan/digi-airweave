@@ -1,0 +1,276 @@
+{% schema %}
+  {
+    "name": "New Matress",
+    "class": "advance-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Advance Section Videos"
+      },
+      {
+        "type": "image_picker",
+        "id": "video_one_img",
+        "label": "Video One Image"
+      },
+      {
+        "type": "text",
+        "id": "video_one_play_msg",
+        "label": "Video One Play Button Message"
+      },
+      {
+        "type": "text",
+        "id": "video_one_title",
+        "label": "Video One Title"
+      },
+      {
+        "type": "text",
+        "id": "video_one_src",
+        "label": "Video One Source"
+      },
+      {
+        "type": "image_picker",
+        "id": "video_two_img",
+        "label": "Video Two Image"
+      },
+      {
+        "type": "text",
+        "id": "video_two_play_msg",
+        "label": "Video Two Play Button Message"
+      },
+      {
+        "type": "text",
+        "id": "video_two_title",
+        "label": "Video Two Title"
+      },
+      {
+        "type": "text",
+        "id": "video_two_src",
+        "label": "Video Two Source"
+      },
+
+      {
+        "type": "header",
+        "content": "Advance Info 1"
+      },
+      {
+        "type": "image_picker", 
+        "id": "info_one_logo",
+        "label": "Info One Logo"
+      },
+      {
+        "type": "image_picker", 
+        "id": "info_one_logo_active",
+        "label": "Info One Logo Active"
+      },
+      {
+        "type": "text", 
+        "id": "info_one_title",
+        "label": "Info One Title"
+      },
+      {
+        "type": "textarea", 
+        "id": "info_one_copy",
+        "label": "Info One Copy"
+      },
+      
+      {
+        "type": "header",
+        "content": "Advance Info 2"
+      },
+      {
+        "type": "image_picker", 
+        "id": "info_two_logo",
+        "label": "Info Two Logo"
+      },
+      {
+        "type": "image_picker", 
+        "id": "info_two_logo_active",
+        "label": "Info Two Logo Active"
+      },
+      {
+        "type": "text", 
+        "id": "info_two_title",
+        "label": "Info Two Title"
+      },
+      {
+        "type": "textarea", 
+        "id": "info_two_copy",
+        "label": "Info Two Copy"
+      },
+
+      {
+        "type": "header",
+        "content": "Advance Info 3"
+      },
+      {
+        "type": "image_picker", 
+        "id": "info_three_logo",
+        "label": "Info Three Logo"
+      },
+      {
+        "type": "image_picker", 
+        "id": "info_three_logo_active",
+        "label": "Info Three Logo Active"
+      },
+      {
+        "type": "text", 
+        "id": "info_three_title",
+        "label": "Info Three Title"
+      },
+      {
+        "type": "textarea", 
+        "id": "info_three_copy",
+        "label": "Info Three Copy"
+      },
+
+      {
+        "type": "header",
+        "content": "Advance Info 4"
+      },
+      {
+        "type": "image_picker", 
+        "id": "info_four_logo",
+        "label": "Info Four Logo"
+      },
+      {
+        "type": "image_picker", 
+        "id": "info_four_logo_active",
+        "label": "Info Four Logo Active"
+      },
+      {
+        "type": "text", 
+        "id": "info_four_title",
+        "label": "Info Four Title"
+      },
+      {
+        "type": "textarea", 
+        "id": "info_four_copy",
+        "label": "Info Four Copy"
+      }
+    ],
+    "presets": []
+  }
+{% endschema %}
+
+
+<h2 class="features-header">Better Sleep With The New Airweave Mattress</h2>
+<div class="info-container" style="padding: 40px 0">
+  <aside class="advance__prop-list">
+    <ul class="advance-properties"> 
+      <li class="property active"> 
+        <div class="property-icon"> 
+          <img src="{{section.settings.info_one_logo | img_url: '70px'}}"/> 
+          <img class="active" src="{{section.settings.info_one_logo_active | img_url: '70px'}}"/> 
+        </div> 
+
+        <div class="property-text"> 
+          <h3>{{section.settings.info_one_title}}</h3> 
+          <p>{{section.settings.info_one_copy}}</p>  
+        </div> 
+      </li> 
+
+      <li class="property">
+        <div class="property-icon"> 
+          <img src="{{section.settings.info_two_logo | img_url: '70px'}}"/> 
+          <img class="active" src="{{section.settings.info_two_logo_active | img_url: '70px'}}"/> 
+        </div> 
+
+        <div class="property-text"> 
+          <h3>{{section.settings.info_two_title}}</h3> 
+          <p>{{section.settings.info_two_copy}}</p>  
+        </div> 
+      </li> 
+
+      <li class="property"> 
+        <div class="property-icon"> 
+          <img style="width: 55px" src="{{section.settings.info_three_logo | img_url: '70px'}}"/> 
+          <img style="width: 55px" class="active" src="{{section.settings.info_three_logo_active | img_url: '70px'}}"/> 
+        </div> 
+
+        <div class="property-text"> 
+          <h3>{{section.settings.info_three_title}}</h3> 
+          <p>{{section.settings.info_three_copy}}</p>  
+        </div> 
+      </li> 
+
+      <!--<li class="property"> 
+        <div class="property-icon"> 
+          <img style="width: 50px" src="{{section.settings.info_four_logo | img_url: '70px'}}"/> 
+          <img style="width: 50px" class="active" src="{{section.settings.info_four_logo_active | img_url: '70px'}}"/> 
+        </div> 
+
+        <div class="property-text"> 
+          <h3>{{section.settings.info_four_title}}</h3> 
+          <p>{{section.settings.info_four_copy}}</p>  
+        </div> 
+      </li>-->
+    </ul> 
+
+
+    <ul class="mobile-advance-properties">
+      <li class="property-text active"> 
+        <h3>{{section.settings.info_one_title}}</h3> 
+        <p>{{section.settings.info_one_copy}}</p>  
+      </li> 
+    
+      <li class="property-text"> 
+        <h3>{{section.settings.info_two_title}}</h3> 
+        <p>{{section.settings.info_two_copy}}</p>  
+      </li> 
+
+      <li class="property-text"> 
+        <h3>{{section.settings.info_three_title}}</h3> 
+        <p>{{section.settings.info_three_copy}}</p>  
+      </li> 
+
+      <!--<li class="property-text"> 
+        <h3>{{section.settings.info_four_title}}</h3> 
+        <p>{{section.settings.info_four_copy}}</p>  
+      </li>--> 
+    </ul>
+  </aside> 
+
+  <aside class="advance__videos">
+
+    <div class="video-container"> 
+      <div class="video-preview"> 
+        <img class="video-preview-img" src="{{section.settings.video_one_img | img_url: '1220x'}}"/> 
+        <span class="video-play-cta"> 
+          <img class="video-play-btn" src="{{ 'play_btn.png' | file_img_url: '150x' }}"/>
+          <p class="video-play-title">{{section.settings.video_one_play_msg}}</p> 
+        </span> 
+      </div> 
+
+      <div class="advance-video">
+        <video src="{{section.settings.video_one_src}}" controls></video>
+      </div>
+    </div> 
+
+    <ul class="video-list">
+      <li class="video-list-item" 
+          data-video-preview="{{section.settings.video_one_img | img_url: '1220x'}}"
+          data-play-title="{{section.settings.video_one_play_msg}}"
+          data-video-src="{{section.settings.video_one_src}}">
+
+        <span class="video-thumbnail active"> 
+          <img class="thumbail__play-btn" src="{{ 'play_btn.png' | file_img_url: '64x' }}"/>
+          <img class="thumbail__play-img" src="{{section.settings.video_one_img | img_url: '180x'}}" alt="{{section.settings.video_one_title}}" />
+        </span> 
+        <p class="video-title">{{section.settings.video_one_title}}</p> 
+      </li> 
+	  {% if section.settings.video_two_src %}
+        <!--<li class="video-list-item" 
+            data-video-preview="{{section.settings.video_two_img | img_url: '1220x'}}"
+            data-play-title="{{section.settings.video_two_play_msg}}"
+            data-video-src="{{section.settings.video_two_src}}">
+
+          <span class="video-thumbnail"> 
+            <img class="thumbail__play-btn" src="{{ 'play_btn.png' | file_img_url: '64x' }}"/>
+            <img class="thumbail__play-img" src="{{section.settings.video_two_img | img_url: '180x'}}" alt="{{section.settings.video_two_title}}" />
+          </span> 
+          <p class="video-title">{{section.settings.video_two_title}}</p> 
+        </li>--> 
+      {% endif %}
+    </ul> 
+  </aside>
+</div>  

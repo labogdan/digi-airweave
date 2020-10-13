@@ -1,0 +1,75 @@
+{% comment %}
+  /------------ Hyperdown Bundle Promo ------------/
+{% endcomment %}
+
+{% assign has_duvet = false %}
+{% assign has_mattress = false %}
+
+{% for item in cart.items %}
+
+  {% if item.product.handle == 'airweave-hyperdown-duvet' %}
+    {% assign has_duvet = true %}
+  {% endif %}
+
+  {% if item.product.handle == 'airweave-8-5-mattress' %}
+    {% assign has_mattress = true %}
+  {% endif %}
+
+  {% if item.product.handle == 'airweave-top-mattress' %}
+    {% assign has_mattress = true %}
+  {% endif %}
+
+  {% if item.product.handle == 'airweave-futon' %}
+    {% assign has_mattress = true %}
+  {% endif %}
+
+  {% if item.product.handle == 'airweave-mattress-advanced' %}
+    {% assign has_mattress = true %}
+  {% endif %}
+
+  {% if item.product.handle == 'airweave-top-mattress-luxe' %}
+    {% assign has_mattress = true %}
+  {% endif %}
+
+{% endfor %}
+
+{% comment %}
+  /------------ End Hyperdown Bundle Promo ------------/
+{% endcomment %}
+
+{% capture bundle-savings-message %}
+{% if cart.items.size >= 1 %}
+  <div class="inline-cart-savings-unactivated">
+    <span class="hyperdown-strong">SAVE $200</span>
+    <span class="inline-cart-savings--message">
+       withe code: BUNDLE200 <a href="https://www.airweave.com/products/airweave-hyperdown-duvet" class="inline-cart-savings--link">Hyperdown Duvet</a> with a <a href="https://www.airweave.com/collections/mattress-models" class="inline-cart-savings--link">Mattress </a>or <a href="https://www.airweave.com/collections/toppers" class="inline-cart-savings--link">Topper</a>
+    </span>
+  </div>
+{% endif %}
+
+{% endcapture %}
+
+{% capture bundle-savings-message-activated %}
+{% if cart.items.size >= 1 %}
+  <div class="inline-cart-savings">
+    <p class="inline-cart-savings--headline">
+      BUNDLE200
+    </p>
+    <p class="inline-cart-savings--message">
+      Use checkout code to activate savings!
+    </p>
+  </div>
+{% endif %}
+{% endcapture %}
+
+
+{% comment %} Change the message of the page  {% endcomment %}
+{% if settings.hyperdown-bundle-enable %}
+  {% if has_duvet == true and has_mattress == true %}
+    {{ bundle-savings-message-activated }}
+  {% endif %}
+
+  {% unless has_duvet == true and has_mattress == true %}
+    {{ bundle-savings-message }}
+  {% endunless %}
+{% endif %}

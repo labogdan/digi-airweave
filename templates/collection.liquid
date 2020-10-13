@@ -1,0 +1,112 @@
+<!-- /templates/collection.liquid -->
+
+<div class="collection-hero">
+  <h4>{{ collection.description }}</h4>
+</div>
+
+<div class="collection-extras-wrapper">
+  <div class="collection-extras">
+    {% for product in collection.products %}
+
+      {% if product.tags contains 'hidden' %}
+        {% assign hide_me = true %}
+      {% endif %}
+
+      {% unless hide_me %}
+
+      {% assign on_sale = false %}
+      {% if product.compare_at_price > product.price %}
+        {% assign on_sale = true %}
+      {% endif %}
+
+      <div class="collection-extras-block">
+        <div class="collection-extras-block-image">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'master' }}">
+          </a>
+        </div>
+        <div class="collection-extras-block-content">
+          <a href="{{ product.url }}">
+            <h3 class="collection-extras-block-title">{{ product.title }}</h3>
+            {% if product.price_varies == true %}
+              {% if on_sale %}
+                <h3 class="collection-extras-block-price">{{ product.price_min | money | remove: '.00' | remove: ' ' }} - {{ product.price_max | money | remove: '.00' | remove: ' ' }} </h3>
+                <h3 class="collection-extras-compare-at-price">{{ product.compare_at_price_min | money | remove: '.00' | remove: ' ' }} - {{ product.compare_at_price_max | money | remove: '.00' | remove: ' ' }} </h3>
+              {% else %}
+                <h3 class="collection-extras-block-price">{{ product.price_min | money | remove: '.00', | remove: ' ' }} - {{ product.price_max | money | remove: '.00', | remove: ' ' }}</h3>
+              {% endif %}
+            {% else %}
+              {% if on_sale %}
+                <h3 class="collection-extras-block-price">{{ product.price | money | remove: '.00', | remove: ' ' }}</h3>
+                <h3 class="collection-extras-compare-at-price">{{ product.compare_at_price | money | remove: '.00', | remove: ' ' }}</h3>
+              {% else %}
+                <h3 class="collection-extras-block-price">{{ product.price | money | remove: '.00', | remove: ' ' }}</h3>
+              {% endif %}
+            {% endif %}
+          </a>
+        </div>
+      </div>
+
+      {% endunless %}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="mattresses-try-it-out">
+  <h2>Try it out</h2>
+  <div class="mattresses-locations fade-in-trial">
+    <div class="mattresses-location boconcept-stores">
+      <div class="mattresses-location-img">
+        <a href="/pages/contact#locations" target="_blank">
+          <img src="{{ 'retailers-store.jpg' | asset_url }}" class="location-image-mobile">
+          <img src="{{ 'retailers-store.jpg' | asset_url }}" class="location-image-desktop">
+        </a>
+      </div>
+      <div class="mattresses-location-text">
+        <h5>Try airweave At Select Retailers in New York City</h5>
+        <a href="/pages/contact#locations" target="_blank">View Store Locations</a>
+      </div>
+    </div>
+  </div>
+  <div class="mattresses-trial-copy fade-in-trial">
+    <div class="mattresses-try-it-out-icon">
+      <img src="{{ 'moon-icon.svg' | asset_url }}">
+    </div>
+    <h3>100 Night Trial</h3>
+    <a rel="modal:open" href="#trial-details" >View Details</a>
+  </div>
+</div>
+
+{% include 'contact-footer' %}
+
+<script>
+$(document).ready(function() {
+  //Cache reference to window and animation items
+  var $animation_elements = $('.mattresses-product-section, .fade-in-trial, .mattresses-trial-copy');
+  var $window = $(window);
+  $window.on('scroll', check_if_in_view);
+  $window.on('scroll resize', check_if_in_view);
+  $window.trigger('scroll');
+
+  function check_if_in_view() {
+    var window_height = $window.height();
+    var window_top_position = $window.scrollTop();
+    var window_bottom_position = (window_top_position + window_height);
+
+    $.each($animation_elements, function() {
+      var $element = $(this);
+      var element_height = $element.outerHeight();
+      var element_top_position = $element.offset().top;
+      var element_bottom_position = (element_top_position + element_height);
+
+      //check to see if this current container is within viewport
+      if (element_top_position + 160 <= window_bottom_position) {
+        $element.addClass('in-view');
+      }
+      // else {
+      //   $element.removeClass('in-view');
+      // }
+    });
+  }
+});
+</script>

@@ -1,0 +1,117 @@
+<div class="related-products-wrapper">
+  <h2 class="related-products-header">You May Also Like</h2>
+  <div class="grid-container related-products-container more-featured-collection related-collection-slick">
+    {% assign related_counter = 0 %}
+	  {% for block in section.blocks %}
+      {% unless product.id == all_products[block.settings.product].id %}
+	    {% assign on_sale = false %}
+	    {% if all_products[block.settings.product].compare_at_price > all_products[block.settings.product].price %}
+	      {% assign on_sale = true %}
+	    {% endif %}
+	    {% assign featured_list = '' %}
+	    {% for block in section.blocks %}
+	      {% assign featured_list = featured_list | append: all_products[block.settings.featured_product].id | append: ',' %}
+	    {% endfor %}
+	    {% unless featured_list contains all_products[block.settings.product].id %}
+	      <div class="collection-extras-block">
+	        <div class="collection-extras-block-image">
+	          <a href="{{ all_products[block.settings.product].url }}">
+	            <img src="{{ all_products[block.settings.product].featured_image | img_url: 'master' }}">
+	          </a>
+	        </div>
+	        <div class="collection-extras-block-content text-center">
+				<a href="{{ all_products[block.settings.product].url }}">
+					<div class="vert-text">
+					    <span class="collection-extras-block-title">{{ all_products[block.settings.product].title }}</span>
+					</div>
+					{% if all_products[block.settings.product].price_varies == true %}
+					  {% if on_sale %}
+					    <h3 class="collection-extras-block-price {% if settings.highlight_price_enabled %}sale-red{% endif %}">{{ all_products[block.settings.product].price_min | money | remove: '.00' | remove: ' ' }} - {{ all_products[block.settings.product].price_max | money | remove: '.00' | remove: ' ' }} </h3>
+					    <h3 class="collection-extras-compare-at-price">{{ all_products[block.settings.product].compare_at_price_min | money | remove: '.00' | remove: ' ' }} - {{ all_products[block.settings.product].compare_at_price_max | money | remove: '.00' | remove: ' ' }} </h3>
+					  {% else %}
+					    <h3 class="collection-extras-block-price">{{ all_products[block.settings.product].price_min | money | remove: '.00' | remove: ' ' }} - {{ all_products[block.settings.product].price_max | money | remove: '.00' | remove: ' ' }}</h3>
+					  {% endif %}
+					{% else %}
+					  {% if on_sale %}
+					    <h3 class="collection-extras-block-price {% if settings.highlight_price_enabled %}sale-red{% endif %}">{{ all_products[block.settings.product].price | money | remove: '.00' | remove: ' ' }}</h3>
+					    <h3 class="collection-extras-compare-at-price">{{ all_products[block.settings.product].compare_at_price | money | remove: '.00' | remove: ' ' }}</h3>
+					  {% else %}
+					    <h3 class="collection-extras-block-price">{{ all_products[block.settings.product].price | money | remove: '.00' | remove: ' ' }}</h3>
+					  {% endif %}
+					{% endif %}
+					<div class="yotpo bottomLine"
+					  data-appkey="2L4JZXk1a0QKtmjoNOZmVVp735oAgqpG1fMEuvLJ"
+					  data-domain="{{shop.permanent_domain | escape }}"
+					  data-product-id="{{ all_products[block.settings.product].id }}"
+					  data-product-models="{{ all_products[block.settings.product].id }}"
+					  data-name="{{ all_products[block.settings.product].title | escape }}"
+					  data-url="{{ shop.url }}{{ all_products[block.settings.product].url }}"
+					  data-image-url="{{ all_products[block.settings.product].featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+					  data-description="{{ all_products[block.settings.product].description | escape }}"
+					  data-bread-crumbs="{% for tag in all_products[block.settings.product].tags %}{{ tag | escape }};{% endfor %}">
+					</div>
+				</a>
+				<div class="quick-add">
+					<form action="/cart/add" method="post" class="shopify-product-form" enctype="multipart/form-data">
+						{% assign has_presale_pricing = false %}
+						{% if all_products[block.settings.product].tags contains 'presale-pricing' %}
+						{% assign has_presale_pricing = true %}
+						{% endif %}
+				
+				
+						{% if all_products[block.settings.product].variants.size > 1 %}
+							<select id="productSelect" class="related-products-carousel" name="id" style="display: block">
+								{% for variant in all_products[block.settings.product].variants %}
+								{% if variant.available %}
+								<option {% if variant == all_products[block.settings.product].selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}</option>
+								{% else %}
+								<option disabled="disabled">
+								{{ variant.title }}
+								</option>
+								{% endif %}
+								{% endfor %}
+							</select>
+							  <button type="submit" name="add" class="quick-atc" data-cart-add="{{ all_products[block.settings.product].selected_or_first_available_variant.id }}" data-cart-quantity="1">
+							    <span>Add</span>
+							  </button>
+				
+				        {% else %}
+							  <button type="submit" name="add" class="quick-atc full" data-cart-add="{{ all_products[block.settings.product].selected_or_first_available_variant.id }}" data-cart-quantity="1">
+							    <span>Add to Cart</span>
+							  </button>
+				        {% endif %}
+				
+					</form>
+				</div>
+	        </div>
+	      </div>
+	        {% assign related_counter = related_counter | plus: 1 %}
+	    {% endunless %}
+      {% endunless %}
+      {% endfor %}
+  </div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Suggested products",
+    "max_blocks": 4,
+    "settings": [
+    ],
+    "blocks": [
+      {
+        "type": "product_block",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Choose a product to show"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

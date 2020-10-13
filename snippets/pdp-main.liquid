@@ -1,0 +1,298 @@
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+	{% assign on_sale = true %}
+{% endif %}
+<div itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+
+  <div class="product-main">
+    <div class="product-slider-wrapper">
+      <div class="slider-for">
+        {% for image in product.images %}
+	        {% unless image.alt contains "airfiber" or image.alt contains "inner-zoom" %}
+       			<img src="{{ image.src | img_url: 'master' }}">
+   			{% endunless %}
+        {% endfor %}
+      </div>
+      <div class="slider-nav">
+        {% for image in product.images %}
+   			{% unless image.alt contains "airfiber" or image.alt contains "inner-zoom" %}
+       			<img src="{{ image.src | img_url: 'master' }}">
+   			{% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="productInfo" class="product-info">
+      <div class="product-info-container">
+      	{% include 'yotpo-inline' %}
+        <h1 itemprop="name" class="product-title">
+          {{ product.title }}
+          {% if product.tags contains 'mattress-fit' %}
+          	<a class="inline-cart-link mattressfit" rel="modal:open" href="#mattress-fit"><span class="powered-by">Powered by</span>MattressFit</a>
+          {% endif %}
+          {% if product.tags contains 'new' %}
+          	<span class="new-tag__product">new!</span>
+          {% endif %}
+		  {% unless product.selected_or_first_available_variant.inventory_quantity < 1 and product.selected_or_first_available_variant.inventory_quantity > 5 %}
+          	<span class="new-tag__product new-tag__product--low-stock">low stock!</span>
+          {% endunless %}
+        </h1>
+
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+          <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+          <form action="/cart/add" method="post" class="shopify-product-form" enctype="multipart/form-data">
+            {% assign has_presale_pricing = false %}
+            {% if product.tags contains 'presale-pricing' %}
+            {% assign has_presale_pricing = true %}
+            {% endif %}
+
+            <select id="productSelect" name="id">
+              {% for variant in product.variants %}
+              {% if variant.available %}
+              {% comment %}
+              Note: if you use option_selection.js, your <select> tag will be overwritten, meaning what you have inside <option> will not reflect what you coded below.
+              {% endcomment %}
+              <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+              {% else %}
+              <option disabled="disabled">
+                {{ variant.title }} - {{ 'Sold Out' | t }}
+              </option>
+              {% endif %}
+              {% endfor %}
+              </select>
+
+              {% if product.variants.size > 1 %}
+              {% for option in product.options %}
+              {% include 'swatch' with option %}
+              {% endfor %}
+              {% endif %}
+
+              <button type="submit" name="add" class="pdp-add{% unless product.selected_or_first_available_variant.available %} hidden{% endunless %}" data-cart-add="{{ product.selected_or_first_available_variant.id }}" data-cart-quantity="1">
+                <span>Add to Cart</span>
+              </button>
+
+              <a class="klaviyo-bis-trigger{% if product.selected_or_first_available_variant.available %} hidden{% endif %}" href="#"><span>Notify Me When Available</span></a>
+
+              	<div class="price-container">
+		            {% if has_presale_pricing == true %}
+		            <div class="product-page-presale-pricing">
+		              <h3 class="product-price">
+		                <span id="productPrice" itemprop="price" content="{{ product.selected_or_first_available_variant.price | divided_by: 100.00 }}">{{ product.selected_or_first_available_variant.price | money | remove: '.00' | remove: ' ' }}</span>
+		              </h3>
+
+		              {% if product.compare_at_price > product.price %}
+		              <div class="product-compare-at-price">
+		                (<span id="productCompareAtPrice">{{ product.compare_at_price | money | remove: '.00' | remove: ' ' }}</span>
+		                <span>Regular Price</span>)
+		              </div>
+		              {% endif %}
+		            </div>
+		            {% else %}
+		            <h3 id="productPrice" itemprop="price" class="product-price {% if on_sale %}{% if settings.highlight_price_enabled %}sale-red{% endif %}{% endif %}" content="{{ product.selected_or_first_available_variant.price | divided_by: 100.00 }}">
+		              {{ product.selected_or_first_available_variant.price | money | remove: '.00' | remove: ' ' }}
+		            </h3>
+
+		              {% if product.compare_at_price > product.price %}
+		              <span id="productCompareAtPrice" class="product-compare-at-price">{{ product.compare_at_price | money | remove: '.00' | remove: ' ' }}</span>
+		              {% endif %}
+		            {% endif %}
+		        </div>
+                {% include 'klarna' %}
+				{% include 'upsells', product: product %}
+				{% include 'product-accordion' %}
+              </form>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+    {% if product.metafields.yotpo.reviews_count and product.metafields.yotpo.reviews_count != "0" %}
+    <div itemscope itemprop = "aggregateRating" itemtype="http://schema.org/AggregateRating">
+      <meta itemprop="ratingValue" content="{{ product.metafields.yotpo.reviews_average }}"/>
+      <meta itemprop="reviewCount" content="{{ product.metafields.yotpo.reviews_count }}"/>
+    </div>
+    {% endif %}
+  </div>
+
+  <script>
+    // RPS Side Cart
+    $(document).ready(function()
+    {
+      var slickInitialized = false;
+
+      var sideCart = window.sideCart || [];
+      $('button.pdp-add').on('click', function(e)
+      {
+        e.stopImmediatePropagation();
+        var form = $(this).closest('form');
+        var fields = {};
+        form.find('input, select').each(function() {
+          fields[$(this).prop('name')] = $(this).val();
+        });
+
+        sideCart.push('add-item', { id: fields.id, quantity: 1 });
+
+        if (window._upsellProducts && document.querySelector('[data-remodal-id="product-upsell"]'))
+        {
+
+          // Open modal
+          $('[data-remodal-id="product-upsell"]').remodal().open();
+
+          // Init Slick
+          if (!slickInitialized)
+          {
+            setTimeout(function()
+            {
+              $('[data-remodal-id="product-upsell"] .upsells').slick();
+              slickInitialized = true;
+            }, 125);
+          }
+
+
+          var upsellProducts = window._upsellProducts;
+          var selectedVariants = {};
+          for (var k in Object.keys(upsellProducts))
+          {
+            if (upsellProducts.hasOwnProperty(k))
+            {
+              var upsellProduct = upsellProducts[k];
+              selectedVariants[upsellProduct.id] = upsellProduct.variants[0];
+            }
+          }
+
+          var selectedOptions = {};
+          $('[data-remodal-id="product-upsell"] .upsell').each(function()
+          {
+            var uid = $(this).data('upsell-id');
+            selectedOptions[uid] = {};
+            $(this).find('input:checked').each(function()
+            {
+              selectedOptions[uid][$(this).prop('name').replace(/\d+$/, function(n){ return ++n }).replace('-', '')] = $(this).val();
+            })
+          });
+
+          $('[data-remodal-id="product-upsell"]').on('change', 'input', function(e)
+          {
+            var form = $(this).closest('form');
+            var uid = form.data('upsell-id');
+            
+            selectedOptions[uid][$(this).prop('name').replace(/\d+$/, function(n){ return ++n }).replace('-', '')] = $(this).val();
+
+            var selectedVariant = null;
+            variantLoop: for (var v in upsellProducts[uid].variants)
+            {
+              if (upsellProducts[uid].variants.hasOwnProperty(v))
+              {
+                var variant = upsellProducts[uid].variants[v];
+                for (var s in selectedOptions[uid])
+                {
+                  if (selectedOptions[uid].hasOwnProperty(s))
+                  {
+                    if (!variant.hasOwnProperty(s) || variant[s] != selectedOptions[uid][s])
+                    {
+                      continue variantLoop;
+                    }
+                  }
+                }
+
+                selectedVariant = variant;
+                break variantLoop;
+              }
+            }
+
+            
+            // Update things
+            form.find('.price').text('$' + (variant.price / 100).toFixed(2).replace(/\.00$/, ''));
+            form.find('klarna-placement').attr('data-purchase_amount', variant.price);
+            window.KlarnaOnsiteService = window.KlarnaOnsiteService || [];
+            window.KlarnaOnsiteService.push({ eventName: 'refresh-placements' });
+
+            form.find('[name="id"]').val(variant.id);
+
+          });
+
+        }
+        else
+        {
+          sideCart.push('open');
+        }
+
+        return false;
+      });
+      
+      
+      $(document).on('submit', '[data-remodal-id="product-upsell"] form', function(e)
+      {
+        e.preventDefault();
+
+
+        var fields = {
+          id: $(this).find('[name="id"]').val(),
+          quantity: 1
+        };
+
+        sideCart.push('add-item', fields);
+        $(this).closest('[data-remodal-id="product-upsell"]').remodal().close();
+        sideCart.push('open');
+      });
+
+      $(document).on('click', '[data-remodal-id="product-upsell"] [data-action="open-cart"]', function(e)
+      {
+        e.preventDefault();
+        $(this).closest('.remodal').remodal().close();
+        sideCart.push('open');
+      });
+
+      $(document).on('click', '[data-ajax-cart-delete]', function (e) {
+        e.preventDefault();
+        var lineID = $(this).parents('[data-line-item]').data('line-item');
+        Shopify.theme.jsAjaxCart.removeFromCart(lineID);
+
+        if (Shopify.theme.jsCart) {
+          Shopify.theme.jsCart.removeFromCart(lineID);
+        }
+
+        return false;
+      });
+      $(document).on('click', '[data-ajax-cart-close]', function (e) {
+        e.preventDefault();
+        Shopify.theme.jsAjaxCart.hideDrawer();
+        Shopify.theme.jsAjaxCart.hideMiniCart();
+        return false;
+      });
+    });
+  </script>
+  
+  <script>
+    $(function() {
+      var Accordion = function(el, multiple) {
+        this.el = el || {};
+        this.multiple = multiple || false;
+
+        // Variables privadas
+        var links = this.el.find('.link');
+        // Evento
+        links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+      }
+
+      Accordion.prototype.dropdown = function(e) {
+        var $el = e.data.el;
+        $this = $(this),
+          $next = $this.next();
+
+        $next.slideToggle();
+        $this.parent().toggleClass('open');
+
+        if (!e.data.multiple) {
+          $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+        };
+      }
+
+      var accordion = new Accordion($('#accordion'), false);
+    });
+  </script>

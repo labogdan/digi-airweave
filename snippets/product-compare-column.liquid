@@ -1,0 +1,164 @@
+<div class="compare-column">
+  	<div class="thumb-contain">
+		<a href="{{ all_products[block.settings.product].url }}">
+			<img src="{{ all_products[block.settings.product].featured_image | img_url: 'master' }}">
+			<h4 class="new-tag__product">{{ block.settings.product_award }}</h4>
+		</a>
+	</div>
+  	{% assign on_sale = false %}
+    {% if all_products[block.settings.product].compare_at_price > all_products[block.settings.product].price %}
+    {% assign on_sale = true %}
+    {% endif %}
+  
+	<div class="product-info-row">
+		<h3>{{ block.settings.product_name }}</h3>
+		{% if all_products[block.settings.product].price_varies == true %}
+          {% if on_sale %}
+            <h3 class="collection-extras-block-price {% if settings.highlight_price_enabled %}sale-red{% endif %}">{{ all_products[block.settings.product].price_min | money | remove: '.00' | remove: ' ' }} - {{ all_products[block.settings.product].price_max | money | remove: '.00' | remove: ' ' }} </h3>
+            <h3 class="collection-extras-compare-at-price">{{ all_products[block.settings.product].compare_at_price_min | money | remove: '.00' | remove: ' ' }} - {{ all_products[block.settings.product].compare_at_price_max | money | remove: '.00' | remove: ' ' }} </h3>
+          {% else %}
+            <h3 class="collection-extras-block-price">{{ all_products[block.settings.product].price_min | money | remove: '.00' | remove: ' ' }} - {{ all_products[block.settings.product].price_max | money | remove: '.00' | remove: ' ' }}</h3>
+          {% endif %}
+        {% else %}
+          {% if on_sale %}
+            <h3 class="collection-extras-block-price {% if settings.highlight_price_enabled %}sale-red{% endif %}">{{ all_products[block.settings.product].price | money | remove: '.00' | remove: ' ' }}</h3>
+            <h3 class="collection-extras-compare-at-price">{{ all_products[block.settings.product].compare_at_price | money | remove: '.00' | remove: ' ' }}</h3>
+          {% else %}
+            <h3 class="collection-extras-block-price">{{ all_products[block.settings.product].price | money | remove: '.00' | remove: ' ' }}</h3>
+          {% endif %}
+        {% endif %}
+
+        <div class="yotpo bottomLine"
+          data-appkey="2L4JZXk1a0QKtmjoNOZmVVp735oAgqpG1fMEuvLJ"
+          data-domain="{{shop.permanent_domain | escape }}"
+          data-product-id="{{ all_products[block.settings.product].id }}"
+          data-product-models="{{ all_products[block.settings.product].id }}"
+          data-name="{{ all_products[block.settings.product].title | escape }}"
+          data-url="{{ shop.url }}{{ all_products[block.settings.product].url }}"
+          data-image-url="{{ all_products[block.settings.product].featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+          data-description="{{ all_products[block.settings.product].description | escape }}"
+          data-bread-crumbs="{% for tag in all_products[block.settings.product].tags %}{{ tag | escape }};{% endfor %}">
+        </div>
+    </div>
+	
+    <div class="compare-box shop-now">
+      <a class="hp-trusted-by-link" href="{{ all_products[block.settings.product].url }}" style="text-align: center;
+    font-weight: bold;">
+        Shop Now
+      </a>
+    </div>
+	
+	{% if block.settings.product_description %}
+		<div class="compare-box description">
+			<h6>Description</h6>
+			<p>{{ block.settings.product_description }}</p>
+		</div>
+	{% endif %}
+	{% if block.settings.feel %}
+		<div class="compare-box feel">
+			<h6>Feel</h6>
+			<p>{{ block.settings.feel }}</p>
+		</div>
+	{% endif %}
+	{% if block.settings.great_for %}
+		<div class="compare-box great-for">
+			<h6>Great For:</h6>
+			<p>{{ block.settings.great_for }}</p>
+		</div>
+	{% endif %}
+	{% include 'pdp-icons-view' %}
+	{% if block.settings.components_content %}
+		<div class="compare-box components">
+			<h6>Components:</h6>
+			{% if block.settings.components_image %}
+				<img src="{{ block.settings.components_image | img_url: 'master' }}">
+			{% endif %}
+			<p>{{ block.settings.components_content }}</p>
+		</div>
+	{% endif %}
+	{% if block.settings.airfiber %}
+		<div class="compare-box airfiber">
+			<h6>airfiber&reg;:</h6>
+			{% if block.settings.airfiber %}
+				<img src="{{ block.settings.airfiber | img_url: 'master' }}">
+			{% endif %}
+		</div>
+	{% endif %}
+	{% if block.settings.thickness %}
+		<div class="compare-box thickness">
+			<h6>Thickness</h6>
+			<p>{{ block.settings.thickness }}</p>
+		</div>
+	{% endif %}
+	{% if block.settings.total_thickness %}
+		<div class="compare-box total-thickness">
+			<h6>Total Thickness:</h6>
+			<p>{{ block.settings.total_thickness }}</p>
+		</div>
+	{% endif %}
+	{% if block.settings.cleanliness %}
+		<div class="compare-box cleanliness">
+			<h6>Clean From The Inside & Out:</h6>
+			<p>{{ block.settings.cleanliness }}</p>
+		</div>
+	{% endif %}
+	{% if block.settings.sustainability %}
+		<div class="compare-box sustainability">
+			<h6>Sustainability:</h6>
+			<p>{{ block.settings.sustainability }}</p>
+		</div>
+	{% endif %}
+	{% if block.settings.special_features %}
+		<div class="compare-box special-features">
+			<h6>Special Features:</h6>
+			<p>{{ block.settings.special_features }}</p>
+		</div>
+	{% endif %}
+	{% if block.settings.satisfaction %}
+		<div class="compare-box satisfaction">
+			<h6>Your Satisfaction Is Our Priority:</h6>
+			<p>{{ block.settings.satisfaction }}</p>
+		</div>
+	{% endif %}
+  	<div class="compare-box shop-now">
+      <a class="hp-trusted-by-link" href="{{ all_products[block.settings.product].url }}" style="text-align: center;
+    font-weight: bold; margin-bottom: 0;width: 100%;">
+        Shop Now
+      </a>
+      <div class="quick-add">
+        <form action="/cart/add" method="post" class="shopify-product-form" enctype="multipart/form-data">
+          {% assign has_presale_pricing = false %}
+          {% if all_products[block.settings.product].tags contains 'presale-pricing' %}
+          {% assign has_presale_pricing = true %}
+          {% endif %}
+
+
+          {% if all_products[block.settings.product].variants.size > 1 %}
+          <select id="productSelect" class="related-products-carousel" name="id" style="display: block">
+            {% for variant in all_products[block.settings.product].variants %}
+            {% if variant.available %}
+            <option {% if variant == all_products[block.settings.product].selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}</option>
+            {% else %}
+            <option disabled="disabled">
+              {{ variant.title }}
+            </option>
+            {% endif %}
+            {% endfor %}
+          </select>
+          <button type="submit" name="add" class="quick-atc" data-cart-add="{{ all_products[block.settings.product].selected_or_first_available_variant.id }}" data-cart-quantity="1">
+            <span style="font-weight: bold">Add</span>
+          </button>
+
+          {% else %}
+          <button type="submit" name="add" class="quick-atc full" data-cart-add="{{ all_products[block.settings.product].selected_or_first_available_variant.id }}" data-cart-quantity="1">
+            <span style="font-weight: bold">Add to Cart</span>
+          </button>
+          {% endif %}
+
+        </form>
+      </div>
+    </div>
+  
+    
+  
+  </div>

@@ -1,0 +1,54 @@
+{% for block in section.blocks %}
+  {% if product.handle == block.settings.product %}
+    {{ block.settings.details }}
+    {% assign product_found = true %}
+  {% endif %}
+{% endfor %}
+
+{% unless product_found == true %}
+  {{ section.settings.default_details }}
+{% endunless %}
+
+{% schema %}
+  {
+    "name": "Details and Specs",
+    "class": "product-section",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "default_details",
+        "label": "Default details and specs"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "details_block",
+        "name": "Product Details",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "textarea",
+            "id": "details",
+            "label": "Details and specs",
+            "default": "MATERIALS"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Details and Specs",
+        "category": "Product Page",
+        "blocks": [
+          {
+            "type": "details_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

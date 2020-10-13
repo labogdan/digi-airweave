@@ -1,0 +1,97 @@
+<div class="hp-featured-reviews-wrapper">
+  <div class="hp-featured-sponsorships-wrapper">
+    {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'yotpo_block' %}
+        <div class="hp-featured-yotpo-reviews">
+          <div class="yotpo yotpo-reviews-carousel" 
+          data-mode="manual" 
+          data-type="both" 
+          data-review-ids="35521440,35231741,35467482,35442670,35467508,35440020" 
+          data-show-navigation="1" 
+          data-header-customisation-alignment="left" 
+          data-background-color="transparent">&nbsp;</div>
+        </div>
+      {% when 'review_block' %}
+        <div class="hp-featured-review-block">
+          <div class="hp-review-rating">
+            <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+            <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+            <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+            <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+            <img src="{{ 'lg-star.png' | asset_img_url: '12x' }}">
+          </div>
+          <p class="hp-review-content">{{ block.settings.content }}</p>
+          <p class="hp-review-author">{{ block.settings.author }}</p>
+          <p class="hp-review-verified"><em>{{ block.settings.sub }}</em></p>
+        </div>
+    {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Featured Reviews",
+    "class": "index-section",
+    "settings": [
+
+    ],
+    "blocks": [
+      {
+        "type": "review_block",
+        "name": "Review",
+        "settings": [
+          {
+            "type": "text",
+            "id": "content",
+            "label": "Review content",
+            "default": "I was suffering from back and shoulder pain when I wake up. After I started using the airweave top mattress, it's just gone!!"
+          },
+          {
+            "type": "text",
+            "id": "author",
+            "label": "Review author",
+            "default": "Holden"
+          },
+          {
+            "type": "text",
+            "id": "sub",
+            "label": "Author subtext",
+            "default": "Verified Reviewer"
+          }
+        ]
+      },
+      {
+        "type": "yotpo_block",
+        "name": "Yotpo Carousel",
+        "settings": [
+          {
+            "type": "text",
+            "id": "yotpo_reviews",
+            "label": "Yotpo review IDs, comma seperated",
+            "default": "35521440,35231741,35467482,35442670,35467508,35440020"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Reviews",
+        "category": "Homepage",
+        "blocks": [
+          {
+            "type": "review_block"
+          },
+          {
+            "type": "review_block"
+          },
+          {
+            "type": "review_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

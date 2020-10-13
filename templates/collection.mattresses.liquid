@@ -1,0 +1,78 @@
+<!-- /templates/collection.liquid -->
+
+<div class="mattresses-experience">
+	{% section 'collection-header' %}
+</div>
+
+{% section 'collection-featured' %}
+
+<div class="mattresses-try-it-out">
+  <h2>Try it out</h2>
+  <div class="mattresses-locations fade-in-trial">
+    <div class="mattresses-location boconcept-stores">
+      <div class="mattresses-location-img">
+        <a href="/pages/contact#locations" target="_blank">
+          <img src="{{ 'retailers-store.jpg' | asset_url }}" class="location-image-mobile">
+          <img src="{{ 'retailers-store.jpg' | asset_url }}" class="location-image-desktop">
+        </a>
+      </div>
+      <div class="mattresses-location-text">
+        <h5>Try airweave At Select Retailers in New York City</h5>
+        <a href="/pages/contact#locations" target="_blank">View Store Locations</a>
+      </div>
+    </div>
+  </div>
+  <div class="mattresses-trial-copy fade-in-trial">
+    <div class="mattresses-try-it-out-icon">
+      <img src="{{ 'moon-icon.svg' | asset_url }}">
+    </div>
+    <h3>100 Night Trial</h3>
+    <a rel="modal:open" href="#trial-details" >View Details</a>
+  </div>
+</div>
+
+{% include 'contact-footer' %}
+
+<script>
+$(document).ready(function() {
+  $('.experience-learn-more').click(function(e) {
+    $('.mattresses-experience-mobile').toggleClass('experience-copy-mobile-expanded');
+    $('.experience-copy-mobile').toggleClass('active');
+  });
+
+  // $('.mattresses-location').hover(function(e) {
+  //   $(this).toggleClass('zoom-in');
+  //   $('.mattresses-location').not(this).each(function(){
+  //        $(this).toggleClass('zoom-out');
+  //    });
+  // })
+
+  //Cache reference to window and animation items
+  var $animation_elements = $('.mattresses-product-section, .fade-in-trial, .mattresses-trial-copy');
+  var $window = $(window);
+  $window.on('scroll', check_if_in_view);
+  $window.on('scroll resize', check_if_in_view);
+  $window.trigger('scroll');
+
+  function check_if_in_view() {
+    var window_height = $window.height();
+    var window_top_position = $window.scrollTop();
+    var window_bottom_position = (window_top_position + window_height);
+
+    $.each($animation_elements, function() {
+      var $element = $(this);
+      var element_height = $element.outerHeight();
+      var element_top_position = $element.offset().top;
+      var element_bottom_position = (element_top_position + element_height);
+
+      //check to see if this current container is within viewport
+      if (element_top_position + 160 <= window_bottom_position) {
+        $element.addClass('in-view');
+      }
+      // else {
+      //   $element.removeClass('in-view');
+      // }
+    });
+  }
+});
+</script>

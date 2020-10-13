@@ -1,0 +1,11 @@
+{% assign recommended_products = '' %}
+{% for tag in product.tags %}
+  {% if tag contains 'recommended' %}
+    {% assign new_tag = tag | split: '::' %}
+    {% assign recommended_products = recommended_products | append: new_tag[1] | append: ';' %}
+  {% endif %}
+{% endfor %}
+{% assign recommended_products = recommended_products | remove_last: ';' | split: ';' %}
+{% if recommended_products.size > 0 %}
+  {% include 'related-products-tagged' %}
+{% endif %}

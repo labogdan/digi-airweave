@@ -1,0 +1,419 @@
+{% if section.settings.image_position == 'inline' %}
+	<div class="hero-banner">
+		<div class="content-contain">
+			<div class="content">
+				<div class="align-content {% if section.settings.align_header == 'left' %}left{% elsif section.settings.align_header == 'center' %}center{% elsif section.settings.align_header == 'right' %}right{%endif%}">
+					<h5 class="page-preheading">{{ section.settings.preheading }}</h5>
+					<h2 class="page-heading">{{ section.settings.heading }}</h2>
+					<p class="page-preheading">{{ section.settings.subheading }}</p>
+				</div>
+				<div class="align-image {% if section.settings.align_header == 'left' %}left{% elsif section.settings.align_header == 'center' %}center{% elsif section.settings.align_header == 'right' %}right{%endif%}">
+					<img src="{{ section.settings.hero_image | img_url: '800x' }}"/>
+				</div>
+			</div>
+		</div>
+	</div>
+{%endif%}  
+
+{% if section.settings.image_position == 'background' %}
+	<div class="hero-banner background-img" style="background: url('{{ section.settings.hero_image | img_url: '800x' }}')">
+		<div class="content-contain">
+			<div class="content">
+				<div class="align-content {% if section.settings.align_header == 'left' %}left{% elsif section.settings.align_header == 'center' %}center{% elsif section.settings.align_header == 'right' %}right{%endif%}">
+					<h5 class="page-preheading">{{ section.settings.preheading }}</h5>
+					<h2 class="page-heading">{{ section.settings.heading }}</h2>
+					<p class="page-preheading">{{ section.settings.subheading }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{%endif%}  
+  
+  
+<div class="basic-content-wrapper">
+	<div class="tabbed-content">
+		<div class="tabs">
+		<label class="openTab" data-type="Mattress">
+		<input type="radio" name="tab">
+		<div>Mattress</div>
+		</label>
+		<label class="openTab" data-type="Toppers">
+		<input type="radio" name="tab">
+		<div>Toppers</div>
+		</label>
+	</div>
+	
+	<div id="Mattress" class="mattress-group tabContent">
+		<div class="compare-slider compare-s-hidden">
+			{% for block in section.blocks %}
+				{% if block.type == 'mattress' %}
+					{% include 'product-compare-column' %}
+  				{% endif %} 
+			{% endfor %}
+		</div>
+	</div>
+
+
+	
+	<div id="Toppers" class="mattress-topper-group tabContent">
+		<div class="compare-slider compare-s-hidden">
+			{% for block in section.blocks %}
+				{% if block.type == 'mattress-topper' %}
+				  {% include 'product-compare-column' %}
+				{% endif %} 
+			{% endfor %}
+		</div>
+	</div>
+	<div id="Pillows" class="pillow-group tabContent">
+		<div class="compare-slider compare-s-hidden">
+			{% for block in section.blocks %}
+				{% if block.type == 'pillow' %}
+				  {% include 'product-compare-column' %}
+				{% endif %} 
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    
+    $("body").on("click", ".openTab", function(e){
+      $(".tabContent").hide();
+      $(".tabContent#"+$(this).data("type")).show();
+      window.location.hash = $(this).data("type");
+      initSlick();
+    })
+	 
+    $('.compare-s-hidden').removeClass('compare-s-hidden').addClass('compare-s-visible');
+  
+    
+    if(window.location.hash) {
+      $(".tabContent").hide();
+      $(".tabContent"+window.location.hash).show();
+      initSlick();
+    }else{
+      $(".tabContent").first().show();
+      initSlick();
+    }
+    
+  });
+  
+  function initSlick(){
+    
+        if ($('.compare-slider').hasClass('slick-initialized')) {
+              $('.compare-slider').slick('destroy');
+        }
+
+        $('.compare-slider').slick({
+              autoplay: false,
+              autoplaySpeed: 3000,
+              dots: false,
+              arrows: true,
+              slidesToShow: 4,
+              slidesToScroll: 1,
+              responsive: [
+                {
+                  breakpoint: 1140,
+                  settings: {
+                    slidesToShow: 3,
+                    arrows: true,
+                    dots: false,
+                  }
+                },
+                {
+                  breakpoint: 940,
+                  settings: {
+                    slidesToShow: 2,
+                    arrows: true,
+                    dots: false,
+                  }
+                },
+                {
+                  breakpoint: 767,
+                  settings: {
+                    slidesToShow: 1,
+                    arrows: true,
+                    dots: true,
+                  }
+                }
+              ]
+	  });
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "Comparison Chart",
+    "class": "comparison-chart",
+    "settings": [
+      {
+		"type": "select",
+		"id": "image_position",
+		"label": "Image Position",
+		"options": [
+		 {
+		   "value": "background",
+		   "label": "Background"
+		 },
+		 {
+		   "value": "inline",
+		   "label": "Inline"
+		 }
+		],
+		"default":   "background"
+	  },
+      {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Hero Image"
+      },
+      {
+        "type": "text",
+        "id": "preheading",
+        "label": "Preheading",
+        "default": "The Perfect's Night Sleep"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Comparison Chart"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      },
+	  {
+		   "type":      "radio",
+		   "id":        "align_header",
+		   "label":     "Align Header",
+		   "options": [
+		     { "value": "left", "label": "Left" },
+		     { "value": "center", "label": "Center" },
+		     { "value": "right", "label": "Right" }
+		   ],
+		   "default":   "left",
+		   "info":      "Align Content in Header"
+	  }
+    ],
+    "blocks": [
+      {
+        "type": "mattress",
+        "name": "Mattress",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "product_name",
+            "label": "Product Name"
+          },
+          {
+            "type": "text",
+            "id": "product_award",
+            "label": "Product Award"
+          },
+          {
+            "type": "textarea",
+            "id": "product_description",
+            "label": "Product Description"
+          },
+          {
+            "type": "textarea",
+            "id": "feel",
+            "label": "Feel"
+          },
+          {
+            "type": "html",
+            "id": "great_for",
+            "label": "Great For:"
+          },
+          {
+            "type": "image_picker",
+            "id": "components_image",
+            "label": "Components Image"
+          },
+          {
+            "type": "html",
+            "id": "components_content",
+            "label": "Components Content"
+          },
+           {
+            "type": "image_picker",
+            "id": "airfiber",
+            "label": "Airfiber"
+          },
+          {
+            "type": "text",
+            "id": "thickness",
+            "label": "Thickness"
+          },
+          {
+            "type": "text",
+            "id": "total_thickness",
+            "label": "Total Mattress Thickness"
+          },
+          {
+            "type": "textarea",
+            "id": "cleanliness",
+            "label": "Cleanliness"
+          },
+          {
+            "type": "textarea",
+            "id": "sustainability",
+            "label": "Sustainability"
+          },
+          {
+            "type": "textarea",
+            "id": "special_features",
+            "label": "Special Features"
+          },
+          {
+            "type": "textarea",
+            "id": "satisfaction",
+            "label": "Satisfaction Information"
+          }
+        ]
+      },
+      {
+        "type": "mattress-topper",
+        "name": "Mattress Topper",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "product_name",
+            "label": "Product Name"
+          },
+          {
+            "type": "text",
+            "id": "product_award",
+            "label": "Product Award"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Diagram Image"
+          },
+          {
+            "type": "textarea",
+            "id": "product_description",
+            "label": "Product Description"
+          },
+          {
+            "type": "textarea",
+            "id": "feel",
+            "label": "Feel"
+          },
+          {
+            "type": "html",
+            "id": "great_for",
+            "label": "Great For:"
+          },
+          {
+            "type": "text",
+            "id": "thickness",
+            "label": "Thickness"
+          },
+          {
+            "type": "text",
+            "id": "total_thickness",
+            "label": "Total Mattress Thickness"
+          },
+          {
+            "type": "textarea",
+            "id": "sustainability",
+            "label": "Sustainability"
+          },
+          {
+            "type": "textarea",
+            "id": "special_features",
+            "label": "Special Features"
+          },
+          {
+            "type": "textarea",
+            "id": "satisfaction",
+            "label": "Satisfaction Information"
+          }
+        ]
+      },
+      {
+        "type": "pillow",
+        "name": "Pillow",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "product_name",
+            "label": "Product Name"
+          },
+          {
+            "type": "text",
+            "id": "product_award",
+            "label": "Product Award"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Diagram Image"
+          },
+          {
+            "type": "textarea",
+            "id": "product_description",
+            "label": "Product Description"
+          },
+          {
+            "type": "textarea",
+            "id": "feel",
+            "label": "Feel"
+          },
+          {
+            "type": "html",
+            "id": "great_for",
+            "label": "Great For:"
+          },
+          {
+            "type": "text",
+            "id": "thickness",
+            "label": "Thickness"
+          },
+          {
+            "type": "text",
+            "id": "total_thickness",
+            "label": "Total Mattress Thickness"
+          },
+          {
+            "type": "textarea",
+            "id": "sustainability",
+            "label": "Sustainability"
+          },
+          {
+            "type": "textarea",
+            "id": "special_features",
+            "label": "Special Features"
+          },
+          {
+            "type": "textarea",
+            "id": "satisfaction",
+            "label": "Satisfaction Information"
+          }
+        ]
+      }
+    ],
+    "presets": []
+  }
+{% endschema %}

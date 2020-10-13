@@ -1,0 +1,50 @@
+<section class="page-hero">
+	<div class="container">
+		<div class="hero-content">
+			<h4>{{ section.settings.pre_heading }}</h4> 
+			<h1>{{ section.settings.heading }}</h1>
+			<p>{{ section.settings.sub_heading }}</p>
+		</div>
+	</div>
+</section>
+{% for block in section.blocks %}
+	{% case block.type %}
+	  {% when 'mattress' %}
+	   
+	  {% when 'mattress-topper' %}
+	    
+	  {% when 'pillow' %}
+	{% endcase %}
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Comparison Chart",
+    "settings": [
+		{
+			"id": "pre_heading",
+			"type": "text",
+			"label": "Preheading",
+			"default": "The Perfect Night's Sleep"
+		},
+		{
+			"id": "heading",
+			"type": "text",
+			"label": "Heading",
+			"default": "Product Comparison"
+		},
+		{
+			"id": "sub_heading",
+			"type": "text",
+			"label": "Subeading",
+			"default": "Praesent elementum lorem aliquam purus placerat, et consequat lectus dapibus. Fusce tempus imperdiet laoreet. Aliquam et pretium odio. "
+		}
+    ],
+    "blocks": [
+	    {
+			"type": "product",
+			"name": "Feature product"
+		}
+    ]
+  }
+{% endschema %}

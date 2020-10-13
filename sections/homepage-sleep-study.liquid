@@ -1,0 +1,64 @@
+<section class="sleep-study"
+  {% if section.settings.background_image != blank %}
+    style="background-image:url({{ section.settings.background_image | img_url: '1600x' }});"
+  {% endif %}
+  >
+
+  {% if section.settings.logo != blank %}
+    <img class="sleep-study__logo lazyload" data-src="{{ section.settings.logo | img_url: '1200x' }}" alt="{{ section.settings.logo.alt }}">
+  {% endif %}
+  
+  <h4 class="sleep-study__title">{{ section.settings.heading }}</h4>
+
+  <p class="sleep-study__copy">{{ section.settings.paragraph }}</p>
+
+  <a class="sleep-study__link" href="{{ section.settings.button_url }}">{{ section.settings.button_title }}</a>
+
+</section>
+
+{% schema %}
+  {
+    "name": "Sleep Study",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "textarea",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Airweave takes a more scientific approach to our products impact on sleep than any other mattress brand."
+      },
+      {
+        "type": "html",
+        "id": "paragraph",
+        "label": "Paragraph text",
+        "default": "Airweave was recently published in a peer-reviewed scientific journal, the Public Library of Science (PLOS) in an article on the first study of how bedding affects sleep quality.<br><br>According to <strong>Dr. Seiji Nishino, MD, PhD,</strong> from Stanford University, <i>\“…sleeping with a high rebound mattress topper facilitates core body temperature drop and deep sleep at the beginning of nocturnal sleep, which is important for the restoration of the body.  Surprisingly, these beneficial effects were caused by the addition of only a thin 1 inch topper, suggesting the possibility to improve sleep by refining bedding and other factors of the bedroom environment.\"</i>"
+      },
+      {
+        "type": "text",
+        "id": "button_title",
+        "label": "Button text",
+        "default": "Shop All Toppers"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button url"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background image (full size)"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Sleep Study",
+        "category": "Homepage"
+      }
+    ]
+  }
+{% endschema %}

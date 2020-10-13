@@ -1,0 +1,67 @@
+<div class="hp-blogfeed-wrapper">
+  <div class="hp-blogfeed">
+    {% for article in blogs.news.articles limit: 3 %}
+      <div class="hp-article-block">
+        <p class="hp-article-block-tags">
+          {% for tag in article.tags %}
+          {% unless tag.handle contains 'featured' %}
+            <span>{{ tag }}</span>
+          {% endunless %}
+          {% endfor %}
+        </p>
+        <a href="{{ article.url }}"><h2 class="hp-article-block-title">{{ article.title }}</h2></a>
+        <a class="hp-article-more" href="{{ article.url }}">Read More</a>
+      </div>
+    {% endfor %}
+  </div>
+  
+  <a class="hp-blogfeed-more" href="/blogs/news">view all news</a>
+</div>
+
+{% javascript %}
+  $(document).ready(function(){
+    $('.hp-blogfeed').slick({
+      centerMode: false,
+      slidesToShow: 3,
+      arrows: false,
+      dots: false,
+      responsive: [
+        {
+          breakpoint: 767,
+          settings: {
+            centerMode: false,
+            dots: false,
+            arrows: false,
+            slidesToShow: 2
+          }
+        },
+        {
+          breakpoint: 479,
+          settings: {
+            dots: false,
+            arrows: false,
+            centerMode: true,
+            centerPadding: '27px',
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Blogfeed",
+    "class": "index-section",
+    "settings": [
+      
+    ],
+    "presets": [
+      {
+        "name": "Blogfeed",
+        "category": "Homepage"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,192 @@
+<style>
+  h6.accessories-title {
+    font-size: 16px;
+    letter-spacing: inherit;
+    font-weight: 600;
+    font-style: italic;
+    font-family: Roboto, sans-serif;
+  }
+
+  .upsell-item {
+    position: relative;
+    border: 1px solid #EFEFEF;
+    display: flex;
+    margin-bottom: 4px;
+    border-left: none;
+    border-right: none;
+    padding: 15px 0;
+    cursor: pointer;
+  }
+
+  .upsell-item input {
+    position: absolute;
+    right: 0;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    top: 50%;
+    margin: 0;
+  }
+
+  .upsell-item .upsell-img-contain {
+    max-width: 100px;
+  }
+
+  .upsell-item img {
+    width: 100%;
+    vertical-align: middle;
+  }
+
+  .upsell-content-contain {
+    position: relative;
+    width: 100%;
+    padding-left: 10px;
+  }
+
+  .upsell-item span {
+    padding-bottom: 5px;
+    text-transform: initial;
+  }
+
+  .upsell-item span.money {
+    width: auto;
+    text-align: right;
+    position: absolute;
+    right: 40px;
+  }
+
+  .upsell-frame {
+    position: relative;
+  }
+
+  .upsell-frame input[type="checkbox"] .upsell-item:after {
+    content: url('../assets/unchecked.svg');
+  }
+
+  .upsell-item {
+    border: 2px solid #dfe2e4;
+    border-radius: 3px;
+    background: white;
+  }
+
+  .upsell-frame.added .upsell-item {
+    border: 2px solid #607EB8;
+  }
+
+/*   .upsell-frame {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    transform: none;
+    bottom: 0;
+    top: auto;
+  } */
+
+  .upsell-frame::after {
+    content: '\0000a0';
+    background-image: url('{{ 'unchecked.svg' | asset_url }}');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    font-size: 12px;
+    color: #577FBE;
+    visibility: visible;
+    position: absolute;
+    right: 0;
+    padding-right: 40px;
+    padding-bottom: 8px;
+    bottom: 0;
+    font-family: 'Montserrat';
+    font-weight: 600;
+  }
+      
+  .upsell-frame.added::after {
+    content: 'Added' !important;
+    background-image: url('{{ 'checked.svg' | asset_url }}');
+  }
+
+  .upsell-item.upsell-frame:hover {
+    cursor: pointer;
+  }
+
+  .upsell-content-contain h4 {
+    margin-bottom: 0;
+  }
+
+  .upsell-content-contain p {
+    font-family: 'Montserrat';
+    font-size: 14px;
+    border-top: 1px solid #E0E0E0;
+    padding-top: 5px;
+    margin-right: 10px;
+  }
+
+  .upsell-item select {
+    font-family: 'Montserrat';
+    font-size: 14px;
+    font-weight: 500;
+    height: 25px;
+    width: 150px;
+    margin-right: 10px;
+    background: transparent;
+    font-weight: 700;
+    float: right;
+    color: #333;
+    margin-top: -3px;
+  }
+
+  @media only screen and (max-width: 1420px) {
+    .upsell-content-contain span {
+      max-width: 50%;
+    }
+
+    .upsell-content-contain select {
+      max-width: calc(50% - 10px);
+    }
+  }
+</style>
+
+
+{% assign upsellCollection = nil %}
+{% assign tags = product.tags | join: "||" %}
+{% if tags contains 'upsell:' %}
+	{% for tag in product.tags %}
+    	{% if tag contains 'upsell:' %}
+          {% assign split = tag | split: ':' %}
+          {% assign upsellCollection = collections[split[1]] %}
+          {% break %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% if upsellCollection %}
+	{% for product in upsellCollection.products %}
+		<div class="upsell-frame" style="display: none" data-add-upsell>
+			<div class="upsell-item">
+	       	  <div class="upsell-img-contain">
+	             <img src="{{ product.featured_image | img_url: 'small' }}" style="display: inline-block;" />
+	          </div>
+	          <div class="upsell-content-contain">
+	            <span style="display: inline-block">{{ product.title }}</span>
+              {% if product.variants.size > 1 %}
+                <select name="upsell-variant-id[]" class="upsell-variant-selector">
+                  {% for v in product.variants %}
+                    {% if v.available %}
+                        <option value="{{ v.id }}">{{ v.title }} {{ v.price | money_without_trailing_zeros }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              {% else %}
+                      <h4>{{ product.price  | money_without_trailing_zeros }}</h4>
+              {% endif %}
+			 	      <p>{{ product.metafields.product.upsell-promo }}</p>
+	          </div>
+
+            {% unless product.variants.size > 1 %}
+              <input type="hidden" name="upsell-variant-id[]" value="{{ product.first_available_variant.id }}"/>
+            {% endunless %}
+
+              
+<!--             <input type="checkbox" id="upsell-check-{{ product.id }}" name="upsell[]" class="upsell-variant" value="{{ product.first_available_variant.id }}" />  -->
+			</div>
+		</div>
+	{% endfor %}
+{% endif %}

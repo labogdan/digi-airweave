@@ -1,0 +1,300 @@
+{% include 'pdp-main' %}
+{% section 'pdp-futon-features' %}
+{% section 'pdp-features' %}
+
+{% include 'pdp-firmness-scale' %}
+{% section 'inner-zoom' %}
+{% include 'pdp-reviews' %}
+
+{% include 'pdp-faq' %}
+
+{% include 'related-products-group' %}
+
+{% include 'pdp-try-it-out' %}
+
+{% include 'contact-footer' %}
+
+{% if product.metafields.upsell.handle %}
+    <script>window._upsellProducts = {};</script>
+
+    {% assign handles = product.metafields.upsell.handle | split: ',' %}
+    <div class="remodal" data-remodal-id="product-upsell" data-remodal-options="hashTracking: false">
+        <button data-remodal-action="close" class="remodal-close"></button>
+        {% include 'upsell-modal', handles: handles %}
+    </div>
+
+{% endif %}
+
+<style>
+
+    .remodal
+    {
+        max-width: 900px;
+    }
+	.modal-content {
+		text-align: left;
+	}
+	.modal-content klarna-placement {
+	    display: inline-block !important;
+	    line-height: 1;
+		font-size: 13px;
+	}
+
+    .modal-top h3
+    {
+        font-size: 23px;
+        font-weight: 300 !important;
+    }
+
+    .modal-top h1
+    {
+        font-size: 28px;
+    }
+    .modal-top p {
+	    max-width: 550px;
+	    margin: 0 auto;
+        padding-top: 5px;
+	}
+	.modal-top klarna-placement-style-cta {
+	    color: #537DC2;
+	    font-weight: 400;
+	    font-size: 12px;
+	}
+    .modal-content
+    {
+        display: flex;
+        padding-top: 30px;
+    }
+
+    .modal-content > .image,
+    .modal-content > form
+    {
+        flex: 1;
+        width: 50%;
+    }
+
+    .modal-content form .price
+    {
+        display: inline-block;
+		font-size: 36px;
+		font-weight: 100 !important;
+    }
+
+
+    .modal-content klarna-placement klarna-placement-style-logo
+    {
+        height: 12px;
+        width: 55px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        margin: 0 5px;
+        float: left;
+    }
+    .modal-content img {
+	    padding: 20px;
+    }
+    .modal-content .swatch_options {
+	    margin-bottom: 0;
+	}
+
+    .modal-content .swatch_options
+    {
+        display: block;
+        padding: 15px 0;
+    }
+    
+    .modal-content form button
+    {
+        border-radius: 50px;
+        padding: 15px 30px;
+        text-align: center;
+        display: block;
+        font-size: 14px;
+        text-transform: uppercase;
+        width: 100%;
+        margin-bottom: 15px;
+        font-weight: 800;
+    }
+
+	.modal-content form button[type="submit"] {
+	    color: #fff;
+	    background-color: #FF5E45;
+	    border-color: rgba(0,0,0,0);
+	    text-transform: uppercase;
+	    height: 55px !important;
+	    width: 100% !important;
+	    max-width: 466px;
+	    border-radius: 0;
+	    font-family: 'Gotham', serif;
+	    font-weight: 600;
+	    font-size: 1em;
+	}
+    .modal-content form button[type="button"]
+    {
+        background: #FFFFFF;
+        border: 1px solid #222222;
+        color: #222222;
+		border-radius: 0;
+		font-family: 'Gotham', serif;
+		font-weight: 500;
+    }
+    
+    .modal-content .swatch label {
+	    line-height: 34px;
+        height: 34px;
+    }
+    
+    @media only screen and (max-width: 640px) {
+	    .modal-content {
+		    display: block;
+	    }
+	    .modal-content .image {
+		    width: 100% !important;
+		    display: block;
+		    padding: 0;
+		}
+		.modal-content form {
+		    display: block;
+		    width: 100% !important;
+		}
+    }
+</style>
+
+
+
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+<script>
+$(document).ready(function() {
+  var selectCallback = function(variant, selector) {
+    document.getElementsByTagName("klarna-placement")[0].setAttribute("data-purchase_amount", variant.price);
+    window.KlarnaOnsiteService = window.KlarnaOnsiteService || [];
+    window.KlarnaOnsiteService.push({ eventName: 'refresh-placements' });
+
+    $('#productPrice, .shopify-product-form .product-price').html(Shopify.formatMoney(variant.price, "{{ shop.money }}").replace('.00', ''));
+    $('.pdp-breadcrumb select').val(variant.option1);
+
+    $('.new-tag__product--low-stock').toggle(variant.inventory_quantity > 0 && variant.inventory_quantity <= 10);
+
+    if (variant.compare_at_price > variant.price ) {
+      $('#productCompareAtPrice, .pdp-breadcrumb .product-compare-at-price').html(Shopify.formatMoney(variant.compare_at_price, "{{ shop.money }}").replace('.00', ''));
+    } else {
+      $('#productCompareAtPrice, .pdp-breadcrumb .product-compare-at-price').html('');
+    }
+
+    $('.affirm-as-low-as').attr('data-amount', variant.price);
+    if (typeof affirm == 'object') { affirm.ui.refresh(); }
+
+    if (variant) {
+      $('.pdp-breadcrumb-add').attr('data-cart-add', variant.id);
+      $('.pdp-add').attr('data-cart-add', variant.id);
+    } else {
+
+    }
+
+    if (variant && variant.available) {
+      $('.pdp-breadcrumb-add').removeAttr('disabled');
+      $('.pdp-add').removeAttr('disabled').removeClass('hidden');
+
+      setTimeout(function() {
+        $('.klaviyo-bis-trigger').addClass('hidden').hide();
+      }, 0);
+      // $('.pdp-breadcrumb-add').html('<span>Add To Cart</span>');
+      // $('.pdp-add').html('<span>Add To Cart</span>');
+    }
+
+    if (variant && !variant.available) {
+      $('.pdp-breadcrumb-add').attr('disabled', 'disabled');
+      $('.pdp-add').attr('disabled', 'disabled').addClass('hidden');
+
+      setTimeout(function() {
+        $('.klaviyo-bis-trigger').removeClass('hidden').css('display', 'inline-flex');
+      }, 0);
+      // $('.pdp-breadcrumb-add').html('<span>Sold Out</span>');
+      // $('.pdp-add').html('<span>Sold Out</span>');
+    }
+
+    if (variant.title.indexOf("Portable") > -1) {
+		ritzProductSlider.slick('slickUnfilter');
+		ritzProductSlider.slick('slickFilter', '.slide-portable');
+		ritzProductSlider.slick('slickGoTo', 0);
+    }
+    if (variant.title.indexOf("Traveler") > -1) {
+		ritzProductSlider.slick('slickUnfilter');
+		ritzProductSlider.slick('slickFilter', '.slide-traveler');
+		ritzProductSlider.slick('slickGoTo', 0);
+    }
+
+    // BEGIN SWATCHES
+    if (variant) {
+      var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      for (var i=0,length=variant.options.length; i<length; i++) {
+        var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+        if (radioButton.size()) {
+          radioButton.get(0).checked = true;
+        }
+      }
+    }
+    // END SWATCHES
+  }
+
+  jQuery(function($) {
+    new Shopify.OptionSelectors('productSelect', {
+      product: {{ product | json }},
+      onVariantSelected: selectCallback,
+      enableHistoryState: true
+    });
+
+    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+      $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+    {% endif %}
+
+    // Hide selectors if we only have 1 variant and its title contains 'Default'.
+    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+      $('.selector-wrapper').hide();
+    {% endif %}
+  });
+});
+</script>
+
+<script>
+$(function() {
+  $('.pdp-breadcrumb li[data-scroll*="#"]').click(function() {
+    var target = $(this).attr('data-scroll');
+    $('html, body').animate({
+      scrollTop: $(target).offset().top-140
+    }, 400);
+    return false;
+  });
+});
+</script>
+ 
+<script text="text/javascript">
+  var _learnq = _learnq || [];
+
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+    CompareAtPrice: {{ product.compare_at_price_max|money|json }}
+  };
+
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>

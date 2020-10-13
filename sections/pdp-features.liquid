@@ -1,0 +1,272 @@
+<div id="productBenefits" class="features">
+  <h2 class="features-header">{{ section.settings.heading }}</h2>
+  <div class="features-btns">
+  	{% for block in section.blocks %}
+		{% assign words = block.settings.title | split: ' ' %}
+		<a href="#{{words[0]}}" class="features-btn">
+			<img class="inactive-only" src="{{ block.settings.block_icon }}"/>
+			<img class="active-only" src="{{ block.settings.block_icon_active }}"/>
+			<p>{{ block.settings.title }}</p>
+		</a>
+    {% endfor %}
+  </div>
+  
+  <div class="features-content-wrapper">
+	{% for block in section.blocks %}
+		{% assign words = block.settings.title | split: ' ' %}
+		<div id="{{words[0]}}" class="features-content">
+	      <div class="features-copy">
+	        <h2>{{ block.settings.title }}</h2>
+	        <p>{{ block.settings.text }}</p>
+	      </div>
+	      <div class="features-video">
+	      	{% if block.settings.video_image == "video" %}
+				<video id="synchronized-video-{{ forloop.index }}" width="100%" preload="true" poster="{{ block.settings.media_image | img_url: '1200x' }}" onclick="playPause('synchronized-video')">
+		          <source src="{{ block.settings.video_url }}" type="video/webm">
+		          <source src="{{ block.settings.video_url }}" type="video/mp4">
+		        </video>
+		        <div class="video-play" onclick="playPause('synchronized-video-{{ forloop.index }}')">
+		          {% include 'svg-definitions' with 'play-icon' %}
+		        </div>
+			{% else %}
+				<img src="{{ block.settings.media_image | img_url: '1200x' }}">
+			{% endif %}
+	      </div>
+	    </div>
+	{% endfor %}
+
+  </div>
+</div>
+
+{% if section.settings.firmness_scale == "yes" %}
+	{% include 'pdp-firmness-scale' %}
+{% endif %}
+
+<script>
+// TABBED CONTENT
+$('.features-btns').each(function(){
+  // For each set of tabs, we want to keep track of
+  // which tab is active and its associated content
+  var $active, $content, $links = $(this).find('a');
+
+  // If the location.hash matches one of the links, use that as the active tab.
+  // If no match is found, use the first link as the initial active tab.
+  $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+  $active.addClass('active');
+
+  $content = $($active[0].hash);
+  $content.addClass('active');
+
+  // Hide the remaining content
+  $links.not($active).each(function () {
+    $(this.hash).removeClass('active');
+  });
+
+  // Bind the click event handler
+  $(this).on('click', 'a', function(e){
+    // Pause all videos
+    pauseAll();
+
+    // Make the old tab inactive.
+    $active.removeClass('active');
+    $content.removeClass('active');
+
+    // Update the variables with the new link and content
+    $active = $(this);
+    $content = $(this.hash);
+
+    // Make the tab active.
+    $active.addClass('active');
+    $content.addClass('active');
+
+    // Prevent the anchor's default click action
+    e.preventDefault();
+  });
+  $('.features-next').on('click', function(e){
+    // Pause all videos
+    pauseAll();
+
+    // Make the old tab inactive.
+    $active.removeClass('active');
+    $content.removeClass('active');
+
+    // Update the variables with the new link and content
+    $nexthash = ($(this.hash));
+    $active = $('.features-btn[href=' + $nexthash.selector + ']');
+    $content = $(this.hash);
+
+    // Make the tab active.
+    $active.addClass('active');
+    $content.addClass('active');
+
+    // Prevent the anchor's default click action
+    e.preventDefault();
+  });
+});
+
+
+</script>
+
+<script>
+  //var video1 = document.getElementById("video1");
+  function playPause(videoName) {
+    var video = document.getElementById(videoName)
+    if (video.paused) {
+      video.play();
+      // $('#' + videoName).attr('controls', 'true');
+      $('#' + videoName).next('.video-play').hide();
+    } else {
+      video.pause();
+      $('#' + videoName).next('.video-play').show();
+    }
+  }
+  function pauseAll() {
+    $('video').each(function() {
+      this.pause();
+      $(this).next('.video-play').show();
+    });
+    //Pause the youtube embed too
+    $('.youtube-video').each(function(){
+      this.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*')
+    });
+  }
+</script>
+
+<script>
+$(document).ready(function() {
+  //Cache reference to window and animation items
+  var $autoplay_video = $('#synchronized-video');
+  var $window = $(window);
+  $window.on('scroll', check_if_in_view);
+  $window.on('scroll resize', check_if_in_view);
+  $window.trigger('scroll');
+
+  function check_if_in_view() {
+    var window_height = $window.height();
+    var window_top_position = $window.scrollTop();
+    var window_bottom_position = (window_top_position + window_height);
+
+    $.each($autoplay_video, function() {
+      var $element = $(this);
+      var element_height = $element.outerHeight();
+      var element_top_position = $element.offset().top;
+      var element_bottom_position = (element_top_position + element_height);
+
+      //check to see if this current container is within viewport
+      if (element_top_position + 160 <= window_bottom_position) {
+        $autoplay_video[0].play();
+        $autoplay_video.next('.video-play').hide();
+        //remove listener after autoplay triggers once
+        $window.off('scroll', check_if_in_view);
+        $window.off('scroll resize', check_if_in_view);
+      }
+    });
+  }
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+// if(  $('.ritz-features-slider').length){
+//   $('.ritz-features-slider').slick({
+//     dots: true,
+//     arrows: true,
+//     responsive: [ 
+//       {
+//         breakpoint: 479,
+//         settings: {
+//           arrows: false,
+//           dots: true
+//         }
+//       }
+//     ]
+//   });
+// }
+});
+</script>
+
+{% schema %}
+  { 
+    "name": "Product Features",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+		"type": "select",
+		"id": "firmness_scale",
+		"label": "Show Firmness Scale",
+		"options": [
+		 {
+		   "value": "yes",
+		   "label": "Yes"
+		 },
+		 {
+		   "value": "no",
+		   "label": "No"
+		 }
+		],
+		"default":   "yes"
+	  }
+    ],
+    "blocks": [
+      {
+        "type": "feature_block",
+        "name": "Feature Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Feature Title"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Feature Description"
+          },
+          {
+			"type": "text",
+			"id": "block_icon",
+			"label": "Block Icon"
+		  },
+          {
+			"type": "text",
+			"id": "block_icon_active",
+			"label": "Block Icon Active"
+		  },
+		  {
+			"type": "select",
+			"id": "video_image",
+			"label": "Media Type",
+			"options": [
+			 {
+			   "value": "video",
+			   "label": "Video"
+			 },
+			 {
+			   "value": "image",
+			   "label": "Image"
+			 }
+			],
+			"default":   "image"
+		  },
+		  {
+            "type": "text",
+            "id": "video_url",
+            "label": "Media - Video"
+          },
+          {
+            "type": "image_picker",
+            "id": "media_image",
+            "label": "Media - Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+    ]
+  }
+{% endschema %}
