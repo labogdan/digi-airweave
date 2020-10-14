@@ -1,6 +1,6 @@
 <div class="hp-hero">
   <div class="hp-hero-image">
-    <img src="{{ section.settings.image | img_url: '1000x' }}" alt="airweave Mattress">
+    <img class="lazyload" data-src="{{ section.settings.image | img_url: '1000x' }}" alt="airweave Mattress">
   </div>
   <div class="hp-hero-copy">
     <h2 class="hp-hero-title">{{ section.settings.message }}</h2>

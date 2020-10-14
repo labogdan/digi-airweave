@@ -1,6 +1,6 @@
 <div class="hp-partners">
   {% for block in section.blocks %}
-    <div class="hp-partners-block" style="background-image:url({{ block.settings.background | img_url: 'master' }})">
+    <div class="hp-partners-block lazyload" data-bg="{{ block.settings.background | img_url: 'master' }}">
       <div class="hp-partners-block-overlay">
         <img class="hp-partners-block-logo lazyload" data-src="{{ block.settings.logo | img_url: 'master' }}">
         <p class="hp-partners-block-message">{{ block.settings.message }}</p>

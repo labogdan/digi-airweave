@@ -1,13 +1,13 @@
-<section class="sleep-study"
+<section class="sleep-study lazyload"
   {% if section.settings.background_image != blank %}
-    style="background-image:url({{ section.settings.background_image | img_url: '1600x' }});"
+    data-bg="{{ section.settings.background_image | img_url: '1600x' }} "
   {% endif %}
   >
 
   {% if section.settings.logo != blank %}
     <img class="sleep-study__logo lazyload" data-src="{{ section.settings.logo | img_url: '1200x' }}" alt="{{ section.settings.logo.alt }}">
   {% endif %}
-  
+
   <h4 class="sleep-study__title">{{ section.settings.heading }}</h4>
 
   <p class="sleep-study__copy">{{ section.settings.paragraph }}</p>

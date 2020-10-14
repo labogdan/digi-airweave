@@ -3,7 +3,7 @@
   <div id="{{ block.settings.anchor }}" class="hp-featured-sponsorships" data-athlete="{{ block.settings.anchor }}">
     <div class="hp-sponsorship-img-mobile" style="background-image: url({{ block.settings.background | img_url: 'master' }})">
     </div>
-    <div class="hp-sponsorship-block" style="background-image: url({{ block.settings.background | img_url: 'master' }})">
+    <div class="lazyload hp-sponsorship-block" data-bg={{ block.settings.background | img_url: 'master' }}>
       <div class="hp-sponsorship-message">
         <h2 class="hp-sponsorship-quote">
           {{ block.settings.quote }}

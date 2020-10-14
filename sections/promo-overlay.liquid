@@ -33,7 +33,7 @@
 {% for block in section.blocks %}
   {% assign foo = 0 %}
 
-	<div class="promo-modal promo-modal-{% increment foo %}" style="background: url('{{ block.settings.background_image | img_url: '2400x2400' }}');">
+	<div class="lazyload promo-modal promo-modal-{% increment foo %}" data-bg="{{ block.settings.background_image | img_url: '2400x2400' }}">
 		<div class="modal-wrapper modal-transition">
 		  <div class="modal-header">
 		    <button class="modal-close modal-toggle modal-toggle-{{ foo }}" style="color: {{ block.settings.closecolor }}">&nbsp;</button>
